@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Index</h1>
+    <a href="/api/data">API</a>
+    <main>
+        <div class="labels">
+            <label class="checkbox">
+                <input type="checkbox" id="ch1" />
+                <div class="checkbox__text">Объем (масса) канала расхода 1</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch2" />
+                <div class="checkbox__text">Значение температуры ТСП 1 * 100</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch3" />
+                <div class="checkbox__text">Значение температуры ТСП 2 * 100</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch4" />
+                <div class="checkbox__text">Тепло</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch5" />
+                <div class="checkbox__text">Время работы счетчика , ч</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch6" />
+                <div class="checkbox__text">Время ошибок</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch7" />
+                <div class="checkbox__text">Введенные пользователем константы давления * 1000</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch8" />
+                <div class="checkbox__text">Введенные пользователем константы давления * 1000</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch9" />
+                <div class="checkbox__text">Потребленная энергия</div>
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" id="ch10" />
+                <div class="checkbox__text">Температура внутри корпуса</div>
+            </label>
+            <!-- <form action="/form_date" method="POST"> -->
+                <h3>Начальная дата</h3>
+                <div class="start_date">
+                    <input type="text" id="start_day" name="start_day" placeholder="Число">
+                    <input type="text" id="start_month" name="start_month" placeholder="Месяц">
+                    <input type="text" id="start_year" name="start_year" placeholder="Год">
+                </div>
+                <h3>Конечная дата</h3>
+                <div class="end_date">
+                    <input type="text" id="end_day" name="end_day" placeholder="Число">
+                    <input type="text" id="end_month" name="end_month" placeholder="Месяц">
+                    <input type="text" id="end_year" name="end_year" placeholder="Год">
+                </div>
+                <span id="output"></span>
+                <a href="#" id="submit" class="sliding-button">Submit</a>
+            <!-- </form> -->
+            
+            <!-- <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (1)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Коды ошибок 8-ми типов (1)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (2)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Коды ошибок 8-ми типов (2)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (3)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Коды ошибок 8-ми типов (3)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (4)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Коды ошибок 8-ми типов (4)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (5)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Коды ошибок 8-ми типов (5)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (6)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Коды ошибок 8-ми типов (6)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (7)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Коды ошибок 8-ми типов (7)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (8)</div>
+        </label>
+        <label class="checkbox">
+            <input type="checkbox" />
+            <div class="checkbox__text">Коды ошибок 8-ми типов (8)</div>
+        </label> -->
+        </div>
+
+        <div class="schedules">
+            <canvas id="schedule_1"></canvas>
+            <canvas id="schedule_2"></canvas>
+            <canvas id="schedule_3"></canvas>
+            <canvas id="schedule_4"></canvas>
+            <canvas id="schedule_5"></canvas>
+            <canvas id="schedule_6"></canvas>
+            <canvas id="schedule_7"></canvas>
+            <canvas id="schedule_8"></canvas>
+            <canvas id="schedule_9"></canvas>
+            <canvas id="schedule_10"></canvas>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+        integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+        crossorigin="anonymous"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/js.js" type="module"></script>
+</body>
+
+</html>
