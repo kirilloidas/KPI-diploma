@@ -1,6 +1,7 @@
 const ch = document.querySelectorAll('input[type="checkbox"]');
 const canv = document.querySelectorAll('canvas');
 const btnSubmit = document.getElementById('submit');
+const btnAuthorization = document.getElementById('authorization');
 
 const schedule_1 = document.getElementById("schedule_1");
 const schedule_2 = document.getElementById("schedule_2");
@@ -19,3 +20,6 @@ const start_year = document.getElementById('start_year');
 const end_day = document.getElementById('end_day');
 const end_month = document.getElementById('end_month');
 const end_year = document.getElementById('end_year');
+
+const login = document.getElementById('login');
+const password = document.getElementById('password');

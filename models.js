@@ -11,4 +11,17 @@ const data = new Schema({
     }    
 }, {collection: 'dailyArchive'})
 
-module.exports = model('data', data);
+
+const users = new Schema({
+    login: {
+        type: String,
+        required: true
+    },
+    pass: {
+        type: String,
+        required: true
+    }
+}, {collection: 'users'})
+
+// module.exports = model('data', data);
+module.exports = model('users', users);

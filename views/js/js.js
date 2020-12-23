@@ -71,6 +71,28 @@ window.addEventListener('load', () => {
             Initialization.initializationAjax();
 
         }, 2000);
+    });
+
+    btnAuthorization.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log(login.value, password.value);
+        let authorizationObj = {
+            login: login.value,
+            pass: password.value
+        };
+
+        let json = JSON.stringify(authorizationObj);
+        let request = new XMLHttpRequest();
+            // посылаем запрос на адрес "/user"
+             request.open("POST", "/authorization", true);   
+             request.setRequestHeader("Content-Type", "application/json");
+             request.addEventListener("load", function () {
+                // получаем и парсим ответ сервера
+                 let receivedObj = JSON.parse(request.response);
+                 console.log(receivedObj);
+                //  console.log(receivedObj.startDay, "-", receivedObj.endDay);   // смотрим ответ сервера
+             });
+             request.send(json);
     })
 
 

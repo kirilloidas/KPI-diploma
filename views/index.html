@@ -14,14 +14,26 @@
     <a href="/api/data">API</a>
     <main>
         <section class="modal_block" id="modal_block">
-        
-            <div id="login">
-                <form action="/autorization" method="POST">
+
+            <div class="login">
+                <form action="/authorization" method="POST">
                     <fieldset class="clearfix">
-                        <p><span class="fontawesome-user"></span><input type="text" value="Логин" onBlur="if(this.value == '') this.value = 'Логин'" onFocus="if(this.value == 'Логин') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-                        <p><span class="fontawesome-lock"></span><input type="password"  value="Пароль" onBlur="if(this.value == '') this.value = 'Пароль'" onFocus="if(this.value == 'Пароль') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                        <p>
+                            <span class="fontawesome-user"></span>
+                            <input id="login" type="text" value="Логин"
+                                onBlur="if(this.value == '') this.value = 'Логин'"
+                                onFocus="if(this.value == 'Логин') this.value = ''" required>
+                        </p>
+                        <!-- JS because of IE support; better: placeholder="Username" -->
+                        <p>
+                            <span class="fontawesome-lock"></span>
+                            <input id="password" type="password" value="Пароль"
+                                onBlur="if(this.value == '') this.value = 'Пароль'"
+                                onFocus="if(this.value == 'Пароль') this.value = ''" required>
+                        </p>
+                        <!-- JS because of IE support; better: placeholder="Password" -->
                         <!-- <p class="sliding-button"><input type="submit" value="ВОЙТИ"></p> -->
-                        <a href="#" id="submit" class="sliding-button">Войти</a>
+                        <a href="#" id="authorization" class="sliding-button">Войти</a>
                     </fieldset>
                 </form>
             </div>
@@ -68,22 +80,22 @@
                 <div class="checkbox__text">Температура внутри корпуса</div>
             </label>
             <!-- <form action="/form_date" method="POST"> -->
-                <h3>Начальная дата</h3>
-                <div class="start_date">
-                    <input type="text" id="start_day" name="start_day" placeholder="Число">
-                    <input type="text" id="start_month" name="start_month" placeholder="Месяц">
-                    <input type="text" id="start_year" name="start_year" placeholder="Год">
-                </div>
-                <h3>Конечная дата</h3>
-                <div class="end_date">
-                    <input type="text" id="end_day" name="end_day" placeholder="Число">
-                    <input type="text" id="end_month" name="end_month" placeholder="Месяц">
-                    <input type="text" id="end_year" name="end_year" placeholder="Год">
-                </div>
-                <span id="output"></span>
-                <a href="#" id="submit" class="sliding-button">Submit</a>
+            <h3>Начальная дата</h3>
+            <div class="start_date">
+                <input type="text" id="start_day" name="start_day" placeholder="Число">
+                <input type="text" id="start_month" name="start_month" placeholder="Месяц">
+                <input type="text" id="start_year" name="start_year" placeholder="Год">
+            </div>
+            <h3>Конечная дата</h3>
+            <div class="end_date">
+                <input type="text" id="end_day" name="end_day" placeholder="Число">
+                <input type="text" id="end_month" name="end_month" placeholder="Месяц">
+                <input type="text" id="end_year" name="end_year" placeholder="Год">
+            </div>
+            <span id="output"></span>
+            <a href="#" id="submit" class="sliding-button">Submit</a>
             <!-- </form> -->
-            
+
             <!-- <label class="checkbox">
             <input type="checkbox" />
             <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (1)</div>
