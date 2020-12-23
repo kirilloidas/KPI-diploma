@@ -1,9 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
 body {
-    background: #1D1B26;
-    color: white;
+    background-image: url(../img/padded_@2X.png);
+    color: #CDD1DA;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+  line-height: 1.5em;
+  padding: 20px;
   }
 main{
     display: flex;
+    position: relative;
 }
 .schedules{
     display: flex !important;
@@ -12,14 +29,26 @@ main{
     height: 350px !important;
     flex-wrap: wrap;
 }
-canvas{
+.schedules canvas{
     /* display: inline-block; */
     width: 45% !important;
     margin: 30px !important;
     height: 100% !important;
 }
 
+.modal_block{
+  background-image: url(../img/padded_@2X.png);
+  position: fixed;
+  /* display: none; */
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
 .sliding-button {
+  font-family: 'Open Sans', Arial, sans-serif;
     text-decoration: none;
     color: white;
     display: inline-block;
@@ -28,7 +57,8 @@ canvas{
     border: 1px solid;
     border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
     border-image-slice: 1;
-    margin: 40px 20px;
+    margin: 20px 20px;
+    margin-left: calc(40% - 48px);
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     overflow: hidden;
@@ -49,6 +79,7 @@ canvas{
   }
   .sliding-button:hover {
     background: rgba(255, 255, 255, 0);
+    text-decoration: none;
   }
   .sliding-button:hover:before {
     bottom: 0%;
@@ -113,8 +144,7 @@ canvas{
   display: block;
   width: 50px;
   padding: 0 20px;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin: 20px 10px;
   background: #E9EFF6;
   line-height: 40px;
   border-width: 0;
@@ -130,3 +160,6 @@ canvas{
 .end_date{
   display: flex;
 }
+
+
+

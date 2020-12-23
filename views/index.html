@@ -6,12 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/authorization.css">
 </head>
 
 <body>
     <h1>Index</h1>
     <a href="/api/data">API</a>
     <main>
+        <section class="modal_block" id="modal_block">
+        
+            <div id="login">
+                <form action="/autorization" method="POST">
+                    <fieldset class="clearfix">
+                        <p><span class="fontawesome-user"></span><input type="text" value="Логин" onBlur="if(this.value == '') this.value = 'Логин'" onFocus="if(this.value == 'Логин') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+                        <p><span class="fontawesome-lock"></span><input type="password"  value="Пароль" onBlur="if(this.value == '') this.value = 'Пароль'" onFocus="if(this.value == 'Пароль') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                        <!-- <p class="sliding-button"><input type="submit" value="ВОЙТИ"></p> -->
+                        <a href="#" id="submit" class="sliding-button">Войти</a>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
         <div class="labels">
             <label class="checkbox">
                 <input type="checkbox" id="ch1" />
@@ -149,6 +163,7 @@
             <canvas id="schedule_10"></canvas>
         </div>
     </main>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
         integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="

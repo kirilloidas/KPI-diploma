@@ -74,11 +74,4 @@ window.addEventListener('load', () => {
     })
 
 
-
-
-
-
-
-
-
 });
