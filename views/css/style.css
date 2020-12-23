@@ -7,13 +7,16 @@ main{
 }
 .schedules{
     display: flex !important;
-    flex-direction: column !important;
+    /* flex-direction: column !important; */
     width: 70%;
+    height: 350px !important;
+    flex-wrap: wrap;
 }
 canvas{
-    display: inline-block;
-    width: 80% !important;
-    margin-bottom: 30px;
+    /* display: inline-block; */
+    width: 45% !important;
+    margin: 30px !important;
+    height: 100% !important;
 }
 
 .sliding-button {

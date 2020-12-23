@@ -17,6 +17,31 @@ window.addEventListener('load', () => {
             .then(data => console.log(data));
     }
 
+    let arrCo = [
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(255, 159, 64, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(153, 102, 255, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(75, 192, 192, 0.6)'
+        ];
+    console.log(arrCo);
+    
+
     btnSubmit.addEventListener('click', () => {
         for (let i = 0; i < ch.length; i++) {
             if (!ch[i].checked) {
@@ -27,8 +52,8 @@ window.addEventListener('load', () => {
             }
         }
         let obj = {
-            startTime: new Date(start_year.value, start_month.value - 1, start_day.value).getTime(),
-            endTime: new Date(end_year.value, end_month.value - 1, end_day.value).getTime()
+            startTime: new Date(start_year.value, start_month.value, start_day.value).getTime(),
+            endTime: new Date(end_year.value, end_month.value, end_day.value).getTime()
         };
         let json = JSON.stringify(obj);
         let request = new XMLHttpRequest();

@@ -5,6 +5,7 @@ export class Schedule {
     }
 
     static setDataSchedule(data) {
+        console.log(data);
         let date = [];
         let dataArr = [];
         let a = 1;
@@ -32,6 +33,24 @@ export class Schedule {
         return this._date;
     }
 
+    static getColorSchedule(n) {
+        let arrColors = [];
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+        }
+          
+          let red = getRandomInt(255);
+          let green = getRandomInt(255);
+          let blue = getRandomInt(255);
+
+          for(let i = 0; i < n; i++) {
+              arrColors[i] = "rgb(" + red + "," + green + "," + blue + ")";
+          }
+          console.log(arrColors);
+        return arrColors;
+    }
+
     static setSchedule() {
         let schedules = [schedule_1, schedule_2,schedule_3, schedule_4,schedule_5, schedule_6,schedule_7, schedule_8,schedule_9, schedule_10];
         let labels = ['Объем (масса) канала расхода 1', 'Значение температуры ТСП 1 * 100', 'Значение температуры ТСП 2 * 100', 'Тепло', 'Время работы счетчика , ч', 'Время ошибок', 'Введенные пользователем константы давления * 1000', 'Введенные пользователем константы давления * 1000', 'Потребленная энергия', 'Температура внутри корпуса'];
@@ -43,19 +62,29 @@ export class Schedule {
                   datasets: [{
                     label: labels[i],
                     data: this.getDataSchedule()[i],
-                    backgroundColor: [
-                      'rgba(255, 99, 132, 0.6)',
-                      'rgba(54, 162, 235, 0.6)',
-                      'rgba(255, 206, 86, 0.6)',
-                      'rgba(75, 192, 192, 0.6)',
-                      'rgba(153, 102, 255, 0.6)',
-                      'rgba(255, 159, 64, 0.6)',
-                      'rgba(255, 99, 132, 0.6)',
-                      'rgba(54, 162, 235, 0.6)',
-                      'rgba(255, 206, 86, 0.6)',
-                      'rgba(75, 192, 192, 0.6)',
-                      'rgba(153, 102, 255, 0.6)'
-                    ]
+                    backgroundColor: this.getColorSchedule(this.getDateSchedule().length)
+                    // [
+                    //   'rgba(255, 99, 132, 0.6)',
+                    //   'rgba(54, 162, 235, 0.6)',
+                    //   'rgba(255, 206, 86, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(153, 102, 255, 0.6)',
+                    //   'rgba(255, 159, 64, 0.6)',
+                    //   'rgba(255, 99, 132, 0.6)',
+                    //   'rgba(54, 162, 235, 0.6)',
+                    //   'rgba(255, 206, 86, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(153, 102, 255, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)',
+                    //   'rgba(75, 192, 192, 0.6)'
+                    // ]
                   }]
                 },
                 options: {
