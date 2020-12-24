@@ -29,6 +29,22 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 })
 
+app.get('/index2', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index2.html'));
+})
+
+app.get('/index3', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index3.html'));
+})
+
+app.get('/customization', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'customization.html'));
+})
+
+app.get('/access', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'access.html'));
+})
+
 var intervalTime;
 app.post("/timeInterval", jsonParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
@@ -93,6 +109,8 @@ async function getDataOfInterval(intervalT, requestData) {
         console.log(error);
     }
 }
+
+
 
 async function authorizationUser(requestUser) {
     console.log('auto')

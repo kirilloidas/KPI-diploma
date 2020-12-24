@@ -20,7 +20,10 @@ p {
 	line-height: 1.5em;
 }
 
-.clearfix { *zoom: 1; } /* For IE 6/7 */
+.clearfix { 
+	*zoom: 1;
+	position: relative;
+ } /* For IE 6/7 */
 .clearfix:before, .clearfix:after {
 	display: table;
 	content: "";
@@ -34,7 +37,7 @@ p {
 	width: 280px;
 }
 
-.modal_block .login form span {
+.modal_block .login form p span {
 	background-color: #363b41;
 	border-radius: 3px 0px 0px 3px;
 	-moz-border-radius: 3px 0px 0px 3px;
@@ -70,6 +73,13 @@ p {
 
 .modal_block .sliding-button{
     margin-left: calc(45% - 48px);
+}
+
+.capsLock{
+	position: absolute;
+	display: none;
+	top: 32%;
+	right: -20%;
 }
 
 /* .modal_block #login form input[type="submit"] {

@@ -51,7 +51,7 @@ export class Schedule {
 
     static setSchedule() {
         let schedules = [schedule_1, schedule_2,schedule_3, schedule_4,schedule_5, schedule_6,schedule_7, schedule_8,schedule_9, schedule_10];
-        let labels = ['Объем (масса) канала расхода 1', 'Значение температуры ТСП 1 * 100', 'Значение температуры ТСП 2 * 100', 'Тепло', 'Время работы счетчика , ч', 'Время ошибок', 'Введенные пользователем константы давления * 1000', 'Введенные пользователем константы давления * 1000', 'Потребленная энергия', 'Температура внутри корпуса'];
+        let labels = ['Об`єм (маса) каналу витрати 1', 'Значення температури ТСП 1 * 100', 'Значення температури ТСП 2 * 100', 'Тепло', 'Час роботи лічильника, год', 'Час помилок', 'Введені користувачем константи тиску * 1000', 'Введені користувачем константи тиску * 1000', 'Спожита енергія', 'Температура всередині корпусу'];
         for(let i = 0; i < schedules.length; i++) {
             var barChart = new Chart(schedules[i], {
                 type: 'bar',
@@ -95,7 +95,7 @@ export class Schedule {
                             ticks: {
                                 beginAtZero:true,
                                 fontColor: "#CCC",
-                                fontSize: 20
+                                fontSize: 28
                             }
                         }],
                         xAxes: [{
@@ -104,7 +104,7 @@ export class Schedule {
                             },
                             ticks: {
                                 fontColor: "#CCC",
-                                fontSize: 20
+                                fontSize: 28
                             }
                         }]
                     },
@@ -112,7 +112,7 @@ export class Schedule {
                         labels: {
                             // This more specific font property overrides the global property
                             fontColor: 'blue',
-                            fontSize: 30,
+                            fontSize: 40,
                             fontFamily: 'Helvetica'
                         }
                     }
