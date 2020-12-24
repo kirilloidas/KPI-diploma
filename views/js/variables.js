@@ -2,6 +2,7 @@ const ch = document.querySelectorAll('input[type="checkbox"]');
 const canv = document.querySelectorAll('canvas');
 const btnSubmit = document.getElementById('submit');
 const btnAuthorization = document.getElementById('authorization');
+const modal_block = document.getElementById('modal_block');
 
 const schedule_1 = document.getElementById("schedule_1");
 const schedule_2 = document.getElementById("schedule_2");

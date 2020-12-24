@@ -97,7 +97,7 @@ export class Schedule {
                             ticks: {
                                 beginAtZero:true,
                                 fontColor: "#CCC",
-                                fontSize: 16
+                                fontSize: 20
                             }
                         }],
                         xAxes: [{
@@ -106,7 +106,7 @@ export class Schedule {
                             },
                             ticks: {
                                 fontColor: "#CCC",
-                                fontSize: 16
+                                fontSize: 20
                             }
                         }]
                     },
@@ -114,7 +114,7 @@ export class Schedule {
                         labels: {
                             // This more specific font property overrides the global property
                             fontColor: 'blue',
-                            fontSize: 20,
+                            fontSize: 30,
                             fontFamily: 'Helvetica'
                         }
                     }

@@ -24,4 +24,6 @@ const users = new Schema({
 }, {collection: 'users'})
 
 // module.exports = model('data', data);
-module.exports = model('users', users);
+// module.exports = model('users', users);
+exports.data = model('data', data);
+exports.users = model('users', users);

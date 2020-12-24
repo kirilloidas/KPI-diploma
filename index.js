@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 let bodyParser = require('body-parser');
 // const Routes = require('./router.js');
-const users = require('./models.js')
+// const users = require('./models.js')
+// const data = require('./models.js');
+const data = require('./models.js').data;
+const users = require('./models.js').users;
 
 
 const PORT = process.env.PORT || 3000;
@@ -30,6 +33,7 @@ app.post("/timeInterval", jsonParser, function (request, response) {
 
     response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
+    console.log(intervalTime);
     start(intervalTime);
 });
 
@@ -67,6 +71,7 @@ async function start(intervalT) {
             ]
 
         }).sort('field');
+        console.log(ourData);
         app.get('/api/data', (req, res) => {
             res.status(200);
             res.end(JSON.stringify(ourData));
@@ -90,15 +95,15 @@ async function authorizationUser(requestUser) {
                         $eq: requestUser.login
                     }
         });
-        console.log(isUser, '10');
+        // console.log(isUser, '10');
         if(isUser == null || isUser.pass != requestUser.pass) {
-            console.log('false');
+            // console.log('false');
             let obj = {
                 isUser: false
             };
             return obj;
         } else {
-            console.log('true');
+            // console.log('true');
             let obj = {
                 isUser: true
             };
