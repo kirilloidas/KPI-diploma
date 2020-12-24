@@ -10,7 +10,7 @@ export class Schedule {
         let dataArr = [];
         let a = 1;
         for(let i = 0; i < data.length - 1; i++) {
-            date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}`;
+            date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}:${new Date(data[i].date).getHours()}`;
         }
         for(let i = 0; i < 10; i++) {
             dataArr[i] = new Array(data.length);
@@ -44,9 +44,7 @@ export class Schedule {
           let green = getRandomInt(255);
           let blue = getRandomInt(255);
 
-          for(let i = 0; i < n; i++) {
-              arrColors[i] = "rgb(" + red + "," + green + "," + blue + ")";
-          }
+              arrColors = "rgb(" + red + "," + green + "," + blue + ")";
           console.log(arrColors);
         return arrColors;
     }

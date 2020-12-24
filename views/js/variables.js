@@ -1,4 +1,4 @@
-const ch = document.querySelectorAll('.switch_schedule input[type="checkbox"]');
+const ch = document.querySelectorAll('.checkbox input[type="checkbox"]');
 const canv = document.querySelectorAll('canvas');
 const btnSubmit = document.getElementById('submit');
 const btnAuthorization = document.getElementById('authorization');

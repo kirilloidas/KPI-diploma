@@ -37,7 +37,12 @@ app.post("/timeInterval", jsonParser, function (request, response) {
     intervalTime = request.body;
     console.log(intervalTime);
     // connectMongo.getDataOfInterval(intervalTime, data);
-    getDataOfInterval(intervalTime, dailyData);
+    if(request.body.isDaily) {
+        getDataOfInterval(request.body, dailyData);
+    } else {
+        getDataOfInterval(request.body, hourlyData);
+    }
+    
 });
 
 app.post("/authorization", jsonParser, function (request, response) {
