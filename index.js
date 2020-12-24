@@ -79,10 +79,15 @@ async function getDataOfInterval(intervalT, requestData) {
             ]
 
         }).sort('field');
-        console.log(ourData);
+        // console.log(ourData);
         app.get('/api/data', (req, res) => {
             res.status(200);
-            res.end(JSON.stringify(ourData));
+            let responseData = ourData.sort(
+                function(a,b){
+                    return a.date-b.date;
+                }
+            );
+            res.end(JSON.stringify(responseData));
         })
     } catch (error) {
         console.log(error);

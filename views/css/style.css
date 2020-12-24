@@ -40,7 +40,7 @@ main{
 .modal_block{
   background-image: url(../img/padded_@2X.png);
   position: fixed;
-  display: none;
+  /* display: none; */
   left: 0;
   top: 0;
   z-index: 100;
