@@ -43,5 +43,18 @@ window.addEventListener('load', () => {
         Initialization.initializationUser(authorizationObj, modal_block);
     })
 
+    // console.log(checkbox_switch);
+    checkbox_switch[0].addEventListener('click', () => {
+        console.log(checkbox_switch[0].checked)
+        if(checkbox_switch[0].checked) {
+            start_hours.classList.add('input_time_show');
+            end_hours.classList.add('input_time_show');
+        } else {
+            start_hours.classList.remove('input_time_show');
+            end_hours.classList.remove('input_time_show');
+        }
+    })
+    
+
 
 });

@@ -1,17 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 // const Routes = require('./router.js');
 // const users = require('./models.js')
 // const data = require('./models.js');
+// const connectMongo = require('./connectMongo.js');
 const data = require('./models.js').data;
 const users = require('./models.js').users;
 
 
 const PORT = process.env.PORT || 3000;
 
-let app = express();
+const app = express();
 let jsonParser = express.json();
 app.use(express.static("public"));
 app.use(bodyParser.json());
@@ -34,6 +35,7 @@ app.post("/timeInterval", jsonParser, function (request, response) {
     response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
     console.log(intervalTime);
+    // connectMongo.getDataOfInterval(intervalTime, data);
     start(intervalTime);
 });
 

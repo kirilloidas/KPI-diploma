@@ -7,10 +7,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/authorization.css">
+    <link rel="stylesheet" href="css/switch.css">
 </head>
 
 <body>
-    <h1>Index</h1>
     <a href="/api/data">API</a>
     <main>
         <section class="modal_block" id="modal_block">
@@ -38,18 +38,24 @@
                 </form>
             </div>
         </section>
-        <div class="labels">
+        
+        <fieldset class="labels">
+            <legend>Параметри</legend>
+            <div class="switch_schedule" id="switch_schedule">
+                <input type="checkbox" id="checkbox_switch" />
+                <label for="checkbox_switch"></label>
+            </div>
             <label class="checkbox">
                 <input type="checkbox" id="ch1" />
-                <div class="checkbox__text">Объем (масса) канала расхода 1</div>
+                <div class="checkbox__text">Об`єм (маса) каналу витрати 1</div>
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch2" />
-                <div class="checkbox__text">Значение температуры ТСП 1 * 100</div>
+                <div class="checkbox__text">Значення температури ТСП 1 * 100</div>
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch3" />
-                <div class="checkbox__text">Значение температуры ТСП 2 * 100</div>
+                <div class="checkbox__text">Значення температури ТСП 2 * 100</div>
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch4" />
@@ -57,40 +63,42 @@
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch5" />
-                <div class="checkbox__text">Время работы счетчика , ч</div>
+                <div class="checkbox__text">Час роботи лічильника, год</div>
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch6" />
-                <div class="checkbox__text">Время ошибок</div>
+                <div class="checkbox__text">Час помилок</div>
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch7" />
-                <div class="checkbox__text">Введенные пользователем константы давления * 1000</div>
+                <div class="checkbox__text">Введені користувачем константи тиску * 1000</div>
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch8" />
-                <div class="checkbox__text">Введенные пользователем константы давления * 1000</div>
+                <div class="checkbox__text">Введені користувачем константи тиску * 1000</div>
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch9" />
-                <div class="checkbox__text">Потребленная энергия</div>
+                <div class="checkbox__text">Спожита енергія</div>
             </label>
             <label class="checkbox">
                 <input type="checkbox" id="ch10" />
-                <div class="checkbox__text">Температура внутри корпуса</div>
+                <div class="checkbox__text">Температура всередині корпусу</div>
             </label>
             <!-- <form action="/form_date" method="POST"> -->
-            <h3>Начальная дата</h3>
+            <h3>Початкова дата</h3>
             <div class="start_date">
                 <input type="text" id="start_day" name="start_day" placeholder="Число">
-                <input type="text" id="start_month" name="start_month" placeholder="Месяц">
-                <input type="text" id="start_year" name="start_year" placeholder="Год">
+                <input type="text" id="start_month" name="start_month" placeholder="Місяць">
+                <input type="text" id="start_year" name="start_year" placeholder="Рік">
+                <input type="text" class="start_hours" id="start_hours" name="start_hours" placeholder="Години">
             </div>
-            <h3>Конечная дата</h3>
+            <h3>Кінцева дата</h3>
             <div class="end_date">
                 <input type="text" id="end_day" name="end_day" placeholder="Число">
-                <input type="text" id="end_month" name="end_month" placeholder="Месяц">
-                <input type="text" id="end_year" name="end_year" placeholder="Год">
+                <input type="text" id="end_month" name="end_month" placeholder="Місяць">
+                <input type="text" id="end_year" name="end_year" placeholder="Рік">
+                <input type="text" class="end_hours" id="end_hours" name="end_hours" placeholder="Години">
             </div>
             <span id="output"></span>
             <a href="#" id="submit" class="sliding-button">Submit</a>
@@ -160,7 +168,7 @@
             <input type="checkbox" />
             <div class="checkbox__text">Коды ошибок 8-ми типов (8)</div>
         </label> -->
-        </div>
+        </fieldset>
 
         <div class="schedules">
             <canvas id="schedule_1"></canvas>

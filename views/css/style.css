@@ -23,6 +23,7 @@ main{
     position: relative;
 }
 .schedules{
+  margin-top: 70px;
     display: flex !important;
     /* flex-direction: column !important; */
     width: 70%;
@@ -39,7 +40,7 @@ main{
 .modal_block{
   background-image: url(../img/padded_@2X.png);
   position: fixed;
-  /* display: none; */
+  display: none;
   left: 0;
   top: 0;
   z-index: 100;
@@ -58,7 +59,7 @@ main{
     border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
     border-image-slice: 1;
     margin: 20px 20px;
-    margin-left: calc(40% - 48px);
+    margin-left: calc(44% - 48px);
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     overflow: hidden;
@@ -87,7 +88,16 @@ main{
     height: 100%;
   }
 .labels{
+    margin-top: 40px;
     margin-right: 50px;
+    width: 440px;
+    border: 1px solid silver;
+    padding: 30px;
+}
+.labels legend {
+  display: inline-block;
+  margin-left: calc(50% - 65px);
+  font-size: 25px;
 }
 .checkbox{
     margin: 20px;
@@ -141,7 +151,7 @@ main{
 
 
 .start_date input, .end_date input {
-  display: block;
+  /* display: block; */
   width: 50px;
   padding: 0 20px;
   margin: 20px 10px;
@@ -159,6 +169,24 @@ main{
 
 .end_date{
   display: flex;
+}
+
+.start_hours, .end_hours {
+  display: none;
+}
+
+.input_time_show {
+  display: block;
+  animation: showBlock 1s linear forwards;
+}
+
+@keyframes showBlock {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 
