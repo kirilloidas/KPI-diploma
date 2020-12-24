@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const data = new Schema({
+const dailyData = new Schema({
     date: {
         type: Number,
         required: true
@@ -23,7 +23,19 @@ const users = new Schema({
     }
 }, {collection: 'users'})
 
+const hourlyData = new Schema({
+    date: {
+        type: Number,
+        required: true
+    },
+    data:  {
+        type: Array,
+        required: true
+    }    
+}, {collection: 'hourlyArchive'})
+
 // module.exports = model('data', data);
 // module.exports = model('users', users);
-exports.data = model('data', data);
+exports.dailyData = model('dailyData', dailyData);
 exports.users = model('users', users);
+exports.hourlyData = model('hourlyData', hourlyData);

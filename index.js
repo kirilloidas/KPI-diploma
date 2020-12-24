@@ -6,8 +6,9 @@ const bodyParser = require('body-parser');
 // const users = require('./models.js')
 // const data = require('./models.js');
 // const connectMongo = require('./connectMongo.js');
-const data = require('./models.js').data;
+const dailyData = require('./models.js').dailyData;
 const users = require('./models.js').users;
+const hourlyData = require('./models.js').hourlyData;
 
 
 const PORT = process.env.PORT || 3000;
@@ -36,7 +37,7 @@ app.post("/timeInterval", jsonParser, function (request, response) {
     intervalTime = request.body;
     console.log(intervalTime);
     // connectMongo.getDataOfInterval(intervalTime, data);
-    start(intervalTime);
+    getDataOfInterval(intervalTime, dailyData);
 });
 
 app.post("/authorization", jsonParser, function (request, response) {
@@ -51,7 +52,7 @@ app.post("/authorization", jsonParser, function (request, response) {
 
 
 
-async function start(intervalT) {
+async function getDataOfInterval(intervalT, requestData) {
     try {
         await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
             useNewUrlParser: true,
@@ -59,7 +60,7 @@ async function start(intervalT) {
             useUnifiedTopology: true
         });
 
-        let ourData = await data.find({
+        let ourData = await requestData.find({
             $and: [{
                     "date": {
                         $gte: intervalT.startTime
