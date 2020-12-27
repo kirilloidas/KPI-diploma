@@ -134,6 +134,34 @@
     </header>
     <main>
         <h1 class="title">Access</h1>
+
+
+            <div class="login">
+                <form action="/addUser" method="POST">
+                        <p>
+                            <input id="login" type="text" value="Логін" 
+                            onBlur="if(this.value == '') this.value = 'Логін'"
+                            onFocus="if(this.value == 'Логін') this.value = ''" required>
+                            <span class="loginSpan">Логін користувача</span>
+                        </p>
+
+                        <p>
+                            <input id="password" type="text" value="Пароль"
+                            onBlur="if(this.value == '') this.value = 'Пароль'"
+                            onFocus="if(this.value == 'Пароль') this.value = ''" required>
+                            <span class="passSpan">Пароль користувача</span>
+                        </p>
+                        <p>
+                            <select id="accessUser" class="accessUser">
+                                <option value="admin">Admin</option>
+                                <option value="employee">Employee</option>
+                            </select>
+                            <span class="accessSpan">Рівень доступу користувача</span>
+                        </p>
+                        <a href="#" id="authorization" class="sliding-button">Додати користувача</a>
+                </form>
+            </div>
+
     </main>
 </body>
 
