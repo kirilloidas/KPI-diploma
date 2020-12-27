@@ -1,3 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
+
+/* ---------- FONTAWESOME ---------- */
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+
+body {
+    background-image: url(../img/padded_@2X.png);
+    color: #CDD1DA;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+  line-height: 1.5em;
+  padding: 20px;
+  }
+main{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    position: relative;
+}
+
 a {
 	color: #eee;
 	text-decoration: none;
@@ -6,7 +35,6 @@ a {
 a:hover {
 	text-decoration: underline;
 }
-
 .modal_block input {
 	border: none;
 	font-family: 'Open Sans', Arial, sans-serif;
@@ -23,6 +51,9 @@ p {
 .clearfix { 
 	*zoom: 1;
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
  } /* For IE 6/7 */
 .clearfix:before, .clearfix:after {
 	display: table;
@@ -71,15 +102,62 @@ p {
 	color:#fff;
 }
 
-.modal_block .sliding-button{
-    margin-left: calc(45% - 48px);
-}
+
 
 .capsLock{
 	position: absolute;
 	display: none;
 	top: 32%;
 	right: -20%;
+}
+
+
+.sliding-button {
+	font-family: 'Open Sans', Arial, sans-serif;
+	  text-decoration: none;
+	  color: white;
+	  display: inline-block;
+	  position: relative;
+	  padding: 15px 30px;
+	  border: 1px solid;
+	  border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+	  border-image-slice: 1;
+	  margin-top: 30px;
+	  font-family: 'Montserrat', sans-serif;
+	  text-transform: uppercase;
+	  overflow: hidden;
+	  letter-spacing: 2px;
+	  transition: .8s cubic-bezier(.165, .84, .44, 1);
+	}
+	.sliding-button:before {
+	  content: "";
+	  position: absolute;
+	  left: 0;
+	  top: 0;
+	  height: 0;
+	  width: 100%;
+	  z-index: -1;
+	  color: white;
+	  background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+	  transition: .8s cubic-bezier(.165, .84, .44, 1);
+	}
+	.sliding-button:hover {
+	  background: rgba(255, 255, 255, 0);
+	  text-decoration: none;
+	}
+	.sliding-button:hover:before {
+	  bottom: 0%;
+	  top: auto;
+	  height: 100%;
+	}
+.authorization_title {
+	font-size: 32px;
+	position: relative;
+	top: 110px;
+}
+.error {
+	opacity: 0;
+	color: red;
 }
 
 /* .modal_block #login form input[type="submit"] {

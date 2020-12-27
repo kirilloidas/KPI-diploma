@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
     <link rel="stylesheet" href="css/authorization.css">
 </head>
 <body>
+    <main>
+    <h1 class="authorization_title">Авторизація</h1>
     <section class="modal_block" id="modal_block">
 
         <div class="login">
@@ -26,7 +28,8 @@
                             onBlur="if(this.value == '') this.value = 'Пароль'"
                             onFocus="if(this.value == 'Пароль') this.value = ''" required>
                     </p>
-                    <span class="capsLock" id="capsLock"><svg height="30" viewBox="0 0 60.031 52" width="35"
+                    <span class="capsLock" id="capsLock">
+                        <svg height="30" viewBox="0 0 60.031 52" width="35"
                             xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <style>
@@ -41,13 +44,15 @@
                                 id="attention" transform="translate(-209.969 -694)" />
                         </svg>
                     </span>
+                    <p class="error" id="error_authorization">Логін чи пароль вказані невірно</p>
                     <!-- JS because of IE support; better: placeholder="Password" -->
                     <!-- <p class="sliding-button"><input type="submit" value="ВОЙТИ"></p> -->
-                    <a href="#" id="authorization" class="sliding-button">Войти</a>
+                    <a href="#" id="authorization" class="sliding-button">Увійти</a>
                 </fieldset>
             </form>
         </div>
     </section>
+</main>
 
     <script src="js/variables.js"></script>
     <script src="js/authorization.js" type="module"></script>

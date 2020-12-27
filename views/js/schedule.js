@@ -18,8 +18,21 @@ export class Schedule {
             dataArr[i] = new Array(data.length);
             dataId[i] = new Array(data.length);
             for(let j = 0; j < data.length; j++) {
-                console.log(data[j].data[a]);
-                dataArr[i][j] = data[j].data[a].value;
+                // console.log(data[j].data[a]);
+                if(data[j].data[a].id == 6
+                    || data[j].data[a].id == 7
+                    || data[j].data[a].id == 8
+                    || data[j].data[a].id == 14) {
+                        console.log('67814');
+                        dataArr[i][j] = data[j].data[a].value / 100;
+                } else if(data[j].data[a].id >= 44 && data[j].data[a].id <= 50) {
+                    console.log('44')
+                    dataArr[i][j] = data[j].data[a].value / 1000;
+                }else if(data[j].data[a].id >= 23 && data[j].data[a].id <= 25 ) {
+                    dataArr[i][j] = data[j].data[a].value / 3600;
+                } else {
+                    dataArr[i][j] = data[j].data[a].value;
+                }
                 dataId[i][j] = data[j].data[a].id;
             }
             a++;
@@ -28,7 +41,7 @@ export class Schedule {
         this._date = date;
         this._dataArr = dataArr;
         this._dataId = dataId;
-        console.log(this._dataId);
+        console.log(dataArr);
         // console.log(dataArr);
     }
 
@@ -56,7 +69,6 @@ export class Schedule {
           let blue = getRandomInt(255);
 
               arrColors = "rgb(" + red + "," + green + "," + blue + ")";
-          console.log(arrColors);
         return arrColors;
     }
 
@@ -81,6 +93,7 @@ export class Schedule {
                 bgColorOfSchedule = this.getColorSchedule(this.getDateSchedule().length);
                 borderColorSchedule = undefined;
             }
+
             var barChart = new Chart(schedules[i], {
                 type: typeOfSchedule,
                 data: {
@@ -88,7 +101,6 @@ export class Schedule {
                   datasets: [{
                     label: labels[i],
                     data: this.getDataSchedule()[i],
-                    // backgroundColor: this.getColorSchedule(this.getDateSchedule().length)
                     backgroundColor: bgColorOfSchedule,
                     borderColor: borderColorSchedule
                   }]
@@ -119,7 +131,7 @@ export class Schedule {
                     legend: {
                         labels: {
                             // This more specific font property overrides the global property
-                            fontColor: 'blue',
+                            fontColor: '#198ada',
                             fontSize: 40,
                             fontFamily: 'Helvetica'
                         }

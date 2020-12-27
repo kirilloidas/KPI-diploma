@@ -17,17 +17,15 @@ window.addEventListener('load', () => {
             .then(data => console.log(data));
     }    
 
-    console.log(new Date(2020, 1, 6, undefined || 0));
-
     btnSubmit.addEventListener('click', () => {
         console.log(checkbox_switch[0].checked);
         for (let i = 0; i < ch.length; i++) {
             if (!ch[i].checked) {
                 canv[i].style.display = 'none';
-                console.log(canv[i])
+                // console.log(canv[i])
             } else {
                 canv[i].style.display = 'block';
-                console.log(canv[i])
+                // console.log(canv[i])
             }
         }
         let obj = {
@@ -63,7 +61,6 @@ window.addEventListener('load', () => {
 
     // console.log(checkbox_switch);
     checkbox_switch[0].addEventListener('click', () => {
-        console.log(checkbox_switch[0].checked)
         if(checkbox_switch[0].checked) {
             start_hours.classList.add('input_time_show');
             end_hours.classList.add('input_time_show');

@@ -33,7 +33,7 @@ export class Initialization {
         }, 2000);
     }
 
-    static initializationUser(authorizationObj) {
+    static initializationUser(authorizationObj, error_authorization) {
         let json = JSON.stringify(authorizationObj);
         let request = new XMLHttpRequest();
             // посылаем запрос на адрес "/user"
@@ -47,6 +47,8 @@ export class Initialization {
                     //  model_block.style.display = "none";
                      document.location.href = "/index1";
                      console.log('yes');
+                 } else {
+                    error_authorization.style.opacity = 1;
                  }
              });
              request.send(json);

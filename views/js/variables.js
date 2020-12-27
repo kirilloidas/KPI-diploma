@@ -28,3 +28,4 @@ const end_hours = document.getElementById('end_hours');
 const login = document.getElementById('login');
 const password = document.getElementById('password');
 const capsLock = document.getElementById('capsLock');
+const error_authorization = document.getElementById('error_authorization');
