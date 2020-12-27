@@ -24,7 +24,12 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(__dirname + '/views'));
 
 
-app.get('/', (req, res) => {
+app.get('/authorization', (req, res) => {
+    res.status(200);
+    res.sendFile(path.join(__dirname, 'views', 'authorization.html'));
+})
+
+app.get('/index1', (req, res) => {
     res.status(200);
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 })

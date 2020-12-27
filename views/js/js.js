@@ -42,32 +42,24 @@ window.addEventListener('load', () => {
         Initialization.initialozationInterval(obj);
     });
 
-    btnAuthorization.addEventListener('click', (event) => {
-        event.preventDefault();
-        console.log(login.value, password.value);
-        let authorizationObj = {
-            login: login.value,
-            pass: password.value
-        };
-        Initialization.initializationUser(authorizationObj, modal_block);
-    })
+    // btnAuthorization.addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     console.log(login.value, password.value);
+    //     let authorizationObj = {
+    //         login: login.value,
+    //         pass: password.value
+    //     };
+    //     Initialization.initializationUser(authorizationObj, modal_block);
+    // })
 
 
-    // window.onkeypress = function ( e ) {
-    //     e = e || window.event;
-    //     var s = String.fromCharCode( e.keyCode || e.which );
-    //     if ( (s.toUpperCase() === s) !== e.shiftKey ) {
-    //       alert('caps is on')
+    // document.addEventListener('keydown', (event) => {
+    //     if(event.getModifierState("CapsLock")) {
+    //         capsLock.style.display = 'block';
+    //     } else {
+    //         capsLock.style.display = 'none';
     //     }
-    //   }
-
-    document.addEventListener('keydown', (event) => {
-        if(event.getModifierState("CapsLock")) {
-            capsLock.style.display = 'block';
-        } else {
-            capsLock.style.display = 'none';
-        }
-    })
+    // })
 
     // console.log(checkbox_switch);
     checkbox_switch[0].addEventListener('click', () => {
