@@ -1,27 +1,47 @@
 export class Schedule {
     constructor() {
         this._date,
-        this._dataArr
+        this._dataArr,
+        this._dataId
     }
 
     static setDataSchedule(data) {
         console.log(data);
         let date = [];
         let dataArr = [];
+        let dataId = [];
         let a = 1;
         for(let i = 0; i < data.length - 1; i++) {
-            date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}`;
+            date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}:${new Date(data[i].date).getHours()}`;
         }
         for(let i = 0; i < 10; i++) {
             dataArr[i] = new Array(data.length);
+            dataId[i] = new Array(data.length);
             for(let j = 0; j < data.length; j++) {
-                dataArr[i][j] = data[j].data[a].value;
+                // console.log(data[j].data[a]);
+                if(data[j].data[a].id == 6
+                    || data[j].data[a].id == 7
+                    || data[j].data[a].id == 8
+                    || data[j].data[a].id == 14) {
+                        console.log('67814');
+                        dataArr[i][j] = data[j].data[a].value / 100;
+                } else if(data[j].data[a].id >= 44 && data[j].data[a].id <= 50) {
+                    console.log('44')
+                    dataArr[i][j] = data[j].data[a].value / 1000;
+                }else if(data[j].data[a].id >= 23 && data[j].data[a].id <= 25 ) {
+                    dataArr[i][j] = data[j].data[a].value / 3600;
+                } else {
+                    dataArr[i][j] = data[j].data[a].value;
+                }
+                dataId[i][j] = data[j].data[a].id;
             }
             a++;
             
         }
         this._date = date;
         this._dataArr = dataArr;
+        this._dataId = dataId;
+        console.log(dataArr);
         // console.log(dataArr);
     }
 
@@ -31,6 +51,10 @@ export class Schedule {
 
     static getDateSchedule() {
         return this._date;
+    }
+
+    static getIdSchedule() {
+        return this._dataId;
     }
 
     static getColorSchedule(n) {
@@ -44,47 +68,41 @@ export class Schedule {
           let green = getRandomInt(255);
           let blue = getRandomInt(255);
 
-          for(let i = 0; i < n; i++) {
-              arrColors[i] = "rgb(" + red + "," + green + "," + blue + ")";
-          }
-          console.log(arrColors);
+              arrColors = "rgb(" + red + "," + green + "," + blue + ")";
         return arrColors;
     }
 
     static setSchedule() {
         let schedules = [schedule_1, schedule_2,schedule_3, schedule_4,schedule_5, schedule_6,schedule_7, schedule_8,schedule_9, schedule_10];
-        let labels = ['Объем (масса) канала расхода 1', 'Значение температуры ТСП 1 * 100', 'Значение температуры ТСП 2 * 100', 'Тепло', 'Время работы счетчика , ч', 'Время ошибок', 'Введенные пользователем константы давления * 1000', 'Введенные пользователем константы давления * 1000', 'Потребленная энергия', 'Температура внутри корпуса'];
+        let labels = ['Об`єм (маса) каналу витрати 1', 'Значення температури ТСП 1 * 100', 'Значення температури ТСП 2 * 100', 'Тепло', 'Час роботи лічильника, год', 'Час помилок', 'Введені користувачем константи тиску * 1000', 'Введені користувачем константи тиску * 1000', 'Спожита енергія', 'Температура всередині корпусу'];
+        let typeOfSchedule,
+            bgColorOfSchedule,
+            borderColorSchedule;
         for(let i = 0; i < schedules.length; i++) {
+            if(this.getIdSchedule()[i][0] == 6
+                || this.getIdSchedule()[i][0] == 7
+                || this.getIdSchedule()[i][0] == 8
+                || this.getIdSchedule()[i][0] == 14
+                || this.getIdSchedule()[i][0] == 55) {
+                    typeOfSchedule = 'line';
+                    bgColorOfSchedule = undefined;
+                    borderColorSchedule = 'yellow';
+                }
+            else {
+                typeOfSchedule = 'bar';
+                bgColorOfSchedule = this.getColorSchedule(this.getDateSchedule().length);
+                borderColorSchedule = undefined;
+            }
+
             var barChart = new Chart(schedules[i], {
-                type: 'bar',
+                type: typeOfSchedule,
                 data: {
                   labels: this.getDateSchedule(),
                   datasets: [{
                     label: labels[i],
                     data: this.getDataSchedule()[i],
-                    backgroundColor: this.getColorSchedule(this.getDateSchedule().length)
-                    // [
-                    //   'rgba(255, 99, 132, 0.6)',
-                    //   'rgba(54, 162, 235, 0.6)',
-                    //   'rgba(255, 206, 86, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(153, 102, 255, 0.6)',
-                    //   'rgba(255, 159, 64, 0.6)',
-                    //   'rgba(255, 99, 132, 0.6)',
-                    //   'rgba(54, 162, 235, 0.6)',
-                    //   'rgba(255, 206, 86, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(153, 102, 255, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)',
-                    //   'rgba(75, 192, 192, 0.6)'
-                    // ]
+                    backgroundColor: bgColorOfSchedule,
+                    borderColor: borderColorSchedule
                   }]
                 },
                 options: {
@@ -97,7 +115,7 @@ export class Schedule {
                             ticks: {
                                 beginAtZero:true,
                                 fontColor: "#CCC",
-                                fontSize: 20
+                                fontSize: 28
                             }
                         }],
                         xAxes: [{
@@ -106,20 +124,20 @@ export class Schedule {
                             },
                             ticks: {
                                 fontColor: "#CCC",
-                                fontSize: 20
+                                fontSize: 28
                             }
                         }]
                     },
                     legend: {
                         labels: {
                             // This more specific font property overrides the global property
-                            fontColor: 'blue',
-                            fontSize: 30,
+                            fontColor: '#198ada',
+                            fontSize: 40,
                             fontFamily: 'Helvetica'
                         }
                     }
                 }
-              });
+            });
         }
     }
 }

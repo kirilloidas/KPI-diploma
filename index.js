@@ -1,17 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 // const Routes = require('./router.js');
 // const users = require('./models.js')
 // const data = require('./models.js');
-const data = require('./models.js').data;
+// const connectMongo = require('./connectMongo.js');
+const dailyData = require('./models.js').dailyData;
 const users = require('./models.js').users;
+const hourlyData = require('./models.js').hourlyData;
 
 
 const PORT = process.env.PORT || 3000;
 
-let app = express();
+const app = express();
 let jsonParser = express.json();
 app.use(express.static("public"));
 app.use(bodyParser.json());
@@ -22,9 +24,30 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(__dirname + '/views'));
 
 
-app.get('/', (req, res) => {
+app.get('/authorization', (req, res) => {
+    res.status(200);
+    res.sendFile(path.join(__dirname, 'views', 'authorization.html'));
+})
+
+app.get('/index1', (req, res) => {
     res.status(200);
     res.sendFile(path.join(__dirname, 'views', 'index.html'));
+})
+
+app.get('/index2', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index2.html'));
+})
+
+app.get('/index3', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index3.html'));
+})
+
+app.get('/customization', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'customization.html'));
+})
+
+app.get('/access', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'access.html'));
 })
 
 var intervalTime;
@@ -34,7 +57,13 @@ app.post("/timeInterval", jsonParser, function (request, response) {
     response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
     console.log(intervalTime);
-    start(intervalTime);
+    // connectMongo.getDataOfInterval(intervalTime, data);
+    if(request.body.isDaily) {
+        getDataOfInterval(request.body, dailyData);
+    } else {
+        getDataOfInterval(request.body, hourlyData);
+    }
+    
 });
 
 app.post("/authorization", jsonParser, function (request, response) {
@@ -49,7 +78,7 @@ app.post("/authorization", jsonParser, function (request, response) {
 
 
 
-async function start(intervalT) {
+async function getDataOfInterval(intervalT, requestData) {
     try {
         await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
             useNewUrlParser: true,
@@ -57,7 +86,7 @@ async function start(intervalT) {
             useUnifiedTopology: true
         });
 
-        let ourData = await data.find({
+        let ourData = await requestData.find({
             $and: [{
                     "date": {
                         $gte: intervalT.startTime
@@ -71,15 +100,22 @@ async function start(intervalT) {
             ]
 
         }).sort('field');
-        console.log(ourData);
+        // console.log(ourData);
         app.get('/api/data', (req, res) => {
             res.status(200);
-            res.end(JSON.stringify(ourData));
+            let responseData = ourData.sort(
+                function(a,b){
+                    return a.date-b.date;
+                }
+            );
+            res.end(JSON.stringify(responseData));
         })
     } catch (error) {
         console.log(error);
     }
 }
+
+
 
 async function authorizationUser(requestUser) {
     console.log('auto')

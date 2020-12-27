@@ -1,18 +1,25 @@
-@charset "utf-8";
-/* CSS Document */
-
-@import url(http://weloveiconfonts.com/api/?family=fontawesome);
-
-@import url(http://meyerweb.com/eric/tools/css/reset/reset.css);
-
-/* ---------- FONTAWESOME ---------- */
-
-[class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
+body {
+    background-image: url(../img/padded_@2X.png);
+    color: #CDD1DA;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+  line-height: 1.5em;
+  padding: 20px;
+  }
+main{
+    display: flex;
+    position: relative;
 }
 
+.title {
+    position: relative;
+    top: 100px;
+    /* left: 45%; */
+    color: #ffffff;
+    font-size: 34px;
+  }
 
-body {
+  body {
     background-image: url(../img/padded_@2X.png);
     color: #CDD1DA;
 	font-family: 'Open Sans', Arial, sans-serif;
@@ -35,7 +42,7 @@ a {
 a:hover {
 	text-decoration: underline;
 }
-.modal_block input {
+input {
 	border: none;
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 14px;
@@ -44,50 +51,53 @@ a:hover {
 	-webkit-appearance: none;
 }
 
-p {
-	line-height: 1.5em;
+select{
+    border: none;
 }
 
-.clearfix { 
-	*zoom: 1;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
- } /* For IE 6/7 */
-.clearfix:before, .clearfix:after {
-	display: table;
-	content: "";
+p {
+    line-height: 1.5em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
-.clearfix:after { clear: both; }
+
+
 
 /* ---------- LOGIN ---------- */
 
-.modal_block .login {
+.login {
 	margin: 150px auto;
-	width: 280px;
+    width: 600px;
+    display: flex;
+    justify-content: center;
 }
 
-.modal_block .login form p span {
-	background-color: #363b41;
-	border-radius: 3px 0px 0px 3px;
-	-moz-border-radius: 3px 0px 0px 3px;
-	-webkit-border-radius: 3px 0px 0px 3px;
-	color: #606468;
-	display: block;
-	float: left;
+.login form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.login form input,
+.login form select {
+    /* margin: 30px; */
 	height: 50px;
-	line-height: 50px;
-	text-align: center;
-	width: 50px;
+    outline:none;
 }
 
-.modal_block .login form input {
-	height: 50px;
-	outline:none;
+p {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
 }
 
-.modal_block .login form input[type="text"], input[type="password"] {
+p span {
+    font-size: 20px;
+    font-style: italic;
+}
+
+.login form input[type="text"], input[type="password"], select {
 	background-color: #3b4148;
 	border-radius: 0px 3px 3px 0px;
 	-moz-border-radius: 0px 3px 3px 0px;
@@ -95,23 +105,16 @@ p {
 	color: #606468;
 	margin-bottom: 1em;
 	padding: 0 16px;
-	width: 198px;
+	width: 200px;
 }
 
-.modal_block .login form input:focus {
+select {
+    width: 232px;
+}
+
+.login form input:focus {
 	color:#fff;
 }
-
-
-
-.capsLock{
-	position: absolute;
-	display: none;
-	top: 32%;
-	right: -20%;
-}
-
-
 .sliding-button {
 	font-family: 'Open Sans', Arial, sans-serif;
 	  text-decoration: none;
@@ -150,37 +153,3 @@ p {
 	  top: auto;
 	  height: 100%;
 	}
-.authorization_title {
-	font-size: 32px;
-	position: relative;
-	top: 110px;
-}
-.error {
-	opacity: 0;
-	color: red;
-}
-
-/* .modal_block #login form input[type="submit"] {
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	background-color: #ea4c88;
-	color: #eee;
-	font-weight: bold;
-	margin-bottom: 2em;
-	text-transform: uppercase;
-	cursor:pointer;
-	width: 280px;
-}
-
-.modal_block #login form input[type="submit"]:hover {
-	background-color: #d44179;
-}
-
-.modal_block #login > p {
-	text-align: center;
-}
-
-.modal_block #login > p span {
-	padding-left: 5px;
-} */

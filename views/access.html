@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <link rel="stylesheet" href="css/authorization.css"> -->
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/access.css">
     <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/switch.css">
+
 </head>
 
 <body>
@@ -132,197 +132,37 @@
         </div>
         <!-- <svg data-duration="10" data-delay="45" display="none" width="0" height="0" fill= version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg> -->
     </header>
-    <a href="/api/data">API</a>
     <main>
-        <!-- <section class="modal_block" id="modal_block">
+        <h1 class="title">Access</h1>
+
 
             <div class="login">
-                <form action="/authorization" method="POST">
-                    <fieldset class="clearfix">
+                <form action="/addUser" method="POST">
                         <p>
-                            <span class="fontawesome-user"></span>
-                            <input id="login" type="text" value="Логин"
-                                onBlur="if(this.value == '') this.value = 'Логин'"
-                                onFocus="if(this.value == 'Логин') this.value = ''" required>
+                            <input id="login" type="text" value="Логін" 
+                            onBlur="if(this.value == '') this.value = 'Логін'"
+                            onFocus="if(this.value == 'Логін') this.value = ''" required>
+                            <span class="loginSpan">Логін користувача</span>
+                        </p>
+
+                        <p>
+                            <input id="password" type="text" value="Пароль"
+                            onBlur="if(this.value == '') this.value = 'Пароль'"
+                            onFocus="if(this.value == 'Пароль') this.value = ''" required>
+                            <span class="passSpan">Пароль користувача</span>
                         </p>
                         <p>
-                            <span class="fontawesome-lock"></span>
-                            <input id="password" type="password" value="Пароль"
-                                onBlur="if(this.value == '') this.value = 'Пароль'"
-                                onFocus="if(this.value == 'Пароль') this.value = ''" required>
+                            <select id="accessUser" class="accessUser">
+                                <option value="admin">Admin</option>
+                                <option value="employee">Employee</option>
+                            </select>
+                            <span class="accessSpan">Рівень доступу користувача</span>
                         </p>
-                        <span class="capsLock" id="capsLock"><svg height="30" viewBox="0 0 60.031 52" width="35"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <style>
-                                        .cls-1 {
-                                            fill: #bf873e;
-                                            fill-rule: evenodd;
-                                        }
-                                    </style>
-                                </defs>
-                                <path class="cls-1"
-                                    d="M214.413,746a4.455,4.455,0,0,1-3.84-2.166,4.249,4.249,0,0,1,0-4.334l25.572-43.331a4.483,4.483,0,0,1,7.679,0L269.4,739.5a4.249,4.249,0,0,1,0,4.334,4.452,4.452,0,0,1-3.84,2.166H214.413ZM240,706a4,4,0,0,0-4,4v16a4,4,0,0,0,8,0V710A4,4,0,0,0,240,706Zm0,36a4,4,0,1,0-4-4A4,4,0,0,0,240,742Z"
-                                    id="attention" transform="translate(-209.969 -694)" />
-                            </svg>
-                        </span>
-                        <a href="#" id="authorization" class="sliding-button">Войти</a>
-                    </fieldset>
+                        <a href="#" id="authorization" class="sliding-button">Додати користувача</a>
                 </form>
             </div>
-        </section> -->
 
-        <fieldset class="labels">
-            <legend>Параметри</legend>
-            <div class="switch_schedule" id="switch_schedule">
-                <input type="checkbox" id="checkbox_switch" />
-                <label for="checkbox_switch"></label>
-            </div>
-            <label class="checkbox">
-                <input type="checkbox" id="ch1" />
-                <div class="checkbox__text">Об`єм (маса) каналу витрати 1</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch2" />
-                <div class="checkbox__text">Значення температури ТСП 1 * 100</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch3" />
-                <div class="checkbox__text">Значення температури ТСП 2 * 100</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch4" />
-                <div class="checkbox__text">Тепло</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch5" />
-                <div class="checkbox__text">Час роботи лічильника, год</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch6" />
-                <div class="checkbox__text">Час помилок</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch7" />
-                <div class="checkbox__text">Введені користувачем константи тиску * 1000</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch8" />
-                <div class="checkbox__text">Введені користувачем константи тиску * 1000</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch9" />
-                <div class="checkbox__text">Спожита енергія</div>
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" id="ch10" />
-                <div class="checkbox__text">Температура всередині корпусу</div>
-            </label>
-            <!-- <form action="/form_date" method="POST"> -->
-            <h3>Початкова дата</h3>
-            <div class="start_date">
-                <input type="text" id="start_day" name="start_day" placeholder="Число">
-                <input type="text" id="start_month" name="start_month" placeholder="Місяць">
-                <input type="text" id="start_year" name="start_year" placeholder="Рік">
-                <input type="text" class="start_hours" id="start_hours" name="start_hours" placeholder="Години">
-            </div>
-            <h3>Кінцева дата</h3>
-            <div class="end_date">
-                <input type="text" id="end_day" name="end_day" placeholder="Число">
-                <input type="text" id="end_month" name="end_month" placeholder="Місяць">
-                <input type="text" id="end_year" name="end_year" placeholder="Рік">
-                <input type="text" class="end_hours" id="end_hours" name="end_hours" placeholder="Години">
-            </div>
-            <span id="output"></span>
-            <a href="#" id="submit" class="sliding-button">Показати дані</a>
-            <!-- </form> -->
-
-            <!-- <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (1)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Коды ошибок 8-ми типов (1)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (2)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Коды ошибок 8-ми типов (2)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (3)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Коды ошибок 8-ми типов (3)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (4)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Коды ошибок 8-ми типов (4)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (5)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Коды ошибок 8-ми типов (5)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (6)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Коды ошибок 8-ми типов (6)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (7)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Коды ошибок 8-ми типов (7)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Длительность, час, 8-ми типов ошибок (8)</div>
-        </label>
-        <label class="checkbox">
-            <input type="checkbox" />
-            <div class="checkbox__text">Коды ошибок 8-ми типов (8)</div>
-        </label> -->
-        </fieldset>
-
-        <div class="schedules">
-            <canvas id="schedule_1"></canvas>
-            <canvas id="schedule_2"></canvas>
-            <canvas id="schedule_3"></canvas>
-            <canvas id="schedule_4"></canvas>
-            <canvas id="schedule_5"></canvas>
-            <canvas id="schedule_6"></canvas>
-            <canvas id="schedule_7"></canvas>
-            <canvas id="schedule_8"></canvas>
-            <canvas id="schedule_9"></canvas>
-            <canvas id="schedule_10"></canvas>
-        </div>
     </main>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
-        integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
-        crossorigin="anonymous"></script>
-    <script src="js/variables.js"></script>
-    <script src="js/js.js" type="module"></script>
 </body>
 
 </html>

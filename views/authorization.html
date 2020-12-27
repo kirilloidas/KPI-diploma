@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/authorization.css">
+</head>
+<body>
+    <main>
+    <h1 class="authorization_title">Авторизація</h1>
+    <section class="modal_block" id="modal_block">
+
+        <div class="login">
+            <form action="/authorization" method="POST">
+                <fieldset class="clearfix">
+                    <p>
+                        <span class="fontawesome-user"></span>
+                        <input id="login" type="text" value="Логин"
+                            onBlur="if(this.value == '') this.value = 'Логин'"
+                            onFocus="if(this.value == 'Логин') this.value = ''" required>
+                    </p>
+                    <!-- JS because of IE support; better: placeholder="Username" -->
+                    <p>
+                        <span class="fontawesome-lock"></span>
+                        <input id="password" type="password" value="Пароль"
+                            onBlur="if(this.value == '') this.value = 'Пароль'"
+                            onFocus="if(this.value == 'Пароль') this.value = ''" required>
+                    </p>
+                    <span class="capsLock" id="capsLock">
+                        <svg height="30" viewBox="0 0 60.031 52" width="35"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: #bf873e;
+                                        fill-rule: evenodd;
+                                    }
+                                </style>
+                            </defs>
+                            <path class="cls-1"
+                                d="M214.413,746a4.455,4.455,0,0,1-3.84-2.166,4.249,4.249,0,0,1,0-4.334l25.572-43.331a4.483,4.483,0,0,1,7.679,0L269.4,739.5a4.249,4.249,0,0,1,0,4.334,4.452,4.452,0,0,1-3.84,2.166H214.413ZM240,706a4,4,0,0,0-4,4v16a4,4,0,0,0,8,0V710A4,4,0,0,0,240,706Zm0,36a4,4,0,1,0-4-4A4,4,0,0,0,240,742Z"
+                                id="attention" transform="translate(-209.969 -694)" />
+                        </svg>
+                    </span>
+                    <p class="error" id="error_authorization">Логін чи пароль вказані невірно</p>
+                    <!-- JS because of IE support; better: placeholder="Password" -->
+                    <!-- <p class="sliding-button"><input type="submit" value="ВОЙТИ"></p> -->
+                    <a href="#" id="authorization" class="sliding-button">Увійти</a>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+</main>
+
+    <script src="js/variables.js"></script>
+    <script src="js/authorization.js" type="module"></script>
+</body>
+</html>
