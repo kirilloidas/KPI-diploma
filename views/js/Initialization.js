@@ -23,14 +23,16 @@ export class Initialization {
              request.addEventListener("load", function () {
                 // получаем и парсим ответ сервера
                  let receivedObj = JSON.parse(request.response);
+                    Schedule.setDataSchedule(receivedObj);
+                    Schedule.setSchedule();
                 //  console.log(receivedObj.startDay, "-", receivedObj.endDay);   // смотрим ответ сервера
              });
              request.send(json);
 
-        setTimeout(() => {
-            this.initializationAjax();
+        // setTimeout(() => {
+        //     this.initializationAjax();
 
-        }, 2000);
+        // }, 2000);
     }
 
     static initializationUser(authorizationObj, error_authorization) {
