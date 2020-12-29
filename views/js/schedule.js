@@ -90,7 +90,8 @@ export class Schedule {
                 }
             else {
                 typeOfSchedule = 'bar';
-                bgColorOfSchedule = this.getColorSchedule(this.getDateSchedule().length);
+                // bgColorOfSchedule = this.getColorSchedule(this.getDateSchedule().length);
+                bgColorOfSchedule = 'yellow';
                 borderColorSchedule = undefined;
             }
 

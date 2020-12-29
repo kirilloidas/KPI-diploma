@@ -2,10 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
-// const Routes = require('./router.js');
-// const users = require('./models.js')
-// const data = require('./models.js');
-// const connectMongo = require('./connectMongo.js');
 const dailyData = require('./models.js').dailyData;
 const users = require('./models.js').users;
 const hourlyData = require('./models.js').hourlyData;
@@ -24,14 +20,14 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(__dirname + '/views'));
 
 
-app.get('/authorization', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200);
     res.sendFile(path.join(__dirname, 'views', 'authorization.html'));
 })
 
 app.get('/index1', (req, res) => {
     res.status(200);
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+    res.sendFile(path.join(__dirname, 'views', 'index1.html'));
 })
 
 app.get('/index2', (req, res) => {
@@ -142,15 +138,12 @@ async function authorizationUser(requestUser) {
                         $eq: requestUser.login
                     }
         });
-        // console.log(isUser, '10');
         if(isUser == null || isUser.pass != requestUser.pass) {
-            // console.log('false');
             let obj = {
                 isUser: false
             };
             return obj;
         } else {
-            // console.log('true');
             let obj = {
                 isUser: true
             };
@@ -163,5 +156,4 @@ async function authorizationUser(requestUser) {
 }
 app.listen(PORT, () => {
     console.log(`Server has been started...`);
-    // start();
 })
