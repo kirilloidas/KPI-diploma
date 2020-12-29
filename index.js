@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/views'));
 
 app.get('/', (req, res) => {
     res.status(200);
-    res.sendFile(path.join(__dirname, 'views', 'authorization.html'));
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
 })
 
 app.get('/index1', (req, res) => {
