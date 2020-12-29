@@ -1,4 +1,4 @@
-body {
+/* body {
     background-image: url(../img/padded_@2X.png);
     color: #CDD1DA;
 	font-family: 'Open Sans', Arial, sans-serif;
@@ -9,7 +9,7 @@ body {
 main{
     display: flex;
     position: relative;
-}
+} */
 
 .title {
     position: relative;

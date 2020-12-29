@@ -54,14 +54,20 @@ var intervalTime;
 app.post("/timeInterval", jsonParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
 
-    response.json(request.body); // отправляем пришедший ответ обратно
+    // response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
     console.log(intervalTime);
     // connectMongo.getDataOfInterval(intervalTime, data);
     if(request.body.isDaily) {
-        getDataOfInterval(request.body, dailyData);
+        getDataOfInterval(request.body, dailyData)
+            .then(res => {
+                response.end(JSON.stringify(res))
+            });
     } else {
-        getDataOfInterval(request.body, hourlyData);
+        getDataOfInterval(request.body, hourlyData)
+            .then(res => {
+                response.end(JSON.stringify(res))
+            });
     }
     
 });
@@ -100,16 +106,21 @@ async function getDataOfInterval(intervalT, requestData) {
             ]
 
         }).sort('field');
-        // console.log(ourData);
-        app.get('/api/data', (req, res) => {
-            res.status(200);
-            let responseData = ourData.sort(
-                function(a,b){
-                    return a.date-b.date;
-                }
-            );
-            res.end(JSON.stringify(responseData));
-        })
+        let responseData = ourData.sort(
+                    function(a,b){
+                        return a.date-b.date;
+                    }
+                );
+        return responseData;
+        // app.get('/api/data', (req, res) => {
+        //     res.status(200);
+        //     let responseData = ourData.sort(
+        //         function(a,b){
+        //             return a.date-b.date;
+        //         }
+        //     );
+        //     res.end(JSON.stringify(responseData));
+        // })
     } catch (error) {
         console.log(error);
     }
