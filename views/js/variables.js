@@ -25,7 +25,17 @@ const end_month = document.getElementById('end_month');
 const end_year = document.getElementById('end_year');
 const end_hours = document.getElementById('end_hours');
 
+const start_day_error = document.getElementById('start_day_error');
+const start_month_error = document.getElementById('start_month_error');
+const start_year_error = document.getElementById('start_year_error');
+const start_hours_error = document.getElementById('start_hours_error');
+const end_day_error = document.getElementById('end_day_error');
+const end_month_error = document.getElementById('end_month_error');
+const end_year_error = document.getElementById('end_year_error');
+const end_hours_error = document.getElementById('end_hours_error');
+
 const login = document.getElementById('login');
 const password = document.getElementById('password');
 const capsLock = document.getElementById('capsLock');
 const error_authorization = document.getElementById('error_authorization');
+

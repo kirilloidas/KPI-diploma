@@ -37,16 +37,6 @@ main{
     height: 100% !important;
 }
 
-/* .modal_block{
-  background-image: url(../img/padded_@2X.png);
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  width: 100%;
-  height: 100%;
-} */
-
 .sliding-button {
   font-family: 'Open Sans', Arial, sans-serif;
     text-decoration: none;
@@ -162,8 +152,59 @@ main{
   outline: none;
 }
 
-.start_date{
+.start_date, .end_date{
   display: flex;
+  position: relative;
+}
+
+/* .start_error{
+  position: absolute;
+} */
+
+.interval_error {
+  display: none;
+	width: 80px;
+  padding: 10px;
+  top: -80px;
+  background-color: #0e0f12;
+  border-radius: 10px;
+  text-align: center;
+  color: #198ada;
+	position: absolute;
+	border: 1px solid orange;
+}
+.interval_error:after, .interval_error:before {
+	content: ""; 
+	border: solid transparent;
+	position: absolute;
+ 	top: 100%;
+	left: 50%;
+}
+.interval_error:after {
+	/* border-top-color: #fff; */
+	border-width: 8px;
+	margin-left: -8px;
+}
+.interval_error:before {
+	border-top-color: orange;
+	border-width: 9px;
+	margin-left: -9px;
+}
+
+.start_day_error, .end_day_error {
+  left: 3px;
+}
+
+.start_month_error, .end_month_error{
+  left: 114px;
+}
+
+.start_year_error, .end_year_error{
+  left: 223px;
+}
+
+.start_hours_error, .end_hours_error{
+  left: 333px;
 }
 
 .end_date{

@@ -221,16 +221,24 @@
             <!-- <form action="/form_date" method="POST"> -->
             <h3>Початкова дата</h3>
             <div class="start_date">
+                <span class="interval_error start_day_error" id="start_day_error">Некорректно введений день</span>
                 <input type="text" id="start_day" name="start_day" placeholder="Число">
+                <span class="interval_error start_month_error" id="start_month_error">Некорректно введений місяць</span>
                 <input type="text" id="start_month" name="start_month" placeholder="Місяць">
+                <span class="interval_error start_year_error" id="start_year_error">Некорректно введений рік</span>
                 <input type="text" id="start_year" name="start_year" placeholder="Рік">
+                <span class="interval_error start_hours_error" id="start_hours_error">Некорректно введені години</span>
                 <input type="text" class="start_hours" id="start_hours" name="start_hours" placeholder="Години">
             </div>
             <h3>Кінцева дата</h3>
             <div class="end_date">
+                <span class="interval_error end_day_error" id="end_day_error">Некорректно введений день</span>
                 <input type="text" id="end_day" name="end_day" placeholder="Число">
+                <span class="interval_error end_month_error" id="end_month_error">Некорректно введений місяць</span>
                 <input type="text" id="end_month" name="end_month" placeholder="Місяць">
+                <span class="interval_error end_year_error" id="end_year_error">Некорректно введений рік</span>
                 <input type="text" id="end_year" name="end_year" placeholder="Рік">
+                <span class="interval_error end_hours_error" id="end_hours_error">Некорректно введені години</span>
                 <input type="text" class="end_hours" id="end_hours" name="end_hours" placeholder="Години">
             </div>
             <span id="output"></span>

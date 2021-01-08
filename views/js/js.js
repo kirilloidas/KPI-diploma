@@ -5,11 +5,6 @@ import {
     Schedule
 } from './schedule.js';
 
-
-
-let dataArr = [];
-
-
 window.addEventListener('load', () => {
     async function init() {
         fetch('http://localhost:3000/api/data')
@@ -22,10 +17,8 @@ window.addEventListener('load', () => {
         for (let i = 0; i < ch.length; i++) {
             if (!ch[i].checked) {
                 canv[i].style.display = 'none';
-                // console.log(canv[i])
             } else {
                 canv[i].style.display = 'block';
-                // console.log(canv[i])
             }
         }
         let obj = {
@@ -40,26 +33,6 @@ window.addEventListener('load', () => {
         Initialization.initialozationInterval(obj);
     });
 
-    // btnAuthorization.addEventListener('click', (event) => {
-    //     event.preventDefault();
-    //     console.log(login.value, password.value);
-    //     let authorizationObj = {
-    //         login: login.value,
-    //         pass: password.value
-    //     };
-    //     Initialization.initializationUser(authorizationObj, modal_block);
-    // })
-
-
-    // document.addEventListener('keydown', (event) => {
-    //     if(event.getModifierState("CapsLock")) {
-    //         capsLock.style.display = 'block';
-    //     } else {
-    //         capsLock.style.display = 'none';
-    //     }
-    // })
-
-    // console.log(checkbox_switch);
     checkbox_switch[0].addEventListener('click', () => {
         if(checkbox_switch[0].checked) {
             start_hours.classList.add('input_time_show');
@@ -67,6 +40,72 @@ window.addEventListener('load', () => {
         } else {
             start_hours.classList.remove('input_time_show');
             end_hours.classList.remove('input_time_show');
+        }
+    })
+
+    start_day.addEventListener('blur', () => {
+        if(start_day.value <= 0 || start_day.value >= 32) {
+            start_day_error.style.display = 'block';
+        } else {
+            start_day_error.style.display = 'none';
+        }
+    })
+
+    start_month.addEventListener('blur', () => {
+        if(start_month.value <= 0 || start_month.value >= 13) {
+            start_month_error.style.display = 'block';
+        } else {
+            start_month_error.style.display = 'none';
+        }
+    })
+
+    start_year.addEventListener('blur', () => {
+        let yearNow = new Date().getFullYear();
+        if(start_year.value <= 2019 || start_year.value > yearNow) {
+            start_year_error.style.display = 'block';
+        } else {
+            start_year_error.style.display = 'none';
+        }
+    })
+
+    start_hours.addEventListener('blur', () => {
+        if(start_hours.value < 0 || start_hours.value >= 24) {
+            start_hours_error.style.display = 'block';
+        } else {
+            start_hours_error.style.display = 'none';
+        }
+    })
+
+    end_day.addEventListener('blur', () => {
+        if(end_day.value <= 0 || end_day.value >= 32) {
+            end_day_error.style.display = 'block';
+        } else {
+            end_day_error.style.display = 'none';
+        }
+    })
+
+    end_month.addEventListener('blur', () => {
+        if(end_month.value <= 0 || end_month.value >= 13) {
+            end_month_error.style.display = 'block';
+        } else {
+            end_month_error.style.display = 'none';
+        }
+    })
+
+    end_year.addEventListener('blur', () => {
+        let yearNow = new Date().getFullYear();
+        if(end_year.value <= 2019 || end_year.value > yearNow) {
+            end_year_error.style.display = 'block';
+        } else {
+            end_year_error.style.display = 'none';
+        }
+    })
+
+    end_hours.addEventListener('blur', () => {
+        if(end_hours.value < 0 || end_hours.value >= 24) {
+            end_hours_error.style.display = 'block';
+        } else {
+            end_hours_error.style.display = 'none';
         }
     })
     
