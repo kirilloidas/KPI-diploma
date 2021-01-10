@@ -23,6 +23,7 @@ export class Initialization {
              request.addEventListener("load", function () {
                 // получаем и парсим ответ сервера
                  let receivedObj = JSON.parse(request.response);
+                 console.log(receivedObj)
                     Schedule.setDataSchedule(receivedObj);
                     Schedule.setSchedule();
                 //  console.log(receivedObj.startDay, "-", receivedObj.endDay);   // смотрим ответ сервера

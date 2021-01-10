@@ -23,10 +23,10 @@ export class Schedule {
                     || data[j].data[a].id == 7
                     || data[j].data[a].id == 8
                     || data[j].data[a].id == 14) {
-                        console.log('67814');
+                        // console.log('67814');
                         dataArr[i][j] = data[j].data[a].value / 100;
                 } else if(data[j].data[a].id >= 44 && data[j].data[a].id <= 50) {
-                    console.log('44')
+                    // console.log('44')
                     dataArr[i][j] = data[j].data[a].value / 1000;
                 }else if(data[j].data[a].id >= 23 && data[j].data[a].id <= 25 ) {
                     dataArr[i][j] = data[j].data[a].value / 3600;

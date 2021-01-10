@@ -6,14 +6,15 @@ import {
 } from './schedule.js';
 
 window.addEventListener('load', () => {
-    async function init() {
-        fetch('http://localhost:3000/api/data')
-            .then(response => response.json())
-            .then(data => console.log(data));
-    }    
+    // async function init() {
+    //     fetch('http://localhost:3000/api/data')
+    //         .then(response => response.json())
+    //         .then(data => console.log(data));
+    // }
+    let isDateTrue;    
 
     btnSubmit.addEventListener('click', () => {
-        console.log(checkbox_switch[0].checked);
+        // console.log(checkbox_switch[0].checked);
         for (let i = 0; i < ch.length; i++) {
             if (!ch[i].checked) {
                 canv[i].style.display = 'none';
@@ -30,7 +31,17 @@ window.addEventListener('load', () => {
         } else {
             obj.isDaily = true;
         }
-        Initialization.initialozationInterval(obj);
+        for(let i = 0; i < interval_error.length; i++) {
+            if(interval_error[i].style.display == "none") {
+                isDateTrue = true;
+            } else if(interval_error[i].style.display == undefined || interval_error[i].style.display == null){
+                isDateTrue = false;
+                break;
+            }
+        }
+        if(isDateTrue) {
+            Initialization.initialozationInterval(obj);
+        }
     });
 
     checkbox_switch[0].addEventListener('click', () => {

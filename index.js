@@ -1,7 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const fs = require('fs');
 const bodyParser = require('body-parser');
+const ExcelJS = require('exceljs');
+
+const authorization = require('./routes/authorization');
+const counter1 = require('./routes/counter1');
+const counter2 = require('./routes/counter2');
+const counter3 = require('./routes/counter3');
+const customization = require('./routes/customization');
+const access = require('./routes/access');
+
 const dailyData = require('./models.js').dailyData;
 const users = require('./models.js').users;
 const hourlyData = require('./models.js').hourlyData;
@@ -10,7 +20,9 @@ const hourlyData = require('./models.js').hourlyData;
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-let jsonParser = express.json();
+const workbook = new ExcelJS.Workbook();
+const jsonParser = express.json();
+
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -19,32 +31,14 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static(__dirname + '/views'));
 
+// Routers
+app.use('/', authorization)
+app.use('/index1', counter1)
+app.use('/index2', counter2)
+app.use('/index3', counter3)
+app.use('/customization', customization)
+app.use('/access', access)
 
-app.get('/', (req, res) => {
-    res.status(200);
-    res.sendFile(path.join(__dirname, 'views', 'authorization.html'));
-})
-
-app.get('/index1', (req, res) => {
-    res.status(200);
-    res.sendFile(path.join(__dirname, 'views', 'index1.html'));
-})
-
-app.get('/index2', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index2.html'));
-})
-
-app.get('/index3', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index3.html'));
-})
-
-app.get('/customization', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'customization.html'));
-})
-
-app.get('/access', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'access.html'));
-})
 
 var intervalTime;
 app.post("/timeInterval", jsonParser, function (request, response) {
@@ -107,16 +101,8 @@ async function getDataOfInterval(intervalT, requestData) {
                         return a.date-b.date;
                     }
                 );
+        setDataSchedule(responseData);
         return responseData;
-        // app.get('/api/data', (req, res) => {
-        //     res.status(200);
-        //     let responseData = ourData.sort(
-        //         function(a,b){
-        //             return a.date-b.date;
-        //         }
-        //     );
-        //     res.end(JSON.stringify(responseData));
-        // })
     } catch (error) {
         console.log(error);
     }
@@ -157,6 +143,79 @@ async function authorizationUser(requestUser) {
         return false;
     }
 }
+
+
+
+async function setDataSchedule(data) {
+    console.log(data);
+    let date = [];
+    let dataArr = [];
+    let dataId = [];
+    let a = 1;
+    for(let i = 0; i < data.length - 1; i++) {
+        date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}:${new Date(data[i].date).getHours()}`;
+    }
+    for(let i = 0; i < 10; i++) {
+        dataArr[i] = new Array(data.length);
+        dataId[i] = new Array(data.length);
+        for(let j = 0; j < data.length; j++) {
+            // console.log(data[j].data[a]);
+            if(data[j].data[a].id == 6
+                || data[j].data[a].id == 7
+                || data[j].data[a].id == 8
+                || data[j].data[a].id == 14) {
+                    // console.log('67814');
+                    dataArr[i][j] = data[j].data[a].value / 100;
+            } else if(data[j].data[a].id >= 44 && data[j].data[a].id <= 50) {
+                // console.log('44')
+                dataArr[i][j] = data[j].data[a].value / 1000;
+            }else if(data[j].data[a].id >= 23 && data[j].data[a].id <= 25 ) {
+                dataArr[i][j] = data[j].data[a].value / 3600;
+            } else {
+                dataArr[i][j] = data[j].data[a].value;
+            }
+            dataId[i][j] = data[j].data[a].id;
+        }
+        a++;
+        
+    }
+    console.log(dataArr);
+    // console.log(dataArr);
+}
+
+
+workbook.xlsx.readFile("data.xlsx").then(function () {
+
+    //Get sheet by Name
+    var worksheet=workbook.getWorksheet('Лист1');
+
+    //Get Lastrow
+    var row = worksheet.lastRow
+
+
+    // const fakeData =  {
+    //     address: "well st",
+    //     description: "180036710",
+    //     fromTotal: 1.365
+    //   };
+
+    const fakeData = ['hello', 'yes', 'no'];
+
+    //Update a cell
+    // row.getCell(1).value = 5; 
+
+    // row.commit(); 
+
+    worksheet.addRow(fakeData).commit();
+
+    //Save the workbook
+    return workbook.xlsx.writeFile("data.xlsx");
+
+});
+
+
+
+
 app.listen(PORT, () => {
     console.log(`Server has been started...`);
     // start();
