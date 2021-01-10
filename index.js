@@ -101,8 +101,8 @@ async function getDataOfInterval(intervalT, requestData) {
                         return a.date-b.date;
                     }
                 );
-        setDataSchedule(responseData);
-        return responseData;
+        return setDataSchedule(responseData);
+        // return responseData;
     } catch (error) {
         console.log(error);
     }
@@ -147,10 +147,11 @@ async function authorizationUser(requestUser) {
 
 
 async function setDataSchedule(data) {
-    console.log(data);
+    // console.log(data);
     let date = [];
     let dataArr = [];
     let dataId = [];
+    let outputArray = [];
     let a = 1;
     for(let i = 0; i < data.length - 1; i++) {
         date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}:${new Date(data[i].date).getHours()}`;
@@ -179,7 +180,10 @@ async function setDataSchedule(data) {
         a++;
         
     }
-    console.log(dataArr);
+    outputArray[0] = date;
+    outputArray[1] = dataArr;
+    outputArray[2] = dataId;
+    return outputArray;
     // console.log(dataArr);
 }
 
