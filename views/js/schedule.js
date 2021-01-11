@@ -7,9 +7,9 @@ export class Schedule {
 
     static setDataSchedule(data) {
         console.log(data);
-        this._date = data[0];
-        this._dataArr = data[1];
-        this._dataId = data[2];
+        this._date = data.date;
+        this._dataArr = data.dataArr;
+        this._dataId = data.dataId;
         // let date = [];
         // let dataArr = [];
         // let dataId = [];

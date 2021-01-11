@@ -16,6 +16,8 @@ const dailyData = require('./models.js').dailyData;
 const users = require('./models.js').users;
 const hourlyData = require('./models.js').hourlyData;
 
+const setDataToFront = require('./data-processing/setDataToFront.js');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -101,7 +103,9 @@ async function getDataOfInterval(intervalT, requestData) {
                         return a.date-b.date;
                     }
                 );
-        return setDataSchedule(responseData);
+        // return setDataSchedule(responseData);
+        // exelSet(responseData);
+        return setDataToFront.setDataSchedule(responseData);
         // return responseData;
     } catch (error) {
         console.log(error);
@@ -145,77 +149,40 @@ async function authorizationUser(requestUser) {
 }
 
 
-
-async function setDataSchedule(data) {
-    // console.log(data);
-    let date = [];
-    let dataArr = [];
-    let dataId = [];
-    let outputArray = [];
-    let a = 1;
-    for(let i = 0; i < data.length - 1; i++) {
-        date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}:${new Date(data[i].date).getHours()}`;
-    }
-    for(let i = 0; i < 10; i++) {
-        dataArr[i] = new Array(data.length);
-        dataId[i] = new Array(data.length);
-        for(let j = 0; j < data.length; j++) {
-            // console.log(data[j].data[a]);
-            if(data[j].data[a].id == 6
-                || data[j].data[a].id == 7
-                || data[j].data[a].id == 8
-                || data[j].data[a].id == 14) {
-                    // console.log('67814');
-                    dataArr[i][j] = data[j].data[a].value / 100;
-            } else if(data[j].data[a].id >= 44 && data[j].data[a].id <= 50) {
-                // console.log('44')
-                dataArr[i][j] = data[j].data[a].value / 1000;
-            }else if(data[j].data[a].id >= 23 && data[j].data[a].id <= 25 ) {
-                dataArr[i][j] = data[j].data[a].value / 3600;
-            } else {
-                dataArr[i][j] = data[j].data[a].value;
-            }
-            dataId[i][j] = data[j].data[a].id;
+function exelSet(data) {
+    workbook.xlsx.readFile("data.xlsx").then(function () {
+        let labels = ['Об`єм (маса) каналу витрати 1', 'Значення температури ТСП 1 * 100', 'Значення температури ТСП 2 * 100', 'Тепло', 'Час роботи лічильника, год', 'Час помилок', 'Введені користувачем константи тиску * 1000', 'Введені користувачем константи тиску * 1000', 'Спожита енергія', 'Температура всередині корпусу'];
+        //Get sheet by Name
+        var worksheet=workbook.getWorksheet('Лист1');
+    
+        //Get Lastrow
+        var row = worksheet.lastRow
+    
+    
+        // const fakeData =  {
+        //     address: "well st",
+        //     description: "180036710",
+        //     fromTotal: 1.365
+        //   };
+    
+        let ourData = [];
+        for(let i = 0; i < data.date.length; i++) {
+            ourData[i] = data.dataArr[i];
         }
-        a++;
-        
-    }
-    outputArray[0] = date;
-    outputArray[1] = dataArr;
-    outputArray[2] = dataId;
-    return outputArray;
-    // console.log(dataArr);
+    
+        //Update a cell
+        // row.getCell(1).value = 5; 
+    
+        // row.commit(); 
+    
+        worksheet.addRow(ourData).commit();
+    
+        //Save the workbook
+        return workbook.xlsx.writeFile("data.xlsx");
+    
+    });
 }
 
-
-workbook.xlsx.readFile("data.xlsx").then(function () {
-
-    //Get sheet by Name
-    var worksheet=workbook.getWorksheet('Лист1');
-
-    //Get Lastrow
-    var row = worksheet.lastRow
-
-
-    // const fakeData =  {
-    //     address: "well st",
-    //     description: "180036710",
-    //     fromTotal: 1.365
-    //   };
-
-    const fakeData = ['hello', 'yes', 'no'];
-
-    //Update a cell
-    // row.getCell(1).value = 5; 
-
-    // row.commit(); 
-
-    worksheet.addRow(fakeData).commit();
-
-    //Save the workbook
-    return workbook.xlsx.writeFile("data.xlsx");
-
-});
 
 
 
