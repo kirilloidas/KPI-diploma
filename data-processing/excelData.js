@@ -3,7 +3,7 @@ const ExcelJS = require('exceljs');
 
 
 
-exports.setExcel = (data) => {
+exports.setExcel = (data, switchCheckedObj) => {
     fs.unlinkSync('./data.xlsx');
     console.log('file deleted')
     const workbook = new ExcelJS.Workbook();
@@ -36,6 +36,7 @@ exports.setExcel = (data) => {
     ];
 
     for (let i = 0; i < data.dataArr.length; i++) {
+        if(switchCheckedObj[i] == false) continue;
         for (let j = 0; j < data.date.length; j++) {
             let label;
             if (j == 0) {

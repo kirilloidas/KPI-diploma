@@ -15,16 +15,20 @@ window.addEventListener('load', () => {
 
     btnSubmit.addEventListener('click', () => {
         // console.log(checkbox_switch[0].checked);
+        let switchCheckedObj = new Object();
         for (let i = 0; i < ch.length; i++) {
+            switchCheckedObj[i] = ch[i].checked;
             if (!ch[i].checked) {
                 canv[i].style.display = 'none';
             } else {
                 canv[i].style.display = 'block';
             }
         }
+        console.log(switchCheckedObj);
         let obj = {
             startTime: new Date(start_year.value, start_month.value, start_day.value, start_hours.value || 0).getTime(),
-            endTime: new Date(end_year.value, end_month.value, end_day.value, end_hours.value || 0).getTime()
+            endTime: new Date(end_year.value, end_month.value, end_day.value, end_hours.value || 0).getTime(),
+            switchCheckedObj: switchCheckedObj
         };
         if(checkbox_switch[0].checked) {
             obj.isDaily = false;

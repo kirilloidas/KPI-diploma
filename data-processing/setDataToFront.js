@@ -5,7 +5,7 @@ class setDataToFront {
 
     }
 
-    static setDataSchedule(data) {
+    static setDataSchedule(data, switchCheckedObj) {
         let date = [];
         let dataArr = [];
         let dataId = [];
@@ -38,7 +38,7 @@ class setDataToFront {
         outputArray.date = date;
         outputArray.dataArr = dataArr;
         outputArray.dataId = dataId;
-        excelData.setExcel(outputArray);
+        excelData.setExcel(outputArray, switchCheckedObj);
         return outputArray;
     }
 }

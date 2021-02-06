@@ -53,7 +53,6 @@ const transporter = nodemailer.createTransport(sendGrid({
 var intervalTime;
 app.post("/timeInterval", jsonParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
-
     // response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
     if(request.body.isDaily) {
@@ -101,7 +100,7 @@ app.post('/excelToMail', jsonParser, function(req, res) {
 
 
 
-async function getDataOfInterval(intervalT, requestData) {
+async function getDataOfInterval(dataFromFront, requestData) {
     try {
         await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
             useNewUrlParser: true,
@@ -112,12 +111,12 @@ async function getDataOfInterval(intervalT, requestData) {
         let ourData = await requestData.find({
             $and: [{
                     "date": {
-                        $gte: intervalT.startTime
+                        $gte: dataFromFront.startTime
                     }
                 },
                 {
                     "date": {
-                        $lte: intervalT.endTime
+                        $lte: dataFromFront.endTime
                     }
                 }
             ]
@@ -128,7 +127,7 @@ async function getDataOfInterval(intervalT, requestData) {
                         return a.date-b.date;
                     }
                 );
-        return setDataToFront.setDataSchedule(responseData);
+        return setDataToFront.setDataSchedule(responseData, dataFromFront.switchCheckedObj);
     } catch (error) {
         console.log(error);
     }
