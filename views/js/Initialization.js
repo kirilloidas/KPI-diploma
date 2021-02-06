@@ -29,11 +29,6 @@ export class Initialization {
                 //  console.log(receivedObj.startDay, "-", receivedObj.endDay);   // смотрим ответ сервера
              });
              request.send(json);
-
-        // setTimeout(() => {
-        //     this.initializationAjax();
-
-        // }, 2000);
     }
 
     static initializationUser(authorizationObj, error_authorization) {
@@ -53,6 +48,20 @@ export class Initialization {
                  } else {
                     error_authorization.style.opacity = 1;
                  }
+             });
+             request.send(json);
+    }
+
+    static excelToMail(obj) {
+        let json = JSON.stringify(obj);
+        let request = new XMLHttpRequest();
+            // посылаем запрос на адрес "/user"
+             request.open("POST", "/excelToMail", true);   
+             request.setRequestHeader("Content-Type", "application/json");
+             request.addEventListener("load", function () {
+                // получаем и парсим ответ сервера
+                 let receivedObj = JSON.parse(request.response);
+                 console.log(receivedObj)
              });
              request.send(json);
     }

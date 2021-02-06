@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const ExcelJS = require('exceljs');
+const { Telegraf, Markup } = require("telegraf");
 
 const authorization = require('./routes/authorization');
 const counter1 = require('./routes/counter1');
@@ -11,6 +11,11 @@ const counter2 = require('./routes/counter2');
 const counter3 = require('./routes/counter3');
 const customization = require('./routes/customization');
 const access = require('./routes/access');
+
+const nodemailer = require('nodemailer')
+const sendGrid = require('nodemailer-sendgrid-transport')
+const sendExcelModule = require('./emails/sendExcelModule')
+const key = require('./keys/keys');
 
 const dailyData = require('./models.js').dailyData;
 const users = require('./models.js').users;
@@ -22,7 +27,6 @@ const setDataToFront = require('./data-processing/setDataToFront.js');
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-const workbook = new ExcelJS.Workbook();
 const jsonParser = express.json();
 
 app.use(express.static("public"));
@@ -40,6 +44,10 @@ app.use('/index2', counter2)
 app.use('/index3', counter3)
 app.use('/customization', customization)
 app.use('/access', access)
+
+const transporter = nodemailer.createTransport(sendGrid({
+    auth: {api_key: key.SENDGRID_API_KEY}
+}))
 
 
 var intervalTime;
@@ -70,6 +78,26 @@ app.post("/authorization", jsonParser, function (request, response) {
         });
 
 });
+
+app.get('/downloadExcel', function (req, res, next) {
+    // var filePath = "../"; // Or format the path using the `id` rest param
+    // var fileName = "data.xlsx"; // The default name the browser will use
+
+    res.download('./data.xlsx');    
+});
+
+app.post('/excelToMail', jsonParser, function(req, res) { 
+    try {
+        nodemailer.createTransport(sendGrid({
+            auth: {api_key: key.SENDGRID_API_KEY}
+        })).sendMail(sendExcelModule(req.body.mail))
+        console.log(req.body.mail);
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
+})
 
 
 
@@ -137,6 +165,51 @@ async function authorizationUser(requestUser) {
         return false;
     }
 }
+
+
+
+
+
+
+
+const bot = new Telegraf("1605090343:AAGp3XULDmenK3BPWxVU4B6tDN26efM-95M");
+
+// Обработчик начала диалога с ботом
+// bot.start((ctx) =>
+//   ctx.reply(
+//     `Приветствую, ${
+//        ctx.from.first_name ? ctx.from.first_name : "хороший человек"
+//     }! Набери /help и увидишь, что я могу.`
+//   )
+
+
+// ctx.reply("Требуется авторизация", Markup.inlineKeyboard(
+//     Markup.callbackButton("Список доступных матчей", "groups")
+//   )
+// )
+
+// Обработчик команды /help
+// bot.help((ctx) => ctx.reply("Справка в процессе"));
+
+// // Обработчик команды /whoami
+// bot.command("whoami", (ctx) => {
+//   const { id, username, first_name, last_name } = ctx.from;
+//   return ctx.replyWithMarkdown(`Кто ты в телеграмме:
+// *id* : ${id}
+// *username* : ${username}
+// *Имя* : ${first_name}
+// *Фамилия* : ${last_name}
+// *chatId* : ${ctx.chat.id}`);
+// });
+
+// // Обработчик простого текста
+// bot.on("text", (ctx) => {
+//   return ctx.reply(ctx.message.text);
+// });
+
+// Запуск бота
+// bot.launch();
+
 
 app.listen(PORT, () => {
     console.log(`Server has been started...`);

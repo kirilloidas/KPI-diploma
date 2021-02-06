@@ -120,6 +120,23 @@ window.addEventListener('load', () => {
         }
     })
     
+    downloadExcel.addEventListener('click', (e) => {
+        e.preventDefault();
+        modalBlock.style.display = 'flex';
+        modalBlock.style.justifyContent = 'center';
+        modalBlock.style.alignItems = 'center';
+    })
 
+    closeModalBlock.addEventListener('click', () => {
+        modalBlock.style.display = 'none';
+    })
+
+    excelToMail.addEventListener('click', (e) => {
+        // e.preventDefault()
+        let obj = {
+            mail: modalBlock_mail.value
+        };
+        Initialization.excelToMail(obj);
+    })
 
 });

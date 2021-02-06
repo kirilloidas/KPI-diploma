@@ -9,6 +9,7 @@
     <!-- <link rel="stylesheet" href="css/authorization.css"> -->
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/switch.css">
+    <link rel="stylesheet" href="css/modalblock.css">
 </head>
 
 <body>
@@ -113,64 +114,203 @@
                                 xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <path fill="#CDD1DA"
                                     d="M109.92,59.988c0.426-2.44,0.661-4.95,0.661-7.516c0-23.326-18.429-42.305-41.081-42.305  c-22.653,0-41.083,18.979-41.083,42.305c0,2.566,0.236,5.074,0.663,7.516c-3.567,2.278-5.939,6.261-5.939,10.81v41.415  c0,7.084,5.743,12.826,12.825,12.826h67.067c7.08,0,12.822-5.742,12.822-12.826h0.004V70.798  C115.859,66.25,113.489,62.266,109.92,59.988z M75.159,96.15v9c0,3.128-2.534,5.662-5.661,5.662c-3.127,0-5.661-2.534-5.661-5.662  v-9.004c-3.631-2.001-6.094-5.862-6.094-10.302c0-6.492,5.263-11.756,11.757-11.756c6.494,0,11.758,5.264,11.758,11.756  C81.258,90.286,78.793,94.15,75.159,96.15z M94.95,57.971H44.049c-0.349-1.775-0.535-3.616-0.535-5.499  c0-15.003,11.657-27.208,25.986-27.208c14.328,0,25.984,12.204,25.984,27.208C95.484,54.355,95.3,56.196,94.95,57.971z" />
-                                </svg>
+                            </svg>
                             <div class="menu-text">
                                 Приватність
                             </div>
                         </a>
                     </div>
-                    <!-- <div class="item item-footer">
-                  <div class="menu-item">
-                    <svg class="icon icon-email-menu"><use xlink:href="#icon-email"></use></svg>
-                    <div class="menu-text">
-                      Info
-                    </div>
-                  </div>
-                </div> -->
                 </div>
             </div>
         </div>
-        <!-- <svg data-duration="10" data-delay="45" display="none" width="0" height="0" fill= version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg> -->
+        </div>
     </header>
-    <!-- <a href="/api/data">API</a> -->
     <main>
-        <!-- <section class="modal_block" id="modal_block">
+        <div class="modalBlock" id="modalBlock">
+            <div class="modalBlock-content">
+                <span class="closeModalBlock" id="closeModalBlock">
+                    <svg class="modal__cross" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24"
+                        width="24">
+                        <path fill="#C0C0C0"
+                            d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z" />
+                    </svg>
+                </span>
+                <p class="modalBlock-title">Отримати файл</p>
+                <div class="modal-inputsBlock">
+                    <input type="text" class="modalBlock-input" id="modalBlock-telephone" placeholder="Телефон">
+                    <input type="text" class="modalBlock-input" id="modalBlock-mail" placeholder="Пошта">
+                </div>
 
-            <div class="login">
-                <form action="/authorization" method="POST">
-                    <fieldset class="clearfix">
-                        <p>
-                            <span class="fontawesome-user"></span>
-                            <input id="login" type="text" value="Логин"
-                                onBlur="if(this.value == '') this.value = 'Логин'"
-                                onFocus="if(this.value == 'Логин') this.value = ''" required>
-                        </p>
-                        <p>
-                            <span class="fontawesome-lock"></span>
-                            <input id="password" type="password" value="Пароль"
-                                onBlur="if(this.value == '') this.value = 'Пароль'"
-                                onFocus="if(this.value == 'Пароль') this.value = ''" required>
-                        </p>
-                        <span class="capsLock" id="capsLock"><svg height="30" viewBox="0 0 60.031 52" width="35"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <style>
-                                        .cls-1 {
-                                            fill: #bf873e;
-                                            fill-rule: evenodd;
-                                        }
-                                    </style>
-                                </defs>
-                                <path class="cls-1"
-                                    d="M214.413,746a4.455,4.455,0,0,1-3.84-2.166,4.249,4.249,0,0,1,0-4.334l25.572-43.331a4.483,4.483,0,0,1,7.679,0L269.4,739.5a4.249,4.249,0,0,1,0,4.334,4.452,4.452,0,0,1-3.84,2.166H214.413ZM240,706a4,4,0,0,0-4,4v16a4,4,0,0,0,8,0V710A4,4,0,0,0,240,706Zm0,36a4,4,0,1,0-4-4A4,4,0,0,0,240,742Z"
-                                    id="attention" transform="translate(-209.969 -694)" />
+                <ul class="modalBlock-list">
+                    <li class="modalBlock-item">
+                        <a href="downloadExcel">Завантажити</a>
+                    </li>
+                    <li class="modalBlock-item">
+                        <a href="#">Телеграмм</a>
+                    </li>
+                    <li class="modalBlock-item">
+                        <a href="#" id="excelToMail">Пошта</a>
+                    </li>
+                    <!-- <li class="modalBlock-item">
+                        <a href="#">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="50" height="60">
+                                <title />
+                                <g data-name="Layer 2" id="Layer_2">
+                                    <path fill="#00FFFF"
+                                        d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2ZM9.71,10.29,11,11.59V6h2v5.59l1.29-1.29,1.41,1.41L12,15.41,8.29,11.71ZM16,18H8V16h8Z" />
+                                </g>
                             </svg>
-                        </span>
-                        <a href="#" id="authorization" class="sliding-button">Войти</a>
-                    </fieldset>
-                </form>
+                        </a>
+                    </li>
+                    <li class="modalBlock-item">
+                        <a href="#">
+                            <svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"
+                                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60">
+                                <style type="text/css">
+                                    .st0 {
+                                        display: none;
+                                        fill: #FEFEFE;
+                                    }
+
+                                    .st1 {
+                                        fill: #0087CB;
+                                    }
+
+                                    .st2 {
+                                        fill: #FCFDFE;
+                                    }
+
+                                    .st3 {
+                                        fill: #CCD9E9;
+                                    }
+
+                                    .st4 {
+                                        fill: #B1C8DB;
+                                    }
+                                </style>
+                                <g id="Layer_1" />
+                                <g id="Layer_2">
+                                    <g>
+                                        <path class="st0"
+                                            d="M0.4,512.4c0-170.7,0-341.3,0-512c170.7,0,341.3,0,512,0c0,170.7,0,341.3,0,512    C341.8,512.4,171.1,512.4,0.4,512.4z" />
+                                        <path class="st1"
+                                            d="M254.6,76.5c49,0.3,90.8,16.4,125.7,49.3c34.8,32.9,53.8,73.7,56.1,121.6c2.4,51.2-14,96-49.5,133.1    c-34.9,36.5-78,55.3-128.6,55.8c-47.1,0.5-88.4-15.3-123-47.2C94.5,351.4,74.9,304.2,77,248.7c1.7-46.5,19.6-86.5,52.5-119.3    C164.2,94.7,206.6,77.4,254.6,76.5z" />
+                                        <path class="st2"
+                                            d="M201.4,280.7c-9.8-3-19.7-6.1-29.5-9.1c-4.8-1.5-9.6-3-14.4-4.5c-1.8-0.6-3.5-1.2-5-2.3    c-2.8-2.1-3-4.7-0.6-7.3c1.6-1.8,3.6-3,5.8-3.9c5.8-2.3,11.6-4.6,17.4-6.9c40-15.4,80-30.9,120.1-46.3c12.7-4.9,25.3-9.8,38-14.7    c1.7-0.7,3.5-1.1,5.4-0.8c3.8,0.6,6.7,3.7,7.1,7.7c0.2,2.2,0.1,4.4-0.3,6.6c-4.9,23-9.8,46.1-14.7,69.1c-4,19-8.1,38-12.1,57.1    c-0.9,4.3-1.8,8.6-2.7,12.9c-0.4,2.1-1,4.1-2,6c-2,3.7-5.2,5.1-9.3,4.3c-2.5-0.5-4.7-1.6-6.7-3.1c-13.8-10.2-27.6-20.5-41.5-30.7    c-0.6-0.5-1.3-0.9-1.9-1.3c-2.4-0.7-4.1-2.5-6-3.9c-6.6-4.8-13.2-9.8-19.8-14.6c-0.5-0.4-1-0.8-1.4-1.3c-0.6-1,0-1.6,0.6-2.2    c9-8,17.9-16.2,26.9-24.2c6.5-5.9,13.1-11.8,19.6-17.7c6.5-5.9,13-11.7,19.5-17.5c5.1-4.6,10.2-9.1,15.2-13.7    c0.4-0.4,0.8-0.8,1.2-1.2c0.3-0.4,0.7-0.8,0.5-1.3c-0.2-0.6-0.8-0.6-1.3-0.6c-1.8-0.2-3.3,0.5-4.8,1.4    c-5.5,3.3-10.8,6.8-16.2,10.2c-16.4,10.3-32.9,20.7-49.3,31c-11.3,7.1-22.6,14.2-33.9,21.4C204,280,203.1,281.3,201.4,280.7z" />
+                                        <path class="st3"
+                                            d="M201.4,280.7c2.7-1.1,5-2.9,7.5-4.4c7.2-4.5,14.4-9,21.6-13.6c5.1-3.2,10.1-6.5,15.2-9.7    c8.4-5.3,16.9-10.6,25.4-15.9c5.9-3.7,11.8-7.5,17.8-11.3c5.2-3.3,10.4-6.6,15.6-9.9c1.7-1,3.4-1.6,5.5-1.4    c0.6,0.1,1.2,0.1,1.4,0.7c0.3,0.6,0.1,1.2-0.4,1.8c-1.2,1.2-2.3,2.5-3.7,3.6c-2.5,2-4.7,4.3-7.1,6.4c-3.9,3.3-7.5,6.9-11.4,10.2    c-1.6,1.4-3.1,2.9-4.7,4.3c-2.3,1.9-4.5,4.2-6.7,6.2c-3.4,3.1-6.9,6.1-10.3,9.1c-1.5,1.4-3.1,2.8-4.5,4.2    c-3.7,3.5-7.6,6.8-11.3,10.3c-4.5,4.1-9.1,8.1-13.5,12.3c-3.2,3-6.6,5.8-9.9,8.7c-0.5,0.4-0.5,0.8-0.2,1.3    c-0.7,11.3-1.5,22.6-2.2,33.9c-0.2,3-0.6,5.9-0.5,8.9c0,0.9,0,1.7-0.7,2.4c-0.6,0.2-1.3,0.2-1.9,0.2c-1.8-0.1-3.1-1-3.6-2.7    c-0.5-1.8-1.1-3.5-1.6-5.3c-4.9-16.1-9.8-32.3-14.7-48.4C202,281.9,201.7,281.3,201.4,280.7z" />
+                                        <path class="st4"
+                                            d="M224,338.7c-0.3-3.9,0.4-7.8,0.5-11.6c0.2-4.2,0.6-8.4,0.8-12.6c0.3-4.3,0.6-8.6,0.9-12.8    c0.1-2.2,0.3-4.4,0.3-6.5c0-0.7,0.2-1.2,0.9-1.6c8.1,6,16.2,11.9,24.2,17.9c0.9,0.7,1.9,1.2,2.6,2.1c-7.5,7.3-15.1,14.6-22.6,21.9    C229.6,337.5,227.2,339.1,224,338.7z" />
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="modalBlock-item">
+                        <a href="#">
+                            <svg enable-background="new 0 0 24 24" id="Layer_1" version="1.1" viewBox="0 0 24 24"
+                                xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="60">
+                                <g>
+                                    <path
+                                        d="M22,3H2C0.8974609,3,0,3.8969727,0,5v14c0,1.1030273,0.8974609,2,2,2h20c1.1025391,0,2-0.8969727,2-2V5   C24,3.8969727,23.1025391,3,22,3z"
+                                        fill="#F2F2F2" />
+                                    <path d="M3,21h19c1.1025391,0,2-0.8969727,2-2V5.1254902L3,21z" fill="#F5F5F5" />
+                                    <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_1_" x1="7.9155107"
+                                        x2="19.1802444" y1="10.4586535" y2="15.7114859">
+                                        <stop offset="0" style="stop-color:#FFFFFF;stop-opacity:0.2" />
+                                        <stop offset="1" style="stop-color:#FFFFFF;stop-opacity:0" />
+                                    </linearGradient>
+                                    <polygon fill="url(#SVGID_1_)"
+                                        points="3,21 3.3306885,21 24,5.3754883 24,5.1254883  " />
+                                    <path
+                                        d="M0,5.1176472V19c0,1.1030273,0.8974609,2,2,2h1V7.3350368   C1.319519,6.0929713,0.9091797,5.7896442,0,5.1176472z"
+                                        fill="#D32F2F" />
+                                    <path d="M21,7.3434954V21h1c1.1025391,0,2-0.8969727,2-2V5.1254902L21,7.3434954z"
+                                        fill="#D32F2F" />
+                                    <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_2_" x1="18.8903751"
+                                        x2="26.6321716" y1="9.4531202" y2="17.1949158">
+                                        <stop offset="0" style="stop-color:#000000;stop-opacity:0.1" />
+                                        <stop offset="1" style="stop-color:#000000;stop-opacity:0" />
+                                    </linearGradient>
+                                    <path d="M21,7.3434954V21h1c1.1025391,0,2-0.8969727,2-2V5.1254902L21,7.3434954z"
+                                        fill="url(#SVGID_2_)" />
+                                    <polygon fill="#F5F5F5" points="21.499939,3 2.500061,3 12,10.3125  " />
+                                    <path
+                                        d="M24,5.1304321V5c0-1.1030273-0.8974609-2-2-2h-0.500061L12,10.3125L2.500061,3H2   C0.8974609,3,0,3.8969727,0,5v0.1304932l12,9.0661459L24,5.1304321z"
+                                        fill="#D32F2F" />
+                                    <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_3_" x1="1.5279056"
+                                        x2="21.46105" y1="1.2802522" y2="10.5752296">
+                                        <stop offset="0" style="stop-color:#FFFFFF;stop-opacity:0.1" />
+                                        <stop offset="1" style="stop-color:#FFFFFF;stop-opacity:0" />
+                                    </linearGradient>
+                                    <path
+                                        d="M24,5.1304321V5c0-1.1030273-0.8974609-2-2-2h-0.500061L12,10.3125L2.500061,3H2   C0.8974609,3,0,3.8969727,0,5v0.1304932l12,9.0661459L24,5.1304321z"
+                                        fill="url(#SVGID_3_)" />
+                                    <path
+                                        d="M12,13.9465942L0.0112305,4.8889771C0.0090942,4.9264526,0,4.9619751,0,5v0.1304932l12,9.0661011   l12-9.0661621V5c0-0.0380249-0.0090942-0.0735474-0.0112305-0.111084L12,13.9465942z"
+                                        opacity="0.1" />
+                                    <path
+                                        d="M22,20.75H2c-1.1025391,0-2-0.8969727-2-2V19c0,1.1030273,0.8974609,2,2,2h20c1.1025391,0,2-0.8969727,2-2   v-0.25C24,19.8530273,23.1025391,20.75,22,20.75z"
+                                        opacity="0.1" />
+                                    <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_4_" x1="23.7147064"
+                                        x2="23.9944" y1="4.1656036" y2="4.4452972">
+                                        <stop offset="0" style="stop-color:#000000;stop-opacity:0.1" />
+                                        <stop offset="1" style="stop-color:#000000;stop-opacity:0" />
+                                    </linearGradient>
+                                    <path
+                                        d="M23.7775879,4.1027222L23.7775879,4.1027222   c0.0650024,0.1281738,0.1158447,0.2643433,0.1539307,0.4054565C23.8951416,4.3657837,23.8427124,4.2310791,23.7775879,4.1027222z"
+                                        fill="url(#SVGID_4_)" />
+                                    <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_5_" x1="23.8411255"
+                                        x2="24.1003418" y1="4.6404419" y2="4.8996582">
+                                        <stop offset="0" style="stop-color:#000000;stop-opacity:0.1" />
+                                        <stop offset="1" style="stop-color:#000000;stop-opacity:0" />
+                                    </linearGradient>
+                                    <path
+                                        d="M23.9414673,4.5401001C23.9785767,4.6875,24,4.8408813,24,5   C24,4.8410645,23.9766235,4.6884155,23.9414673,4.5401001z"
+                                        fill="url(#SVGID_5_)" />
+                                    <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_6_" x1="6.5011444"
+                                        x2="25.3809357" y1="-0.4336395" y2="18.4461517">
+                                        <stop offset="0" style="stop-color:#000000;stop-opacity:0.1" />
+                                        <stop offset="1" style="stop-color:#000000;stop-opacity:0" />
+                                    </linearGradient>
+                                    <path
+                                        d="M0.5337524,5.5337524L16,21h6c1.1025391,0,2-0.8969727,2-2V5.1304321l-12,9.0661621   L0.5337524,5.5337524z"
+                                        fill="url(#SVGID_6_)" />
+                                    <path
+                                        d="M22,3H2C0.8974609,3,0,3.8969727,0,5v0.25c0-1.1030273,0.8974609-2,2-2h20   c1.1025391,0,2,0.8969727,2,2V5C24,3.8969727,23.1025391,3,22,3z"
+                                        fill="#FFFFFF" opacity="0.2" />
+                                    <linearGradient gradientUnits="userSpaceOnUse" id="SVGID_7_" x1="-0.7076151"
+                                        x2="24.7076149" y1="6.0743418" y2="17.9256592">
+                                        <stop offset="0" style="stop-color:#FFFFFF;stop-opacity:0.1" />
+                                        <stop offset="1" style="stop-color:#FFFFFF;stop-opacity:0" />
+                                    </linearGradient>
+                                    <path
+                                        d="M22,3H2C0.8974609,3,0,3.8969727,0,5v14c0,1.1030273,0.8974609,2,2,2h20   c1.1025391,0,2-0.8969727,2-2V5C24,3.8969727,23.1025391,3,22,3z"
+                                        fill="url(#SVGID_7_)" />
+                                </g>
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                                <g />
+                            </svg>
+                        </a>
+                    </li> -->
+                </ul>
             </div>
-        </section> -->
+        </div>
 
         <fieldset class="labels">
             <legend>Параметри</legend>
@@ -242,7 +382,8 @@
                 <input type="text" class="end_hours" id="end_hours" name="end_hours" placeholder="Години">
             </div>
             <span id="output"></span>
-            <a href="#" id="submit" class="sliding-button">Показати дані</a>
+            <a href="#" id="submit" class="show-data sliding-button">Показати дані</a>
+            <a href="#" class="downloadExcel sliding-button disabledBtn" id="downloadExcel">Скачати Excel</a>
             <!-- </form> -->
 
             <!-- <label class="checkbox">
@@ -310,6 +451,8 @@
             <div class="checkbox__text">Коды ошибок 8-ми типов (8)</div>
         </label> -->
         </fieldset>
+
+
 
         <div class="schedules">
             <canvas id="schedule_1"></canvas>

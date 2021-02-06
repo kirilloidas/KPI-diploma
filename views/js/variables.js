@@ -34,6 +34,11 @@ const end_day_error = document.getElementById('end_day_error');
 const end_month_error = document.getElementById('end_month_error');
 const end_year_error = document.getElementById('end_year_error');
 const end_hours_error = document.getElementById('end_hours_error');
+// const downloadExcel = document.getElementById('downloadExcel');
+const modalBlock_mail = document.getElementById('modalBlock-mail');
+const excelToMail = document.getElementById('excelToMail');
+const modalBlock = document.getElementById('modalBlock');
+const closeModalBlock = document.getElementById('closeModalBlock');
 
 const login = document.getElementById('login');
 const password = document.getElementById('password');

@@ -1,4 +1,4 @@
-const exelData = require('./excelData.js');
+const excelData = require('./excelData.js');
 
 class setDataToFront {
     constructor() {
@@ -38,7 +38,7 @@ class setDataToFront {
         outputArray.date = date;
         outputArray.dataArr = dataArr;
         outputArray.dataId = dataId;
-        exelData.setExel(outputArray);
+        excelData.setExcel(outputArray);
         return outputArray;
     }
 }
