@@ -3,7 +3,7 @@
 .modalBlock {
     position: absolute;
     top: -20px;
-    left: -40px;
+    left: -20px;
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
@@ -39,13 +39,13 @@
     
 }
 
-.closeModalBlock svg{
+.closeModalBlock .modal__cross{
     width: 24px;
     height: 24px;
     transition: 0.2s;
 }
 
-.closeModalBlock:hover svg{
+.closeModalBlock:hover .modal__cross{
     width: 27px;
     height: 27px;
     transition: 0.2s;
@@ -78,7 +78,7 @@
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	color: #606468;
+	color: white;
 	margin-bottom: 1em;
 	padding: 0 16px;
     width: 180px;
@@ -95,7 +95,11 @@
     justify-content: space-between;
 }
 
-.modalBlock-item a{
+.modalBlock-item{
+    position: relative;
+}
+
+.modalBlock-item .modalBlock-link{
     font-family: 'Open Sans', Arial, sans-serif;
     height: 50px;
 	
@@ -120,9 +124,46 @@
     transition: 0.2s linear;
 }
 
-.modalBlock-item a:hover {
+.modalBlock-item .modalBlock-link:hover {
     width: 132px;
     height: 53px;
     transition: 0.2s linear;
+}
+
+.fileSendMail{
+    display: none;
+    position: absolute;
+    top: -160px;
+    left: -270px;
+    z-index: 1000;
+    width: 350px;
+    height: 200px;
+    background-color: black;
+    border: 1px solid green;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 28px;
+    padding-top: 50px;
+}
+
+.closeFileSendMail{
+    text-decoration: none;
+    border-radius: 50%;
+    position: relative;
+    margin-top: 75px;
+}
+
+.closeFileSendMail svg{
+    width: 60px;
+    height: 60px;
+    transition: 0.1s linear;
+}
+
+.closeFileSendMail:hover svg{
+    width: 65px;
+    height: 65px;
+    transition: 0.1s linear;
 }
 

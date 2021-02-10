@@ -129,18 +129,24 @@ window.addEventListener('load', () => {
         modalBlock.style.display = 'flex';
         modalBlock.style.justifyContent = 'center';
         modalBlock.style.alignItems = 'center';
+        document.body.style.overflow = 'hidden';
     })
 
     closeModalBlock.addEventListener('click', () => {
         modalBlock.style.display = 'none';
+        document.body.style.overflow = '';
     })
 
     excelToMail.addEventListener('click', (e) => {
-        // e.preventDefault()
+        fileSendMail.style.display = 'flex';
         let obj = {
             mail: modalBlock_mail.value
         };
         Initialization.excelToMail(obj);
+    })
+
+    closeFileSendMail.addEventListener('click', () => {
+        fileSendMail.style.display = 'none';
     })
 
 });

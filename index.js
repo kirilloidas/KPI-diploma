@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const { Telegraf, Markup } = require("telegraf");
+const {
+    Telegraf,
+    Markup
+} = require("telegraf");
 
 const authorization = require('./routes/authorization');
 const counter1 = require('./routes/counter1');
@@ -46,7 +49,9 @@ app.use('/customization', customization)
 app.use('/access', access)
 
 const transporter = nodemailer.createTransport(sendGrid({
-    auth: {api_key: key.SENDGRID_API_KEY}
+    auth: {
+        api_key: key.SENDGRID_API_KEY
+    }
 }))
 
 
@@ -55,7 +60,7 @@ app.post("/timeInterval", jsonParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
     // response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
-    if(request.body.isDaily) {
+    if (request.body.isDaily) {
         getDataOfInterval(request.body, dailyData)
             .then(res => {
                 response.end(JSON.stringify(res))
@@ -66,7 +71,7 @@ app.post("/timeInterval", jsonParser, function (request, response) {
                 response.end(JSON.stringify(res))
             });
     }
-    
+
 });
 
 app.post("/authorization", jsonParser, function (request, response) {
@@ -82,20 +87,22 @@ app.get('/downloadExcel', function (req, res, next) {
     // var filePath = "../"; // Or format the path using the `id` rest param
     // var fileName = "data.xlsx"; // The default name the browser will use
 
-    res.download('./data.xlsx');    
+    res.download('./data.xlsx');
 });
 
-app.post('/excelToMail', jsonParser, function(req, res) { 
+app.post('/excelToMail', jsonParser, function (req, res) {
     try {
         nodemailer.createTransport(sendGrid({
-            auth: {api_key: key.SENDGRID_API_KEY}
+            auth: {
+                api_key: key.SENDGRID_API_KEY
+            }
         })).sendMail(sendExcelModule(req.body.mail))
         console.log(req.body.mail);
     } catch (error) {
         console.log(error)
     }
-    
-    
+
+
 })
 
 
@@ -123,10 +130,10 @@ async function getDataOfInterval(dataFromFront, requestData) {
 
         }).sort('field');
         let responseData = ourData.sort(
-                    function(a,b){
-                        return a.date-b.date;
-                    }
-                );
+            function (a, b) {
+                return a.date - b.date;
+            }
+        );
         return setDataToFront.setDataSchedule(responseData, dataFromFront.switchCheckedObj);
     } catch (error) {
         console.log(error);
@@ -144,11 +151,11 @@ async function authorizationUser(requestUser) {
         });
 
         let isUser = await users.findOne({
-                    "login": {
-                        $eq: requestUser.login
-                    }
+            "login": {
+                $eq: requestUser.login
+            }
         });
-        if(isUser == null || isUser.pass != requestUser.pass) {
+        if (isUser == null || isUser.pass != requestUser.pass) {
             let obj = {
                 isUser: false
             };
@@ -174,40 +181,22 @@ async function authorizationUser(requestUser) {
 const bot = new Telegraf("1605090343:AAGp3XULDmenK3BPWxVU4B6tDN26efM-95M");
 
 // Обработчик начала диалога с ботом
-// bot.start((ctx) =>
-//   ctx.reply(
-//     `Приветствую, ${
-//        ctx.from.first_name ? ctx.from.first_name : "хороший человек"
-//     }! Набери /help и увидишь, что я могу.`
-//   )
+bot.start((ctx) =>
+    ctx.reply(
+        `Приветствую, ${
+       ctx.from.first_name ? ctx.from.first_name : "хороший человек"
+    }! Набери /getFile и получи свой файл`
+    ))
 
-
-// ctx.reply("Требуется авторизация", Markup.inlineKeyboard(
-//     Markup.callbackButton("Список доступных матчей", "groups")
-//   )
-// )
 
 // Обработчик команды /help
 // bot.help((ctx) => ctx.reply("Справка в процессе"));
-
-// // Обработчик команды /whoami
-// bot.command("whoami", (ctx) => {
-//   const { id, username, first_name, last_name } = ctx.from;
-//   return ctx.replyWithMarkdown(`Кто ты в телеграмме:
-// *id* : ${id}
-// *username* : ${username}
-// *Имя* : ${first_name}
-// *Фамилия* : ${last_name}
-// *chatId* : ${ctx.chat.id}`);
-// });
-
-// // Обработчик простого текста
-// bot.on("text", (ctx) => {
-//   return ctx.reply(ctx.message.text);
-// });
+bot.command("getFile", (ctx) => {
+    ctx.replyWithDocument({ source: './data.xlsx'})
+})
 
 // Запуск бота
-// bot.launch();
+bot.launch();
 
 
 app.listen(PORT, () => {
