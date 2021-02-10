@@ -38,6 +38,8 @@ const end_hours_error = document.getElementById('end_hours_error');
 
 const modalBlock_mail = document.getElementById('modalBlock-mail');
 const excelToMail = document.getElementById('excelToMail');
+const fileSendTitle = document.getElementById('fileSendTitle');
+const fileSendTelegram = document.getElementById('fileSendTelegram');
 const modalBlock = document.getElementById('modalBlock');
 const closeModalBlock = document.getElementById('closeModalBlock');
 const fileSendMail = document.getElementById('fileSendMail');

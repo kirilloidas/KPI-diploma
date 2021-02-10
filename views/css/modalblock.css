@@ -133,26 +133,33 @@
 .fileSendMail{
     display: none;
     position: absolute;
-    top: -160px;
-    left: -270px;
+    top: 26px;
+    left: 18px;
     z-index: 1000;
-    width: 350px;
-    height: 200px;
+    width: 400px;
+    height: 250px;
     background-color: black;
     border: 1px solid green;
     border-radius: 10px;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 28px;
-    padding-top: 50px;
+    padding: 50px 30px;
+}
+
+.fileSendTitle{
+    line-height: 1.3;
+    text-align: center;
+    font-style: italic;
 }
 
 .closeFileSendMail{
     text-decoration: none;
     border-radius: 50%;
     position: relative;
-    margin-top: 75px;
+    /* margin-top: 75px; */
 }
 
 .closeFileSendMail svg{

@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
     //         .then(response => response.json())
     //         .then(data => console.log(data));
     // }
-    let isDateTrue;    
+    let isDateTrue;
 
     btnSubmit.addEventListener('click', () => {
         // console.log(checkbox_switch[0].checked);
@@ -30,26 +30,26 @@ window.addEventListener('load', () => {
             endTime: new Date(end_year.value, end_month.value, end_day.value, end_hours.value || 0).getTime(),
             switchCheckedObj: switchCheckedObj
         };
-        if(checkbox_switch[0].checked) {
+        if (checkbox_switch[0].checked) {
             obj.isDaily = false;
         } else {
             obj.isDaily = true;
         }
-        for(let i = 0; i < interval_error.length; i++) {
-            if(interval_error[i].style.display == "none") {
+        for (let i = 0; i < interval_error.length; i++) {
+            if (interval_error[i].style.display == "none") {
                 isDateTrue = true;
-            } else if(interval_error[i].style.display == undefined || interval_error[i].style.display == null){
+            } else if (interval_error[i].style.display == undefined || interval_error[i].style.display == null) {
                 isDateTrue = false;
                 break;
             }
         }
-        if(isDateTrue) {
+        if (isDateTrue) {
             Initialization.initialozationInterval(obj);
         }
     });
 
     checkbox_switch[0].addEventListener('click', () => {
-        if(checkbox_switch[0].checked) {
+        if (checkbox_switch[0].checked) {
             start_hours.classList.add('input_time_show');
             end_hours.classList.add('input_time_show');
         } else {
@@ -59,7 +59,7 @@ window.addEventListener('load', () => {
     })
 
     start_day.addEventListener('blur', () => {
-        if(start_day.value <= 0 || start_day.value >= 32) {
+        if (start_day.value <= 0 || start_day.value >= 32) {
             start_day_error.style.display = 'block';
         } else {
             start_day_error.style.display = 'none';
@@ -67,7 +67,7 @@ window.addEventListener('load', () => {
     })
 
     start_month.addEventListener('blur', () => {
-        if(start_month.value <= 0 || start_month.value >= 13) {
+        if (start_month.value <= 0 || start_month.value >= 13) {
             start_month_error.style.display = 'block';
         } else {
             start_month_error.style.display = 'none';
@@ -76,7 +76,7 @@ window.addEventListener('load', () => {
 
     start_year.addEventListener('blur', () => {
         let yearNow = new Date().getFullYear();
-        if(start_year.value <= 2019 || start_year.value > yearNow) {
+        if (start_year.value <= 2019 || start_year.value > yearNow) {
             start_year_error.style.display = 'block';
         } else {
             start_year_error.style.display = 'none';
@@ -84,7 +84,7 @@ window.addEventListener('load', () => {
     })
 
     start_hours.addEventListener('blur', () => {
-        if(start_hours.value < 0 || start_hours.value >= 24) {
+        if (start_hours.value < 0 || start_hours.value >= 24) {
             start_hours_error.style.display = 'block';
         } else {
             start_hours_error.style.display = 'none';
@@ -92,7 +92,7 @@ window.addEventListener('load', () => {
     })
 
     end_day.addEventListener('blur', () => {
-        if(end_day.value <= 0 || end_day.value >= 32) {
+        if (end_day.value <= 0 || end_day.value >= 32) {
             end_day_error.style.display = 'block';
         } else {
             end_day_error.style.display = 'none';
@@ -100,7 +100,7 @@ window.addEventListener('load', () => {
     })
 
     end_month.addEventListener('blur', () => {
-        if(end_month.value <= 0 || end_month.value >= 13) {
+        if (end_month.value <= 0 || end_month.value >= 13) {
             end_month_error.style.display = 'block';
         } else {
             end_month_error.style.display = 'none';
@@ -109,7 +109,7 @@ window.addEventListener('load', () => {
 
     end_year.addEventListener('blur', () => {
         let yearNow = new Date().getFullYear();
-        if(end_year.value <= 2019 || end_year.value > yearNow) {
+        if (end_year.value <= 2019 || end_year.value > yearNow) {
             end_year_error.style.display = 'block';
         } else {
             end_year_error.style.display = 'none';
@@ -117,13 +117,13 @@ window.addEventListener('load', () => {
     })
 
     end_hours.addEventListener('blur', () => {
-        if(end_hours.value < 0 || end_hours.value >= 24) {
+        if (end_hours.value < 0 || end_hours.value >= 24) {
             end_hours_error.style.display = 'block';
         } else {
             end_hours_error.style.display = 'none';
         }
     })
-    
+
     downloadExcel.addEventListener('click', (e) => {
         e.preventDefault();
         modalBlock.style.display = 'flex';
@@ -139,10 +139,22 @@ window.addEventListener('load', () => {
 
     excelToMail.addEventListener('click', (e) => {
         fileSendMail.style.display = 'flex';
-        let obj = {
-            mail: modalBlock_mail.value
-        };
-        Initialization.excelToMail(obj);
+        const reg_email = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
+
+        if (reg_email.test(modalBlock_mail.value)) {
+            let obj = {
+                mail: modalBlock_mail.value
+            };
+            Initialization.excelToMail(obj);
+        } else {
+            fileSendTitle.innerHTML = "Введіть пошту"
+        }
+
+    })
+
+    fileSendTelegram.addEventListener('click', () => {
+        fileSendMail.style.display = 'flex';
+        fileSendTitle.innerHTML = "Відкрийте в телеграммі бот @KPIEnergyBot та введіть команду /start";
     })
 
     closeFileSendMail.addEventListener('click', () => {
