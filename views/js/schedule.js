@@ -7,41 +7,44 @@ export class Schedule {
 
     static setDataSchedule(data) {
         console.log(data);
-        let date = [];
-        let dataArr = [];
-        let dataId = [];
-        let a = 1;
-        for(let i = 0; i < data.length - 1; i++) {
-            date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}:${new Date(data[i].date).getHours()}`;
-        }
-        for(let i = 0; i < 10; i++) {
-            dataArr[i] = new Array(data.length);
-            dataId[i] = new Array(data.length);
-            for(let j = 0; j < data.length; j++) {
-                // console.log(data[j].data[a]);
-                if(data[j].data[a].id == 6
-                    || data[j].data[a].id == 7
-                    || data[j].data[a].id == 8
-                    || data[j].data[a].id == 14) {
-                        console.log('67814');
-                        dataArr[i][j] = data[j].data[a].value / 100;
-                } else if(data[j].data[a].id >= 44 && data[j].data[a].id <= 50) {
-                    console.log('44')
-                    dataArr[i][j] = data[j].data[a].value / 1000;
-                }else if(data[j].data[a].id >= 23 && data[j].data[a].id <= 25 ) {
-                    dataArr[i][j] = data[j].data[a].value / 3600;
-                } else {
-                    dataArr[i][j] = data[j].data[a].value;
-                }
-                dataId[i][j] = data[j].data[a].id;
-            }
-            a++;
+        this._date = data.date;
+        this._dataArr = data.dataArr;
+        this._dataId = data.dataId;
+        // let date = [];
+        // let dataArr = [];
+        // let dataId = [];
+        // let a = 1;
+        // for(let i = 0; i < data.length - 1; i++) {
+        //     date[i] = `${new Date(data[i].date).getDate()}:${new Date(data[i].date).getMonth()}:${new Date(data[i].date).getFullYear()}:${new Date(data[i].date).getHours()}`;
+        // }
+        // for(let i = 0; i < 10; i++) {
+        //     dataArr[i] = new Array(data.length);
+        //     dataId[i] = new Array(data.length);
+        //     for(let j = 0; j < data.length; j++) {
+        //         // console.log(data[j].data[a]);
+        //         if(data[j].data[a].id == 6
+        //             || data[j].data[a].id == 7
+        //             || data[j].data[a].id == 8
+        //             || data[j].data[a].id == 14) {
+        //                 // console.log('67814');
+        //                 dataArr[i][j] = data[j].data[a].value / 100;
+        //         } else if(data[j].data[a].id >= 44 && data[j].data[a].id <= 50) {
+        //             // console.log('44')
+        //             dataArr[i][j] = data[j].data[a].value / 1000;
+        //         }else if(data[j].data[a].id >= 23 && data[j].data[a].id <= 25 ) {
+        //             dataArr[i][j] = data[j].data[a].value / 3600;
+        //         } else {
+        //             dataArr[i][j] = data[j].data[a].value;
+        //         }
+        //         dataId[i][j] = data[j].data[a].id;
+        //     }
+        //     a++;
             
-        }
-        this._date = date;
-        this._dataArr = dataArr;
-        this._dataId = dataId;
-        console.log(dataArr);
+        // }
+        // this._date = date;
+        // this._dataArr = dataArr;
+        // this._dataId = dataId;
+        // console.log(dataArr);
         // console.log(dataArr);
     }
 
