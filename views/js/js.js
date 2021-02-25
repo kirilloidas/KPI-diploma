@@ -138,13 +138,15 @@ window.addEventListener('load', () => {
     })
 
     excelToMail.addEventListener('click', (e) => {
-        fileSendMail.style.display = 'flex';
+        fileSend.style.display = 'flex';
+        fileSend.classList.add('fileSendMail');
         const reg_email = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 
         if (reg_email.test(modalBlock_mail.value)) {
             let obj = {
                 mail: modalBlock_mail.value
             };
+            fileSendTitle.innerHTML = "Файл відправлено"
             Initialization.excelToMail(obj);
         } else {
             fileSendTitle.innerHTML = "Введіть пошту"
@@ -153,12 +155,14 @@ window.addEventListener('load', () => {
     })
 
     fileSendTelegram.addEventListener('click', () => {
-        fileSendMail.style.display = 'flex';
+        fileSend.style.display = 'flex';
+        fileSend.classList.add('fileSendTelegram');
         fileSendTitle.innerHTML = "Відкрийте в телеграммі бот @KPIEnergyBot та введіть команду /start";
     })
 
-    closeFileSendMail.addEventListener('click', () => {
-        fileSendMail.style.display = 'none';
+    closeFileSend.addEventListener('click', () => {
+        fileSend.style.display = 'none';
+        fileSend.className = 'fileSend';
     })
 
 });

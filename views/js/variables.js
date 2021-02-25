@@ -42,8 +42,8 @@ const fileSendTitle = document.getElementById('fileSendTitle');
 const fileSendTelegram = document.getElementById('fileSendTelegram');
 const modalBlock = document.getElementById('modalBlock');
 const closeModalBlock = document.getElementById('closeModalBlock');
-const fileSendMail = document.getElementById('fileSendMail');
-const closeFileSendMail = document.getElementById('closeFileSendMail');
+const fileSend = document.getElementById('fileSend');
+const closeFileSend = document.getElementById('closeFileSend');
 
 const login = document.getElementById('login');
 const password = document.getElementById('password');

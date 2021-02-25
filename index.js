@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const {
-    Telegraf,
-    Markup
-} = require("telegraf");
+
+// const telegramBot = require('./telegram-bot/telegram-bot');
+
+const session = require('express-session');
+const MongoStore = require('connect-mongodb-session')(session);
+const varMiddleware = require('./middleware/variables');
 
 const authorization = require('./routes/authorization');
 const counter1 = require('./routes/counter1');
@@ -20,17 +22,22 @@ const sendGrid = require('nodemailer-sendgrid-transport')
 const sendExcelModule = require('./emails/sendExcelModule')
 const key = require('./keys/keys');
 
-const dailyData = require('./models.js').dailyData;
-const users = require('./models.js').users;
-const hourlyData = require('./models.js').hourlyData;
+const dailyData = require('./models/data').dailyData;
+const users = require('./models/users');
+const hourlyData = require('./models/data').hourlyData;
 
 const setDataToFront = require('./data-processing/setDataToFront.js');
-
+const FindInMongo = require('./connectToMongo/findInMongo.js');
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 const jsonParser = express.json();
+
+// const store = new MongoStore({
+//     collection: 'sessions',
+//     uri: key.MONGODB_URI
+// })
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
@@ -48,6 +55,16 @@ app.use('/index3', counter3)
 app.use('/customization', customization)
 app.use('/access', access)
 
+// app.use(telegramBot);
+
+// app.use(session({
+//     secret: 'some secret value',
+//     resave: false,
+//     saveUninitialized: false,
+//     store: store
+// }))
+// app.use(varMiddleware)
+
 const transporter = nodemailer.createTransport(sendGrid({
     auth: {
         api_key: key.SENDGRID_API_KEY
@@ -55,18 +72,16 @@ const transporter = nodemailer.createTransport(sendGrid({
 }))
 
 
-var intervalTime;
 app.post("/timeInterval", jsonParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
     // response.json(request.body); // отправляем пришедший ответ обратно
-    intervalTime = request.body;
     if (request.body.isDaily) {
-        getDataOfInterval(request.body, dailyData)
+        FindInMongo.getDataOfInterval(request.body, dailyData)
             .then(res => {
                 response.end(JSON.stringify(res))
             });
     } else {
-        getDataOfInterval(request.body, hourlyData)
+        FindInMongo.getDataOfInterval(request.body, hourlyData)
             .then(res => {
                 response.end(JSON.stringify(res))
             });
@@ -76,21 +91,18 @@ app.post("/timeInterval", jsonParser, function (request, response) {
 
 app.post("/authorization", jsonParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
-    authorizationUser(request.body)
+    FindInMongo.authorizationUser(request.body, users)
         .then(res => {
             response.end(JSON.stringify(res))
         });
 
 });
 
-app.get('/downloadExcel', function (req, res, next) {
-    // var filePath = "../"; // Or format the path using the `id` rest param
-    // var fileName = "data.xlsx"; // The default name the browser will use
-
+app.get('/excel/download', function (req, res, next) {
     res.download('./data.xlsx');
 });
 
-app.post('/excelToMail', jsonParser, function (req, res) {
+app.post('/excel/sendToMail', jsonParser, function (req, res) {
     try {
         nodemailer.createTransport(sendGrid({
             auth: {
@@ -107,99 +119,19 @@ app.post('/excelToMail', jsonParser, function (req, res) {
 
 
 
-async function getDataOfInterval(dataFromFront, requestData) {
+async function start() {
     try {
-        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
+        await mongoose.connect(key.MONGODB_URI, {
             useNewUrlParser: true,
             useFindAndModify: true,
             useUnifiedTopology: true
         });
-
-        let ourData = await requestData.find({
-            $and: [{
-                    "date": {
-                        $gte: dataFromFront.startTime
-                    }
-                },
-                {
-                    "date": {
-                        $lte: dataFromFront.endTime
-                    }
-                }
-            ]
-
-        }).sort('field');
-        let responseData = ourData.sort(
-            function (a, b) {
-                return a.date - b.date;
-            }
-        );
-        return setDataToFront.setDataSchedule(responseData, dataFromFront.switchCheckedObj);
-    } catch (error) {
-        console.log(error);
+        app.listen(PORT, () => {
+            console.log(`Server has been started...`);
+        })
+    } catch (e) {
+        console.log(e);
     }
 }
 
-
-
-async function authorizationUser(requestUser) {
-    try {
-        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
-            useNewUrlParser: true,
-            useFindAndModify: true,
-            useUnifiedTopology: true
-        });
-
-        let isUser = await users.findOne({
-            "login": {
-                $eq: requestUser.login
-            }
-        });
-        if (isUser == null || isUser.pass != requestUser.pass) {
-            let obj = {
-                isUser: false
-            };
-            return obj;
-        } else {
-            let obj = {
-                isUser: true
-            };
-            return obj;
-        }
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
-
-
-
-
-
-
-
-const bot = new Telegraf("1605090343:AAGp3XULDmenK3BPWxVU4B6tDN26efM-95M");
-
-// Обработчик начала диалога с ботом
-bot.start((ctx) =>
-    ctx.reply(
-        `Приветствую, ${
-       ctx.from.first_name ? ctx.from.first_name : "хороший человек"
-    }! Набери /getFile и получи свой файл`
-    ))
-
-
-// Обработчик команды /help
-// bot.help((ctx) => ctx.reply("Справка в процессе"));
-bot.command("getFile", (ctx) => {
-    ctx.replyWithDocument({ source: './data.xlsx'})
-})
-
-// Запуск бота
-bot.launch();
-
-
-app.listen(PORT, () => {
-    console.log(`Server has been started...`);
-    // start();
-})
+start();

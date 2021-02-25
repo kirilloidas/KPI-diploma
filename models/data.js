@@ -11,18 +11,6 @@ const dailyData = new Schema({
     }    
 }, {collection: 'dailyArchive'})
 
-
-const users = new Schema({
-    login: {
-        type: String,
-        required: true
-    },
-    pass: {
-        type: String,
-        required: true
-    }
-}, {collection: 'users'})
-
 const hourlyData = new Schema({
     date: {
         type: Number,
@@ -34,8 +22,5 @@ const hourlyData = new Schema({
     }    
 }, {collection: 'hourlyArchive'})
 
-// module.exports = model('data', data);
-// module.exports = model('users', users);
 exports.dailyData = model('dailyData', dailyData);
-exports.users = model('users', users);
 exports.hourlyData = model('hourlyData', hourlyData);

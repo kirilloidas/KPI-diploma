@@ -56,7 +56,7 @@ export class Initialization {
         let json = JSON.stringify(obj);
         let request = new XMLHttpRequest();
             // посылаем запрос на адрес "/user"
-             request.open("POST", "/excelToMail", true);   
+             request.open("POST", "excel/sendToMail", true);   
              request.setRequestHeader("Content-Type", "application/json");
              request.addEventListener("load", function () {
                 // получаем и парсим ответ сервера

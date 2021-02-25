@@ -25,7 +25,6 @@ document.addEventListener('keydown', (event) => {
 
 function signIn(event) {
     event.preventDefault();
-    console.log(login.value, password.value);
     let authorizationObj = {
         login: login.value,
         pass: password.value
