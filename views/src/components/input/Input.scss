@@ -1,0 +1,31 @@
+.form-par {
+    line-height: 1.5em;
+    display: flex;
+    margin: 3px;
+
+    input {
+        height: 50px;
+        outline:none;
+        border: none;
+        background-color: #3b4148;
+        border-radius: 0px 3px 3px 0px;
+        -moz-border-radius: 0px 3px 3px 0px;
+        -webkit-border-radius: 0px 3px 3px 0px;
+        color: #606468;
+        margin-bottom: 1em;
+        padding: 0 16px;
+        width: 198px;
+    }
+}
+
+.input-interval {
+    width: 50px;
+    padding: 0 20px;
+    margin: 20px 10px;
+    background: #E9EFF6;
+    line-height: 40px;
+    border-width: 0;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+}

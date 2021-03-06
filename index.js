@@ -27,7 +27,7 @@ const hourlyData = require('./models.js').hourlyData;
 const setDataToFront = require('./data-processing/setDataToFront.js');
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 const jsonParser = express.json();
@@ -41,12 +41,12 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(__dirname + '/views'));
 
 // Routers
-app.use('/', authorization)
-app.use('/index1', counter1)
-app.use('/index2', counter2)
-app.use('/index3', counter3)
-app.use('/customization', customization)
-app.use('/access', access)
+// app.use('/', authorization)
+// app.use('/index1', counter1)
+// app.use('/index2', counter2)
+// app.use('/index3', counter3)
+// app.use('/customization', customization)
+// app.use('/access', access)
 
 const transporter = nodemailer.createTransport(sendGrid({
     auth: {

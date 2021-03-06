@@ -1,0 +1,126 @@
+// .switch_schedule {
+//     position: relative;
+//     left: 50%;
+//     margin-top: 5px;
+//     margin-bottom: 5px;
+//     margin-left: -150px;
+//     top: 8%;
+//     text-align: center;
+
+//     label {
+//         display: block;
+//         left: 0px;
+//         top: 0;
+//         position: relative;
+//         width: 300px;
+//         height: 40px;
+//         z-index: 10;
+//         line-height: 40px;
+//         font-weight: bold;
+//         /* background: #303030; */
+//         /* background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082); */
+//         /* border-image-slice: 1; */
+//         border: 1px solid silver;
+//         -webkit-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//         -moz-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//         -ms-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//         -o-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//         transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//         cursor: pointer;
+
+//         *::after {
+//             content: "Добовий архів";
+//             width: 150px;
+//             height: 40px;
+//             position: absolute;
+//             left: 0px;
+//             top: 0px;
+//             display: block;
+//             background: #198ada;
+//             -webkit-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//             -moz-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//             -ms-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//             -o-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//             transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//             cursor: pointer;
+//         }
+//     }
+
+//     #checkbox_switch {
+//         display: none;
+//     }
+//     &:checked + label {
+//         left: 0px;
+
+//         &::after {
+//             left: 150px;
+//             background: #FC6666;
+//             content: "Почасовий архів";
+//         }
+//     }
+// }
+
+.switch_schedule {
+    width: 307px;
+    position: relative;
+    left: 50%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: -150px;
+    top: 8%;
+    
+    text-align: center;
+  }
+  
+  .switch_schedule  label {
+    display: block;
+    left: 0px;
+    top: 0;
+    position: relative;
+    width: 300px;
+    height: 40px;
+    z-index: 10;
+    line-height: 40px;
+    font-weight: bold;
+    /* background: #303030; */
+    /* background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082); */
+    /* border-image-slice: 1; */
+    border: 1px solid silver;
+    -webkit-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -moz-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -ms-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -o-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    cursor: pointer;
+  }
+  
+  .switch_schedule label:after {
+    content: "Добовий архів";
+    width: 150px;
+    height: 40px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    display: block;
+    background: #198ada;
+    -webkit-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -moz-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -ms-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -o-transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    cursor: pointer;
+  }
+  
+  .switch_schedule #checkbox_switch {
+    display: none;
+  }
+  
+  .switch_schedule :checked + label {
+    left: 0px;
+  }
+  
+  .switch_schedule :checked + label:after {
+    left: 150px;
+    background: #FC6666;
+    content: "Почасовий архів";
+  }
