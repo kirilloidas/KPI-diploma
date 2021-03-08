@@ -37,7 +37,7 @@ const InputAuth = (props) => {
             <p className="form-par">
                 {whichInput()}
                 <input type="text" placeholder={props.name}
-                    onChange={(e) => {onChangeHandler(e); console.log(e.target.value)}}
+                    onChange={(e) => {onChangeHandler(e)}}
                     onFocus={onFocusHandler} 
                     required />
             </p>

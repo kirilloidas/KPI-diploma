@@ -1,9 +1,9 @@
 import React from 'react'
 import './Button.scss'
 
-const Button = ({text}) => {
+const Button = ({text, onClick = () => {}}) => {
     return (
-        <a href="#" id="authorization" className="Button">{text}</a>
+        <span className="Button" onClick={(e) => onClick(e)}>{text}</span>
     )
 }
 

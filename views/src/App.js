@@ -19,7 +19,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar/>
         {routing.map((content, index) => {
           return <Route key={index} exact path={content.path} component={content.component} />
         })}

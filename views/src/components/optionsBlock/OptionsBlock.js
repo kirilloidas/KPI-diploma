@@ -4,10 +4,11 @@ import CheckMode from '../checkbox/CheckMode'
 import CheckOptions from '../checkbox/CheckOptions'
 import InputInterval from '../input/InputInterval'
 import Button from '../button/Button'
+import {User} from '../../api/User'
 import {setIntervalObj, setCheckBoxObj, setCheckBoxItem} from '../../redux/actions/checkBoxParam'
 import { connect } from 'react-redux'
 
-const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, setCheckBoxItem}) => {
+const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, setCheckBoxItem, intervalObj}) => {
     const [startDay, setStartDay] = useState();
     const [startMonth, setStartMonth] = useState();
     const [startYear, setStartYear] = useState();
@@ -24,7 +25,6 @@ const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, set
             endTime: new Date(endYear, endMonth, endDay, endHour || 0).getTime(),
         }
         setIntervalObj(obj)
-        // console.log(checkBoxObj)
     }, [startDay, startMonth, startYear, startHour, endDay, endHour, endMonth, endYear])
 
     useEffect(() => {
@@ -47,6 +47,16 @@ const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, set
         'Спожита енергія',
         'Температура всередині корпусу'
     ];
+
+    const getDataHandler = () => {
+        // console.log(intervalObj)
+        User.getData({
+            startTime: intervalObj.startTime, 
+            endTime: intervalObj.endTime,
+            switchCheckedObj: checkBoxObj,
+            isDaily: isDaily
+        }).then(data => console.log(data))
+    }
 
     
 
@@ -81,7 +91,7 @@ const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, set
                 {isDaily ? null : <InputInterval placeholderName={'Години'} onChange={setEndHour}/>}
             </div>
             {/* <span id="output"></span> */}
-            <Button text='Показати дані'/>
+            <Button text='Показати дані' onClick={getDataHandler}/>
         </fieldset>
     )
 }
@@ -89,7 +99,8 @@ const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, set
 const mapStateToProps = state => {
     return {
         isDaily: state.checkBoxReducer.isDaily,
-        checkBoxObj: state.checkBoxReducer.checkBoxObj
+        checkBoxObj: state.checkBoxReducer.checkBoxObj,
+        intervalObj: state.checkBoxReducer.intervalObj
     }
 }
 
