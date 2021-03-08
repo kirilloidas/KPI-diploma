@@ -27,7 +27,7 @@ const hourlyData = require('./models.js').hourlyData;
 const setDataToFront = require('./data-processing/setDataToFront.js');
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 const jsonParser = express.json();
@@ -41,12 +41,12 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(__dirname + '/views'));
 
 // Routers
-app.use('/', authorization)
-app.use('/index1', counter1)
-app.use('/index2', counter2)
-app.use('/index3', counter3)
-app.use('/customization', customization)
-app.use('/access', access)
+// app.use('/', authorization)
+// app.use('/index1', counter1)
+// app.use('/index2', counter2)
+// app.use('/index3', counter3)
+// app.use('/customization', customization)
+// app.use('/access', access)
 
 const transporter = nodemailer.createTransport(sendGrid({
     auth: {
@@ -56,7 +56,8 @@ const transporter = nodemailer.createTransport(sendGrid({
 
 
 var intervalTime;
-app.post("/timeInterval", jsonParser, function (request, response) {
+app.post("/api/timeInterval", jsonParser, function (request, response) {
+    console.log(request.body)
     if (!request.body) return response.sendStatus(400);
     // response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
@@ -74,7 +75,7 @@ app.post("/timeInterval", jsonParser, function (request, response) {
 
 });
 
-app.post("/authorization", jsonParser, function (request, response) {
+app.post("/api/authorization", function (request, response) {
     if (!request.body) return response.sendStatus(400);
     authorizationUser(request.body)
         .then(res => {
@@ -83,14 +84,14 @@ app.post("/authorization", jsonParser, function (request, response) {
 
 });
 
-app.get('/downloadExcel', function (req, res, next) {
+app.get('/api/downloadExcel', function (req, res, next) {
     // var filePath = "../"; // Or format the path using the `id` rest param
     // var fileName = "data.xlsx"; // The default name the browser will use
 
     res.download('./data.xlsx');
 });
 
-app.post('/excelToMail', jsonParser, function (req, res) {
+app.post('/api/excelToMail', jsonParser, function (req, res) {
     try {
         nodemailer.createTransport(sendGrid({
             auth: {
@@ -143,6 +144,7 @@ async function getDataOfInterval(dataFromFront, requestData) {
 
 
 async function authorizationUser(requestUser) {
+    // console.log(JSON.parse(requestUser))
     try {
         await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
             useNewUrlParser: true,
