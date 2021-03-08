@@ -1,4 +1,4 @@
-import {CHECKBOX_OBJ, INTERVAL_OBJ, IS_DAILY, CHECKBOX_ITEM} from '../types'
+import {CHECKBOX_OBJ, INTERVAL_OBJ, IS_DAILY, CHECKBOX_ITEM, DATA_TO_CHART} from '../types'
 
 export function setCheckBoxObj(obj) {
     return {type: CHECKBOX_OBJ, payload: obj}
@@ -14,4 +14,8 @@ export function setIntervalObj(obj) {
 
 export function setIsDaily(bool) {
     return {type: IS_DAILY, payload: bool}
+}
+
+export function setDataToChart(obj) {
+    return {type: DATA_TO_CHART, payload: obj}
 }

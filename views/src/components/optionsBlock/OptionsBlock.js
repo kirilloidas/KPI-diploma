@@ -5,10 +5,10 @@ import CheckOptions from '../checkbox/CheckOptions'
 import InputInterval from '../input/InputInterval'
 import Button from '../button/Button'
 import {User} from '../../api/User'
-import {setIntervalObj, setCheckBoxObj, setCheckBoxItem} from '../../redux/actions/checkBoxParam'
+import {setIntervalObj, setCheckBoxObj, setCheckBoxItem, setDataToChart} from '../../redux/actions/checkBoxParam'
 import { connect } from 'react-redux'
 
-const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, setCheckBoxItem, intervalObj}) => {
+const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, setCheckBoxItem, intervalObj, setDataToChart}) => {
     const [startDay, setStartDay] = useState();
     const [startMonth, setStartMonth] = useState();
     const [startYear, setStartYear] = useState();
@@ -49,13 +49,13 @@ const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, set
     ];
 
     const getDataHandler = () => {
-        // console.log(intervalObj)
         User.getData({
             startTime: intervalObj.startTime, 
             endTime: intervalObj.endTime,
             switchCheckedObj: checkBoxObj,
             isDaily: isDaily
-        }).then(data => console.log(data))
+        }).then(data => {setDataToChart(data.data); console.log(data.data)})
+        .catch((e) => console.log(e))
     }
 
     
@@ -63,7 +63,6 @@ const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, set
     const addCheckBoxObj = (value, index) => {
         // console.log(checkBoxObj)
         setCheckBoxItem(index, value)
-        
     }
 
 
@@ -107,7 +106,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     setIntervalObj,
     setCheckBoxObj,
-    setCheckBoxItem
+    setCheckBoxItem,
+    setDataToChart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OptionsBlock)
