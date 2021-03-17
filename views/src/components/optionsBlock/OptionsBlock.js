@@ -49,6 +49,10 @@ const OptionsBlock = ({isDaily, setIntervalObj, setCheckBoxObj, checkBoxObj, set
     ];
 
     const getDataHandler = () => {
+        console.log(intervalObj.startTime);
+        console.log(intervalObj.endTime);
+        console.log(checkBoxObj);
+        console.log(isDaily)
         User.getData({
             startTime: intervalObj.startTime, 
             endTime: intervalObj.endTime,
