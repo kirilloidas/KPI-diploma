@@ -5,10 +5,10 @@ import CheckOptions from '../../components/checkbox/CheckOptions';
 import OptionsBlock from '../../components/optionsBlock/OptionsBlock'
 import ChartData from '../../components/charts/Chart'
 import {User} from '../../api/User'
-import {setIntervalObj, setCheckBoxObj, setCheckBoxItem, setDataToChart} from '../../redux/actions/checkBoxParam'
+import {setIntervalObj, setCheckBoxObj, setCheckBoxItem, setDataToChart, setIsData} from '../../redux/actions/checkBoxParam'
 import { connect } from 'react-redux';
 
-const Counter = () => {
+const Counter = ({setDataToChart, setIsData}) => {
     const [startDay, setStartDay] = useState();
     const [startMonth, setStartMonth] = useState();
     const [startYear, setStartYear] = useState();
@@ -42,11 +42,14 @@ const Counter = () => {
             endTime: 1606255200000,
             switchCheckedObj: paramsObj,
             isDaily: true
-        }).then(data => {setDataToChart(data.data); console.log(data.data)})
+        }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true)})
         .catch((e) => console.log(e))
     }, [])
+
     return (
         <React.Fragment>
+            <ChartData/>
+            {/* <OptionsBlock/> */}
             <Navbar/>
         </React.Fragment>
         
@@ -57,7 +60,8 @@ const mapStateToProps = state => {
     return {
         isDaily: state.checkBoxReducer.isDaily,
         checkBoxObj: state.checkBoxReducer.checkBoxObj,
-        intervalObj: state.checkBoxReducer.intervalObj
+        intervalObj: state.checkBoxReducer.intervalObj,
+        dataToChart: state.checkBoxReducer.dataToChart
     }
 } 
 
@@ -65,6 +69,7 @@ const mapDispatchToProps = {
     setIntervalObj,
     setCheckBoxObj,
     setCheckBoxItem,
-    setDataToChart
+    setDataToChart,
+    setIsData
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Counter)

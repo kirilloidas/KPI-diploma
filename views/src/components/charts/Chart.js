@@ -1,67 +1,124 @@
-import React, { useEffect, useRef } from 'react'
+import React, {
+    useEffect,
+    useRef
+} from 'react'
 import Chart from 'chart.js'
-import { connect } from 'react-redux'
+import {
+    connect
+} from 'react-redux'
+import './Chart.scss'
 
-const ChartData = ({checkBoxObj, dataToChart}) => {
+const ChartData = ({
+    checkBoxObj,
+    dataToChart,
+    isData
+}) => {
     const schedule = useRef(null);
     useEffect(() => {
-        const ctx = schedule.current;
+        if(isData) {
+            const colors = {
+                purple: {
+                    default: "rgba(149, 76, 233, 1)",
+                    half: "rgba(149, 76, 233, 0.5)",
+                    quarter: "rgba(149, 76, 233, 0.25)",
+                    zero: "rgba(149, 76, 233, 0)"
+                },
+                indigo: {
+                    default: "rgba(80, 102, 120, 1)",
+                    quarter: "rgba(80, 102, 120, 0.25)"
+                }
+            };
+            const ctx = schedule.current.getContext("2d");
+            ctx.canvas.height = 500;
+            let gradient = ctx.createLinearGradient(0, 25, 0, 300);
+            gradient.addColorStop(0, colors.purple.half);
+            gradient.addColorStop(0.35, colors.purple.quarter);
+            gradient.addColorStop(1, colors.purple.zero);
 
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: dataToChart.date,
-              datasets: [{
-                label: 'Об`єм (маса) каналу витрати 1',
-                data: dataToChart.dataArr[8],
-                backgroundColor: undefined,
-                borderColor: 'yellow'
-              }]
-            },
-            options: {
-                // All of my other bar chart option here
-                scales: {
-                    yAxes: [{
-                        gridLines: { 
-                            color: "#CCC" 
-                        },
-                        ticks: {
-                            beginAtZero:true,
-                            fontColor: "#CCC",
-                            fontSize: 28
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: { 
-                            color: "#CCC"
-                        },
-                        ticks: {
-                            fontColor: "#CCC",
-                            fontSize: 28
-                        }
+
+            new Chart(ctx, {
+                // type: 'line',
+                // data: {
+                //   labels: dataToChart.date,
+                //   datasets: [{
+                //     label: 'Об`єм (маса) каналу витрати 1',
+                //     data: dataToChart.dataArr[8],
+                //     backgroundColor: '#0E082D',
+                //     borderColor: '#3113A5'
+                //   }]
+                // },
+                type: "line",
+                data: {
+                    labels: dataToChart.date,
+                    datasets: [{
+                        fill: true,
+                        backgroundColor: gradient,
+                        pointBackgroundColor: colors.purple.default,
+                        borderColor: colors.purple.default,
+                        data: dataToChart.dataArr[8],
+                        lineTension: 0.2,
+                        borderWidth: 2,
+                        pointRadius: 3
                     }]
                 },
-                legend: {
-                    labels: {
-                        // This more specific font property overrides the global property
-                        fontColor: '#198ada',
-                        fontSize: 40,
-                        fontFamily: 'Helvetica'
+                options: {
+                    layout: {
+                        padding: 10
+                    },
+                    responsive: true,
+                    legend: {
+                        display: false
+                    },
+
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                display: false
+                            },
+                            ticks: {
+                                padding: 10,
+                                autoSkip: false,
+                                maxRotation: 15,
+                                minRotation: 15,
+                                fontSize: 16,
+                                fontColor: 'rgba(255,255,255,.7)'
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                // labelString: "Weight in KG",
+                                padding: 10
+                            },
+                            gridLines: {
+                                display: true,
+                                color: colors.indigo.quarter
+                            },
+                            ticks: {
+                                beginAtZero: false,
+                                // max: 63,
+                                // min: 57,
+                                padding: 10,
+                                fontSize: 16,
+                                fontColor: 'rgba(255,255,255,.7)'
+                            }
+                        }]
                     }
                 }
-            }
-        });
-    }, [])
+            });
+        }
+    }, [isData])
 
-    return (
-        <canvas ref={schedule} style={{height: '300px', width: '600px'}} />
+    return ( 
+        <canvas ref = {schedule} width='800' className='chart'/>
     )
 }
 
 const mapStateToProps = state => {
     return {
         dataToChart: state.checkBoxReducer.dataToChart,
-        checkBoxObj: state.checkBoxReducer.checkBoxObj
+        checkBoxObj: state.checkBoxReducer.checkBoxObj,
+        isData: state.checkBoxReducer.isData
     }
 }
 
