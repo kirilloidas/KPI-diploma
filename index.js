@@ -23,6 +23,7 @@ const key = require('./keys/keys');
 const dailyData = require('./models.js').dailyData;
 const users = require('./models.js').users;
 const hourlyData = require('./models.js').hourlyData;
+const currentDataModel = require('./models.js').currentData;
 
 const setDataToFront = require('./data-processing/setDataToFront.js');
 
@@ -75,6 +76,23 @@ app.post("/api/timeInterval", jsonParser, function (request, response) {
 
 });
 
+app.post('/api/currentData', jsonParser, function(request, response) {
+    let currentObj = new Object();
+    getCurrentDataCounter1(currentDataModel)
+        .then(res => {
+            currentObj.first = res;
+        })
+     getCurrentDataCounter2(currentDataModel)
+        .then(res => {
+            currentObj.second = res;
+        })
+    if(currentObj.first && currentObj.second) {
+        response.end(JSON.stringify(currentObj))
+    }
+    console.log(currentObj)
+    
+})
+
 app.post("/api/authorization", function (request, response) {
     if (!request.body) return response.sendStatus(400);
     authorizationUser(request.body)
@@ -105,6 +123,39 @@ app.post('/api/excelToMail', jsonParser, function (req, res) {
 
 
 })
+
+
+async function getCurrentDataCounter1(model) {
+    try {
+        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
+            useNewUrlParser: true,
+            useFindAndModify: true,
+            useUnifiedTopology: true
+        });
+
+        let data = await model.find({});
+        console.log(data)
+        return data;
+    } catch(e) {
+        console.log(e)
+    }
+}
+
+async function getCurrentDataCounter2(model) {
+    try {
+        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster1', {
+            useNewUrlParser: true,
+            useFindAndModify: true,
+            useUnifiedTopology: true
+        });
+
+        let data = await model.find({});
+        console.log(data)
+        return data;
+    } catch(e) {
+        console.log(e)
+    }
+}
 
 
 

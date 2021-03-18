@@ -6,11 +6,13 @@ import AccessIcon from '../svg/SVGNavbar/accessIcon/AccessIcon'
 import CustomizationIcon from '../svg/SVGNavbar/customizationIcon/CustomizationIcon'
 import ChartIcon from '../svg/SVGNavbar/chart'
 import LogoImg from '../../img/ntuukpi.png';
+import {setIsCurrentData} from '../../redux/actions/main'
 import './Navbar.scss'
+import { connect } from 'react-redux'
 // import svgChart from '../../img/svgChart.svg'
 // import svgDashboard from '../../img/dashboard.svg'
 
-const Navbar = () => {
+const Navbar = ({setIsCurrentData}) => {
 
     const navList = [
         // {name: '', path: '/', icon: <HomeIcon/>},
@@ -19,6 +21,14 @@ const Navbar = () => {
         {name: 'Приватність', path: '/access', icon: <AccessIcon/>},
         {name: 'Налаштування', path: '/customization', icon: <CustomizationIcon/>}
     ];
+
+    const menuClickHandler = (item) => {
+        if(item.name = 'Поточний') {
+            setIsCurrentData(true)
+        } else {
+            setIsCurrentData(false)
+        }
+    }
 
     return (
         <div className='NavBar'>
@@ -32,7 +42,7 @@ const Navbar = () => {
                 <ul className='nav-list'>
                     {navList.map((context, index) => {
                         return (
-                            <li className='nav-list__item'>
+                            <li className='nav-list__item' onClick={() => menuClickHandler(context)}>
                                 <span className='nav-list__item-icon'>{context.icon}</span>
                                 <span className='nav-list__item-link'>{context.name}</span>
                             </li>
@@ -62,4 +72,8 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+const mapDispatchToProps = {
+    setIsCurrentData
+}
+
+export default connect(null, mapDispatchToProps)(Navbar)

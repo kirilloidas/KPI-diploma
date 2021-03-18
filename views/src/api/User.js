@@ -6,5 +6,8 @@ export const User = {
     },
     getData(intervalObj) {
         return Api().post('/timeInterval', intervalObj)
+    },
+    getCurrentData() {
+        return Api().post('/currentData');
     }
 }

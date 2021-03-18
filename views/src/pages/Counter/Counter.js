@@ -8,7 +8,7 @@ import {User} from '../../api/User'
 import {setIntervalObj, setCheckBoxObj, setCheckBoxItem, setDataToChart, setIsData} from '../../redux/actions/checkBoxParam'
 import { connect } from 'react-redux';
 
-const Counter = ({setDataToChart, setIsData}) => {
+const Counter = ({setDataToChart, setIsData, isCurrent}) => {
     const [startDay, setStartDay] = useState();
     const [startMonth, setStartMonth] = useState();
     const [startYear, setStartYear] = useState();
@@ -48,9 +48,14 @@ const Counter = ({setDataToChart, setIsData}) => {
 
     return (
         <React.Fragment>
-            <ChartData/>
-            {/* <OptionsBlock/> */}
-            <Navbar/>
+            {isCurrent 
+                ? <Navbar/>
+                : <React.Fragment>
+                    <ChartData/>
+                    {/* <OptionsBlock/> */}
+                    <Navbar/>
+                  </React.Fragment>}
+            
         </React.Fragment>
         
     )
@@ -61,7 +66,8 @@ const mapStateToProps = state => {
         isDaily: state.checkBoxReducer.isDaily,
         checkBoxObj: state.checkBoxReducer.checkBoxObj,
         intervalObj: state.checkBoxReducer.intervalObj,
-        dataToChart: state.checkBoxReducer.dataToChart
+        dataToChart: state.checkBoxReducer.dataToChart,
+        isCurrent: state.mainReducer.isCurrent
     }
 } 
 
