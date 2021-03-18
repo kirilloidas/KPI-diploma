@@ -23,9 +23,9 @@ const Navbar = ({setIsCurrentData}) => {
     ];
 
     const menuClickHandler = (item) => {
-        if(item.name = 'Поточний') {
+        if(item.name == 'Поточний') {
             setIsCurrentData(true)
-        } else {
+        } else if(item.name == 'Архів') {
             setIsCurrentData(false)
         }
     }

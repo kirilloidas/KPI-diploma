@@ -37,16 +37,6 @@ const ChartData = ({
 
 
             new Chart(ctx, {
-                // type: 'line',
-                // data: {
-                //   labels: dataToChart.date,
-                //   datasets: [{
-                //     label: 'Об`єм (маса) каналу витрати 1',
-                //     data: dataToChart.dataArr[8],
-                //     backgroundColor: '#0E082D',
-                //     borderColor: '#3113A5'
-                //   }]
-                // },
                 type: "line",
                 data: {
                     labels: dataToChart.date,

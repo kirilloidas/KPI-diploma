@@ -24,6 +24,7 @@ const dailyData = require('./models.js').dailyData;
 const users = require('./models.js').users;
 const hourlyData = require('./models.js').hourlyData;
 const currentDataModel = require('./models.js').currentData;
+const currentDataModel1 = require('./models.js').currentData1;
 
 const setDataToFront = require('./data-processing/setDataToFront.js');
 
@@ -82,13 +83,18 @@ app.post('/api/currentData', jsonParser, function(request, response) {
         .then(res => {
             currentObj.first = res;
         })
-     getCurrentDataCounter2(currentDataModel)
+     getCurrentDataCounter1(currentDataModel1)
         .then(res => {
             currentObj.second = res;
         })
-    if(currentObj.first && currentObj.second) {
-        response.end(JSON.stringify(currentObj))
-    }
+    setInterval(() => {
+        if(currentObj.first && currentObj.second) {
+            console.log('12345678903456789068912372193912898')
+            response.end(JSON.stringify(currentObj))
+            clearInterval();
+        }
+    }, 200);
+    
     console.log(currentObj)
     
 })
@@ -133,8 +139,8 @@ async function getCurrentDataCounter1(model) {
             useUnifiedTopology: true
         });
 
-        let data = await model.find({});
-        console.log(data)
+        let data = await model.findOne({});
+        console.log('9324892378947892374987239847243213213123213125423534')
         return data;
     } catch(e) {
         console.log(e)
@@ -142,15 +148,16 @@ async function getCurrentDataCounter1(model) {
 }
 
 async function getCurrentDataCounter2(model) {
+    console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
     try {
-        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster1', {
+        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
             useNewUrlParser: true,
             useFindAndModify: true,
             useUnifiedTopology: true
         });
 
         let data = await model.find({});
-        console.log(data)
+        console.log('6192839012890380218903-9120-930-9210-93-02190-39')
         return data;
     } catch(e) {
         console.log(e)
