@@ -11,7 +11,7 @@ const CurrentChart = ({currentData, isGetCurrent}) => {
             const ctx = schedule.current.getContext("2d");
             ctx.canvas.height = 500;
             console.log(currentData.first)
-            let arrData = [currentData.first.data[1].value, currentData.second.data[1].value]
+            let arrData = [currentData[0].data[19].value, currentData[1].data[19].value]
             // let arrData = []
             const colors = {
                 purple: {
@@ -25,9 +25,6 @@ const CurrentChart = ({currentData, isGetCurrent}) => {
                     quarter: "rgba(80, 102, 120, 0.25)"
                 }
             };
-            // let gradient = ctx.createLinearGradient(0, 25, 0, 300);
-            //     gradient.addColorStop(0, colors.purple.half);
-            //     gradient.addColorStop(1, colors.purple.quarter);
                 var gradient = ctx.createLinearGradient(0, 0, 0, 600);
                 gradient.addColorStop(0, 'orange');
                 gradient.addColorStop(1, 'purple');

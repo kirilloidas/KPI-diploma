@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
@@ -15,8 +16,8 @@ const counter3 = require('./routes/counter3');
 const customization = require('./routes/customization');
 const access = require('./routes/access');
 
-const nodemailer = require('nodemailer')
-const sendGrid = require('nodemailer-sendgrid-transport')
+// const nodemailer = require('nodemailer')
+// const sendGrid = require('nodemailer-sendgrid-transport')
 const sendExcelModule = require('./emails/sendExcelModule')
 const key = require('./keys/keys');
 
@@ -39,6 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(cors())
 
 app.use(express.static(__dirname + '/views'));
 
@@ -50,16 +52,15 @@ app.use(express.static(__dirname + '/views'));
 // app.use('/customization', customization)
 // app.use('/access', access)
 
-const transporter = nodemailer.createTransport(sendGrid({
-    auth: {
-        api_key: key.SENDGRID_API_KEY
-    }
-}))
+// const transporter = nodemailer.createTransport(sendGrid({
+//     auth: {
+//         api_key: key.SENDGRID_API_KEY
+//     }
+// }))
 
 
 var intervalTime;
 app.post("/api/timeInterval", jsonParser, function (request, response) {
-    console.log(request.body)
     if (!request.body) return response.sendStatus(400);
     // response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
@@ -79,25 +80,24 @@ app.post("/api/timeInterval", jsonParser, function (request, response) {
 
 app.post('/api/currentData', jsonParser, function(request, response) {
     let currentObj = new Object();
-    getCurrentDataCounter1(currentDataModel)
-        .then(res => {
-            currentObj.first = res;
-        })
-     getCurrentDataCounter1(currentDataModel1)
-        .then(res => {
-            currentObj.second = res;
-        })
-    setInterval(() => {
-        if(currentObj.first && currentObj.second) {
-            console.log('12345678903456789068912372193912898')
-            response.end(JSON.stringify(currentObj))
-            clearInterval();
-        }
-    }, 200);
-    
-    console.log(currentObj)
-    
+    // getCurrentDataCounter1(currentDataModel)
+    //     .then(res => {
+    //         currentObj.first = res;
+    //     })
+    //  getCurrentDataCounter1(currentDataModel1)
+    //     .then(res => {
+    //         currentObj.second = res;
+    //     })
+    Promise.all([getCurrentDataCounter1(currentDataModel), getCurrentDataCounter1(currentDataModel1)]
+        .map(p => p.catch(x => console.log(x)))).then(r => response.end(JSON.stringify(r)))
+    // setInterval(() => {
+    //     if(currentObj.first && currentObj.second) {
+    //         response.end(JSON.stringify(currentObj))
+    //         clearInterval();
+    //     }
+    // }, 200);
 })
+
 
 app.post("/api/authorization", function (request, response) {
     if (!request.body) return response.sendStatus(400);
@@ -122,7 +122,6 @@ app.post('/api/excelToMail', jsonParser, function (req, res) {
                 api_key: key.SENDGRID_API_KEY
             }
         })).sendMail(sendExcelModule(req.body.mail))
-        console.log(req.body.mail);
     } catch (error) {
         console.log(error)
     }
@@ -140,7 +139,6 @@ async function getCurrentDataCounter1(model) {
         });
 
         let data = await model.findOne({});
-        console.log('9324892378947892374987239847243213213123213125423534')
         return data;
     } catch(e) {
         console.log(e)
@@ -148,7 +146,6 @@ async function getCurrentDataCounter1(model) {
 }
 
 async function getCurrentDataCounter2(model) {
-    console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
     try {
         await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
             useNewUrlParser: true,
@@ -157,7 +154,6 @@ async function getCurrentDataCounter2(model) {
         });
 
         let data = await model.find({});
-        console.log('6192839012890380218903-9120-930-9210-93-02190-39')
         return data;
     } catch(e) {
         console.log(e)
@@ -202,7 +198,6 @@ async function getDataOfInterval(dataFromFront, requestData) {
 
 
 async function authorizationUser(requestUser) {
-    // console.log(JSON.parse(requestUser))
     try {
         await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
             useNewUrlParser: true,
@@ -238,25 +233,25 @@ async function authorizationUser(requestUser) {
 
 
 
-const bot = new Telegraf("1605090343:AAGp3XULDmenK3BPWxVU4B6tDN26efM-95M");
+// const bot = new Telegraf("1605090343:AAGp3XULDmenK3BPWxVU4B6tDN26efM-95M");
 
-// Обработчик начала диалога с ботом
-bot.start((ctx) =>
-    ctx.reply(
-        `Приветствую, ${
-       ctx.from.first_name ? ctx.from.first_name : "хороший человек"
-    }! Набери /getFile и получи свой файл`
-    ))
+// // Обработчик начала диалога с ботом
+// bot.start((ctx) =>
+//     ctx.reply(
+//         `Приветствую, ${
+//        ctx.from.first_name ? ctx.from.first_name : "хороший человек"
+//     }! Набери /getFile и получи свой файл`
+//     ))
 
 
-// Обработчик команды /help
-// bot.help((ctx) => ctx.reply("Справка в процессе"));
-bot.command("getFile", (ctx) => {
-    ctx.replyWithDocument({ source: './data.xlsx'})
-})
+// // Обработчик команды /help
+// // bot.help((ctx) => ctx.reply("Справка в процессе"));
+// bot.command("getFile", (ctx) => {
+//     ctx.replyWithDocument({ source: './data.xlsx'})
+// })
 
-// Запуск бота
-bot.launch();
+// // Запуск бота
+// bot.launch();
 
 
 app.listen(PORT, () => {

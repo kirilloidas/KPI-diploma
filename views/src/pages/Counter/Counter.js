@@ -10,7 +10,7 @@ import {getCurrentData} from '../../redux/actions/main';
 import {setIntervalObj, setCheckBoxObj, setCheckBoxItem, setDataToChart, setIsData, setIsGetCurrent} from '../../redux/actions/checkBoxParam'
 import { connect } from 'react-redux';
 
-const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, currentData}) => {
+const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, currentData, getCurrentData}) => {
     const [startDay, setStartDay] = useState();
     const [startMonth, setStartMonth] = useState();
     const [startYear, setStartYear] = useState();
@@ -21,6 +21,7 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
     const [endHour, setEndHour] = useState();
 
     useEffect(() => {
+        console.log('1111111111111111111111111111111111111111111111111111')
         if(isCurrent) {
             console.log('3')
             User.getCurrentData()
@@ -36,11 +37,6 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                     getCurrentData(data.data)
                     console.log(data.data)
                 })
-            let obj = {
-                // startTime: new Date('2020', '10', '10', 0).getTime(),
-                // endTime: new Date('2020', '10', '25',  0).getTime(),
-            }
-            // setIntervalObj(obj)
 
             const paramsObj = {
                 0: true,
@@ -63,7 +59,7 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
             .catch((e) => console.log(e))
         }
         console.log(currentData)
-    })
+    }, [isCurrent])
 
     return (
         <React.Fragment>
