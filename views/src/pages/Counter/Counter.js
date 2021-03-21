@@ -7,6 +7,7 @@ import ChartData from '../../components/charts/Chart'
 import CurrentChart from '../../components/charts/CurrentChart'
 import {User} from '../../api/User'
 import {getCurrentData} from '../../redux/actions/main';
+import ArchiveOptions from '../../components/optionsBlock/ArchiveOptions'
 import {setIntervalObj, setCheckBoxObj, setCheckBoxItem, setDataToChart, setIsData, setIsGetCurrent} from '../../redux/actions/checkBoxParam'
 import { connect } from 'react-redux';
 
@@ -21,7 +22,6 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
     const [endHour, setEndHour] = useState();
 
     useEffect(() => {
-        console.log('1111111111111111111111111111111111111111111111111111')
         if(isCurrent) {
             console.log('3')
             User.getCurrentData()
@@ -71,6 +71,7 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                 </React.Fragment>
                 : <React.Fragment>
                     <ChartData/>
+                    <ArchiveOptions/>
                     {/* <OptionsBlock/> */}
                     <Navbar/>
                   </React.Fragment>}

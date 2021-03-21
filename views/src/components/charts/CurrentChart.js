@@ -10,7 +10,6 @@ const CurrentChart = ({currentData, isGetCurrent}) => {
             console.log(currentData)
             const ctx = schedule.current.getContext("2d");
             ctx.canvas.height = 500;
-            console.log(currentData.first)
             let arrData = [currentData[0].data[19].value, currentData[1].data[19].value]
             // let arrData = []
             const colors = {
@@ -28,6 +27,7 @@ const CurrentChart = ({currentData, isGetCurrent}) => {
                 var gradient = ctx.createLinearGradient(0, 0, 0, 600);
                 gradient.addColorStop(0, 'orange');
                 gradient.addColorStop(1, 'purple');
+            
 
             new Chart(ctx, {
                 type: 'bar',
@@ -61,7 +61,6 @@ const CurrentChart = ({currentData, isGetCurrent}) => {
 }
 
 const mapStateToProps = state => {
-    console.log(state.mainReducer)
     return {
         currentData: state.mainReducer.currentData,
         isGetCurrent: state.checkBoxReducer.isGetCurrent

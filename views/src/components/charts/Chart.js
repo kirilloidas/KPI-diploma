@@ -7,6 +7,7 @@ import {
     connect
 } from 'react-redux'
 import './Chart.scss'
+import 'chartjs-plugin-style';
 
 const ChartData = ({
     checkBoxObj,
@@ -30,7 +31,7 @@ const ChartData = ({
             };
             const ctx = schedule.current.getContext("2d");
             ctx.canvas.height = 500;
-            let gradient = ctx.createLinearGradient(0, 25, 0, 300);
+            let gradient = ctx.createLinearGradient(0, 0, 0, 500);
             gradient.addColorStop(0, colors.purple.half);
             gradient.addColorStop(0.35, colors.purple.quarter);
             gradient.addColorStop(1, colors.purple.zero);
@@ -46,9 +47,9 @@ const ChartData = ({
                         pointBackgroundColor: colors.purple.default,
                         borderColor: colors.purple.default,
                         data: dataToChart.dataArr[8],
-                        lineTension: 0.2,
+                        lineTension: 0.4,
                         borderWidth: 2,
-                        pointRadius: 3
+                        pointRadius: 5
                     }]
                 },
                 options: {
