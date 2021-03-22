@@ -18,6 +18,7 @@ export function setIsDaily(bool) {
 }
 
 export function setDataToChart(obj) {
+    console.log(obj)
     return {type: DATA_TO_CHART, payload: obj}
 }
 

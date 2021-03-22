@@ -1,6 +1,7 @@
 import React, {
     useEffect,
-    useRef
+    useRef,
+    useState
 } from 'react'
 import Chart from 'chart.js'
 import {
@@ -8,14 +9,35 @@ import {
 } from 'react-redux'
 import './Chart.scss'
 import 'chartjs-plugin-style';
+import {ArchiveObject} from '../../objectsDataChart/ArchiveObject'
 
 const ChartData = ({
     checkBoxObj,
     dataToChart,
-    isData
+    isData,
+    isDaily,
+    paramOption,
+    intervalObj
 }) => {
     const schedule = useRef(null);
+    const [numberParam, setNumbarParam] = useState()
+    let exam;
+    // for(let i = 0; i < Object.keys(ArchiveObject).length; i++) {
+    //     console.log(i, ArchiveObject[Object.keys(ArchiveObject)])
+    // }
     useEffect(() => {
+        Object.keys(ArchiveObject).map((item, index) => {
+            // console.log(item, index)
+            if(item == paramOption) {
+                console.log(item)
+                setNumbarParam(index);
+                console.log(numberParam)
+            }
+        })
+    }, [paramOption])
+    useEffect(() => {
+        console.log(numberParam)
+        
         if(isData) {
             const colors = {
                 purple: {
@@ -34,6 +56,7 @@ const ChartData = ({
                 }
             };
             const ctx = schedule.current.getContext("2d");
+            // ctx.clearRect(0, 0, schedule.current.width, schedule.current.height);
             let draw = Chart.controllers.line.prototype.draw;
             console.log(Chart.controllers)
             Chart.controllers.line = Chart.controllers.line.extend({
@@ -62,7 +85,7 @@ const ChartData = ({
             gradient.addColorStop(1, colors.purple.zero);
 
 
-            new Chart(ctx, {
+            exam = new Chart(ctx, {
                 type: "line",
                 data: {
                     labels: dataToChart.date,
@@ -71,7 +94,7 @@ const ChartData = ({
                         backgroundColor: gradient,
                         pointBackgroundColor: colors.purple.default,
                         borderColor: colors.purple.default,
-                        data: dataToChart.dataArr[8],
+                        data: dataToChart.dataArr[numberParam],
                         lineTension: 0.4,
                         borderWidth: 4,
                         pointRadius: 5
@@ -122,8 +145,9 @@ const ChartData = ({
                     }
                 }
             });
+            exam.update();
         }
-    }, [isData])
+    }, [dataToChart, numberParam])
 
     return ( 
         <canvas ref = {schedule} width='800' className='chart'/>
@@ -134,7 +158,10 @@ const mapStateToProps = state => {
     return {
         dataToChart: state.checkBoxReducer.dataToChart,
         checkBoxObj: state.checkBoxReducer.checkBoxObj,
-        isData: state.checkBoxReducer.isData
+        isData: state.checkBoxReducer.isData,
+        intervalObj: state.checkBoxReducer.intervalObj,
+        paramOption: state.checkBoxReducer.paramOption,
+        isDaily: state.checkBoxReducer.isDaily,
     }
 }
 

@@ -96,7 +96,10 @@ class RangeDate extends React.Component {
     this.setState(range);
     let obj = new Array;
     obj.start = new Date(range.from).getTime();
-    obj.finished = new Date(range.to).getTime()
+    obj.finished = new Date(range.to).getTime();
+    // obj.start = range.from;
+    // obj.finished = range.to;
+    console.log(range.from, range.to)
     this.props.setIntervalObj(obj)
   }
 

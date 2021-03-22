@@ -54,6 +54,7 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
             }
             
             if(Object.keys(intervalObj).length !== 0 && Object.keys(intervalObj).length !== 1) {
+            // if(false) {
                 User.getData({
                     startTime: intervalObj.start, 
                     endTime: intervalObj.finished,
@@ -70,7 +71,6 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                 }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
                 .catch((e) => console.log(e))
             }
-            console.log(isCurrent, isDaily, intervalObj)
 
 
             
@@ -110,7 +110,7 @@ const mapStateToProps = state => {
         dataToChart: state.checkBoxReducer.dataToChart,
         isCurrent: state.mainReducer.isCurrent,
         currentData: state.mainReducer.currentData,
-        paramOprion: state.checkBoxReducer.paramOprion
+        paramOption: state.checkBoxReducer.paramOption
     }
 } 
 

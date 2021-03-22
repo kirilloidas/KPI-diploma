@@ -7,7 +7,7 @@ const initialState = {
     dataToChart: {},
     isData: false,
     isGetCurrent: false,
-    paramOprion: undefined
+    paramOption: undefined
 };
 
 export const checkBoxReducer = (state = initialState, action) => {
@@ -36,7 +36,7 @@ export const checkBoxReducer = (state = initialState, action) => {
         case IS_GET_CURRENT:
             return {...state, isGetCurrent: action.payload}
         case PARAM_OPRION:
-            return {...state, paramOprion: action.payload}
+            return {...state, paramOption: action.payload}
         default:
             return state
     }
