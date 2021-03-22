@@ -7,6 +7,7 @@ export const INTERVAL_OBJ = 'INTERVAL_OBJ';
 export const IS_DAILY = 'IS_DAILY';
 export const DATA_TO_CHART = 'DATA_TO_CHART';
 export const IS_DATA = 'IS_DATA';
+export const PARAM_OPRION = 'PARAM_OPRION';
 
 export const IS_GET_CURRENT = 'IS_GET_CURRENT';
 export const IS_CURRENT_DATA = 'IS_CURRENT_DATA';

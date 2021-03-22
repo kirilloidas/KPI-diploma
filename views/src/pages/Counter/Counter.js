@@ -7,11 +7,13 @@ import ChartData from '../../components/charts/Chart'
 import CurrentChart from '../../components/charts/CurrentChart'
 import {User} from '../../api/User'
 import {getCurrentData} from '../../redux/actions/main';
+import RangeDate from '../../components/optionsBlock/RangeDate'
 import ArchiveOptions from '../../components/optionsBlock/ArchiveOptions'
 import {setIntervalObj, setCheckBoxObj, setCheckBoxItem, setDataToChart, setIsData, setIsGetCurrent} from '../../redux/actions/checkBoxParam'
 import { connect } from 'react-redux';
+import './Counter.scss'
 
-const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, currentData, getCurrentData}) => {
+const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, currentData, getCurrentData, isDaily, intervalObj, paramOprion}) => {
     const [startDay, setStartDay] = useState();
     const [startMonth, setStartMonth] = useState();
     const [startYear, setStartYear] = useState();
@@ -31,13 +33,13 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                     console.log(data.data)
                 })
         } else {
-            User.getCurrentData()
-                .then(data => {
-                    setIsGetCurrent(true)
-                    getCurrentData(data.data)
-                    console.log(data.data)
-                })
-
+            // User.getCurrentData()
+            //     .then(data => {
+            //         setIsGetCurrent(true)
+            //         getCurrentData(data.data)
+            //         console.log(data.data)
+            //     })
+            // const isIntervalObj = false;
             const paramsObj = {
                 0: true,
                 1: true,
@@ -50,16 +52,32 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                 8: true,
                 9: true,
             }
-            User.getData({
-                startTime: 1604959200000, 
-                endTime: 1606255200000,
-                switchCheckedObj: paramsObj,
-                isDaily: true
-            }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
-            .catch((e) => console.log(e))
+            
+            if(Object.keys(intervalObj).length !== 0 && Object.keys(intervalObj).length !== 1) {
+                User.getData({
+                    startTime: intervalObj.start, 
+                    endTime: intervalObj.finished,
+                    switchCheckedObj: paramsObj,
+                    isDaily: isDaily
+                }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
+                .catch((e) => console.log(e))
+            } else {
+                User.getData({
+                    startTime: 1604959200000, 
+                    endTime: 1606255200000,
+                    switchCheckedObj: paramsObj,
+                    isDaily: isDaily
+                }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
+                .catch((e) => console.log(e))
+            }
+            console.log(isCurrent, isDaily, intervalObj)
+
+
+            
+            
         }
-        console.log(currentData)
-    }, [isCurrent])
+    }, [isCurrent, isDaily, intervalObj])
+
 
     return (
         <React.Fragment>
@@ -70,10 +88,13 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                     <CurrentChart/>
                 </React.Fragment>
                 : <React.Fragment>
-                    <ChartData/>
-                    <ArchiveOptions/>
-                    {/* <OptionsBlock/> */}
-                    <Navbar/>
+                    <div className='archive-block'>
+                        <ChartData/>
+                        {/* <RangeDate/> */}
+                        <ArchiveOptions/>
+                        <Navbar/>
+                    </div>
+                    
                   </React.Fragment>}
             
         </React.Fragment>
@@ -88,7 +109,8 @@ const mapStateToProps = state => {
         intervalObj: state.checkBoxReducer.intervalObj,
         dataToChart: state.checkBoxReducer.dataToChart,
         isCurrent: state.mainReducer.isCurrent,
-        currentData: state.mainReducer.currentData
+        currentData: state.mainReducer.currentData,
+        paramOprion: state.checkBoxReducer.paramOprion
     }
 } 
 

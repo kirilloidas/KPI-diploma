@@ -19,10 +19,14 @@ const ChartData = ({
         if(isData) {
             const colors = {
                 purple: {
-                    default: "rgba(149, 76, 233, 1)",
-                    half: "rgba(149, 76, 233, 0.5)",
-                    quarter: "rgba(149, 76, 233, 0.25)",
-                    zero: "rgba(149, 76, 233, 0)"
+                    // default: "rgba(149, 76, 233, 1)",
+                    // half: "rgba(149, 76, 233, 0.6)",
+                    // quarter: "rgba(149, 76, 233, 0.3)",
+                    // zero: "rgba(149, 76, 233, 0)"
+                    default: "rgba(34, 146, 255, 1)",
+                    half: "rgba(45, 82, 164, 0.75)",
+                    quarter: "rgba(26, 52, 92, 0.5)",
+                    zero: "rgba(10, 19, 34, 0.2)"
                 },
                 indigo: {
                     default: "rgba(80, 102, 120, 1)",
@@ -30,6 +34,27 @@ const ChartData = ({
                 }
             };
             const ctx = schedule.current.getContext("2d");
+            let draw = Chart.controllers.line.prototype.draw;
+            console.log(Chart.controllers)
+            Chart.controllers.line = Chart.controllers.line.extend({
+                draw: function() {
+                    console.log('k')
+                    draw.apply(this, arguments);
+                    let ctx = this.chart.chart.ctx;
+                    let _stroke = ctx.stroke;
+                    ctx.stroke = function() {
+                        ctx.save();
+                        ctx.shadowColor = 'red';
+                        ctx.shadowBlur = 10;
+                        ctx.shadowOffsetX = 0;
+                        ctx.shadowOffsetY = 4;
+                        _stroke.apply(this, arguments)
+                        ctx.restore();
+                    }
+                }
+            });
+
+            
             ctx.canvas.height = 500;
             let gradient = ctx.createLinearGradient(0, 0, 0, 500);
             gradient.addColorStop(0, colors.purple.half);
@@ -48,7 +73,7 @@ const ChartData = ({
                         borderColor: colors.purple.default,
                         data: dataToChart.dataArr[8],
                         lineTension: 0.4,
-                        borderWidth: 2,
+                        borderWidth: 4,
                         pointRadius: 5
                     }]
                 },
