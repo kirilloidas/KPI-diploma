@@ -1,4 +1,4 @@
-import {CHECKBOX_OBJ, INTERVAL_OBJ, IS_DAILY, CHECKBOX_ITEM, DATA_TO_CHART, IS_DATA, IS_GET_CURRENT, PARAM_OPRION} from '../types'
+import {CHECKBOX_OBJ, INTERVAL_OBJ, IS_DAILY, CHECKBOX_ITEM, DATA_TO_CHART, IS_DATA, IS_GET_CURRENT, PARAM_OPRION, TIME_OBJ, START_TIME, END_TIME} from '../types'
 
 export function setCheckBoxObj(obj) {
     return {type: CHECKBOX_OBJ, payload: obj}
@@ -11,6 +11,18 @@ export function setCheckBoxItem(key, value) {
 export function setIntervalObj(obj) {
     console.log(obj)
     return {type: INTERVAL_OBJ, payload: obj}
+}
+
+export function setTimeObj(obj) {
+    return {type: TIME_OBJ, payload: obj}
+}
+
+export function setStartTimeAction(time) {
+    return {type: START_TIME, payload: time}
+}
+
+export function setEndTimeAction(time) {
+    return {type: END_TIME, payload: time}
 }
 
 export function setIsDaily(bool) {

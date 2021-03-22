@@ -23,11 +23,15 @@
 .ArchiveOptions {
     display: flex;
 
+    // --numbers-text-color: red;
+    // --meridiem-text-color: red;
+    // --meridiem-bg-color: red
     .options-block {
         display: flex;
         flex-direction: column;
         margin-left: 30px;
         margin-top: 70px;
+
         &__isDaily-btn {
             text-decoration: none;
             display: inline-block;
@@ -65,7 +69,25 @@
             -moz-border-radius: 10px;
             -ms-border-radius: 10px;
             -o-border-radius: 10px;
-}
+        }
     }
 
+    .TimeKeeper-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__btn {
+            cursor: pointer;
+            border: 1px solid gray;
+            border-radius: 20px;
+            padding: 5px 15px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+            color: red;
+            box-shadow: 16px 16px 52px 0 rgba(238, 3, 3, 0.35);
+        }
+    }
 }

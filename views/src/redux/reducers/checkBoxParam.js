@@ -1,8 +1,11 @@
-import {CHECKBOX_OBJ, INTERVAL_OBJ, IS_DAILY, CHECKBOX_ITEM, DATA_TO_CHART, IS_DATA, IS_GET_CURRENT, PARAM_OPRION} from '../types'
+import {CHECKBOX_OBJ, INTERVAL_OBJ, IS_DAILY, CHECKBOX_ITEM, DATA_TO_CHART, IS_DATA, IS_GET_CURRENT, PARAM_OPRION, TIME_OBJ, START_TIME, END_TIME} from '../types'
 
 const initialState = {
     checkBoxObj: {},
     intervalObj: {},
+    timeObj: {},
+    startTime: '',
+    endTime: '',
     isDaily: true,
     dataToChart: {},
     isData: false,
@@ -37,6 +40,12 @@ export const checkBoxReducer = (state = initialState, action) => {
             return {...state, isGetCurrent: action.payload}
         case PARAM_OPRION:
             return {...state, paramOption: action.payload}
+        case TIME_OBJ:
+            return {...state, timeObj: action.payload}
+        case START_TIME: 
+            return {...state, startTime: action.payload}
+        case END_TIME:
+            return {...state, endTime: action.payload}
         default:
             return state
     }

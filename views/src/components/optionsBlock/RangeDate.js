@@ -70,6 +70,7 @@ import DayPicker, { DateUtils } from "react-day-picker";
 import './ArchiveOptions.scss';
 import "react-day-picker/lib/style.css";
 import {setIntervalObj} from '../../redux/actions/checkBoxParam';
+import moment from 'moment';
 import { connect } from "react-redux";
 
 class RangeDate extends React.Component {
@@ -91,15 +92,18 @@ class RangeDate extends React.Component {
     };
   }
 
+
   handleDayClick(day) {
     const range = DateUtils.addDayToRange(day, this.state);
     this.setState(range);
     let obj = new Array;
-    obj.start = new Date(range.from).getTime();
-    obj.finished = new Date(range.to).getTime();
-    // obj.start = range.from;
-    // obj.finished = range.to;
-    console.log(range.from, range.to)
+
+    // obj.start = moment(range.from).set({h: (this.props.startTime || 12)}).valueOf();
+    // obj.finished = moment(range.to).set({h: (this.props.endTime || 12)}).valueOf();
+
+    obj.start = range.from;
+    obj.finished = range.to;
+
     this.props.setIntervalObj(obj)
   }
 
@@ -112,30 +116,6 @@ class RangeDate extends React.Component {
     const modifiers = { start: from, end: to };
     return (
       <div className="RangeExample">
-        {/* <p>
-          {!from && !to && "Please select the first day."}
-          {from && !to && "Please select the last day."}
-          {from &&
-            to &&
-            `Selected from ${from.toLocaleDateString()} to
-                ${to.toLocaleDateString()}`}{" "}
-          {from && to && (
-            <button className="link" onClick={this.handleResetClick}>
-              Reset
-            </button>
-          )}
-        </p> */}
-        {/* <p>
-        {from &&
-            to &&
-            `Selected from ${from.toLocaleDateString()} to
-                ${to.toLocaleDateString()}`}{" "}
-          {from && to && (
-            <button className="link" onClick={this.handleResetClick}>
-              Reset
-            </button>
-          )}
-        </p> */}
         <DayPicker
           className="Selectable"
           numberOfMonths={this.props.numberOfMonths}

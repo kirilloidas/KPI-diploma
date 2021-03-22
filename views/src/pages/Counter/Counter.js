@@ -8,12 +8,13 @@ import CurrentChart from '../../components/charts/CurrentChart'
 import {User} from '../../api/User'
 import {getCurrentData} from '../../redux/actions/main';
 import RangeDate from '../../components/optionsBlock/RangeDate'
+import moment from 'moment';
 import ArchiveOptions from '../../components/optionsBlock/ArchiveOptions'
 import {setIntervalObj, setCheckBoxObj, setCheckBoxItem, setDataToChart, setIsData, setIsGetCurrent} from '../../redux/actions/checkBoxParam'
 import { connect } from 'react-redux';
 import './Counter.scss'
 
-const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, currentData, getCurrentData, isDaily, intervalObj, paramOprion}) => {
+const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, currentData, getCurrentData, isDaily, intervalObj, paramOprion, endTime, startTime}) => {
     const [startDay, setStartDay] = useState();
     const [startMonth, setStartMonth] = useState();
     const [startYear, setStartYear] = useState();
@@ -54,10 +55,12 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
             }
             
             if(Object.keys(intervalObj).length !== 0 && Object.keys(intervalObj).length !== 1) {
+                const startInterval = moment(intervalObj.start).set({h: (startTime || 12)}).valueOf();
+                const endInterval = moment(intervalObj.finished).set({h: (startTime || 12)}).valueOf();
             // if(false) {
                 User.getData({
-                    startTime: intervalObj.start, 
-                    endTime: intervalObj.finished,
+                    startTime: startInterval, 
+                    endTime: endInterval,
                     switchCheckedObj: paramsObj,
                     isDaily: isDaily
                 }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
@@ -76,7 +79,7 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
             
             
         }
-    }, [isCurrent, isDaily, intervalObj])
+    }, [isCurrent, isDaily, intervalObj,startTime, endTime])
 
 
     return (
@@ -110,7 +113,9 @@ const mapStateToProps = state => {
         dataToChart: state.checkBoxReducer.dataToChart,
         isCurrent: state.mainReducer.isCurrent,
         currentData: state.mainReducer.currentData,
-        paramOption: state.checkBoxReducer.paramOption
+        paramOption: state.checkBoxReducer.paramOption,
+        startTime: state.checkBoxReducer.startTime,
+        endTime: state.checkBoxReducer.endTime
     }
 } 
 
