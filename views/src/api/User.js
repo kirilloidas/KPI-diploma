@@ -15,7 +15,8 @@ export const User = {
         console.log('download')
         return Api().get('/downloadExcel');
     },
-    excelToMail() {
-        return Api().post('/excelToMail');
+    excelToMail(mail) {
+        // return Api().post('/excelToMail', JSON.stringify({mail: mail}));
+        return Api().post('/excelToMail', {mail: mail});
     }
 }

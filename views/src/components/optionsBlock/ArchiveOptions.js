@@ -14,7 +14,9 @@ import { Link } from 'react-router-dom';
 const ArchiveOptions = ({isCurrent, setParamOption, isDaily, setIsDaily, setTimeObj, setStartTimeAction, setEndTimeAction}) => {
     const [startTime, setStartTime] = useState('00:00');
     const [endTime, setEndTime] = useState('00:00');
-    const [isStartTime, setIsStartTime] = useState(true)
+    const [isStartTime, setIsStartTime] = useState(true);
+    const [isMailBlock, setIsMailBlock] = useState(false);
+    const [mail, setMail] = useState('');
     useEffect(() => {
         setIsStartTime(true)
     }, [isDaily])
@@ -50,7 +52,14 @@ const ArchiveOptions = ({isCurrent, setParamOption, isDaily, setIsDaily, setTime
                 </select>
                 {/* <span className='downloadExcel' onClick={() => User.downloadExcel()}>Завантажити ексель</span> */}
                 <a href='http://localhost:5000/api/downloadExcel' className='downloadExcel'>Завантажити ексель</a>
-                <span className='sendToMail' onClick={() => User.excelToMail()}>Відправити на пошту</span>
+                <span className='sendToMail' onClick={() => setIsMailBlock(true)}>Відправити на пошту</span>
+                <div className='blur blur-block' style={{display: isMailBlock ? 'flex' : 'none'}}>
+                        <div className='blur-block__sendToMail-blur'>
+                            <p className='title'>Введіть пошту</p>
+                            <input className='sendMail-input' onChange={(e) => setMail(e.target.value)}/>
+                            <span className='sendMail-btn' onClick={() => {User.excelToMail(mail); setIsMailBlock(false)}}>Відправити</span>
+                        </div>
+                </div>
             </div>
             {!isDaily ? 
                 <React.Fragment>
@@ -75,8 +84,6 @@ const ArchiveOptions = ({isCurrent, setParamOption, isDaily, setIsDaily, setTime
                         <span className='TimeKeeper-block__btn' >Задати кінц. час</span>
                     </div>
                 </React.Fragment>
-                
-
                  : null
             }
             

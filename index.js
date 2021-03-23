@@ -113,12 +113,13 @@ app.get('/api/downloadExcel', function (req, res, next) {
     // var filePath = "../"; // Or format the path using the `id` rest param
     // var fileName = "data.xlsx"; // The default name the browser will use
 
-    res.download('./data.xlsx');
+    res.download('./data.xlsx');        
     // fs.createReadStream('./data.xlsx').pipe(res);
 });
 
 app.post('/api/excelToMail', jsonParser, function (req, res) {
-    console.log('email')
+    console.log(req.body);
+    console.log(req.body.mail)
     try {
         nodemailer.createTransport(sendGrid({
             auth: {

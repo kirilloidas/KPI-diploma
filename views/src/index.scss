@@ -12,6 +12,19 @@ body {
   color: #CDD1DA;
 }
 
+.blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .3);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #root {
   position: relative;
   max-width: 1280px;
