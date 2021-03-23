@@ -6,31 +6,38 @@ import {setParamOption, setIsDaily, setTimeObj, setStartTimeAction, setEndTimeAc
 import {ArchiveObject} from '../../objectsDataChart/ArchiveObject';
 import TimeKeeper from 'react-timekeeper';
 import moment from 'moment';
+import {User} from '../../api/User';
 import {CurrentObject} from '../../objectsDataChart/CurrentObject';
 import Helmet from "react-helmet";
+import { Link } from 'react-router-dom';
 
 const ArchiveOptions = ({isCurrent, setParamOption, isDaily, setIsDaily, setTimeObj, setStartTimeAction, setEndTimeAction}) => {
     const [startTime, setStartTime] = useState('00:00');
-    const [endTime, setEndTime] = useState('12:00pm');
+    const [endTime, setEndTime] = useState('00:00');
     const [isStartTime, setIsStartTime] = useState(true)
     useEffect(() => {
         setIsStartTime(true)
     }, [isDaily])
 
-    const setTime = (time) => {
-        const obj = new Object();
-        if(isStartTime) {
-            setStartTime(time)
-            // obj.startTime = moment(startTime, 'HH:mm').get('hour');
-            setStartTimeAction(moment(startTime, 'HH:mm').get('hour'))
-        } else {
-            setEndTime(time)
-            // obj.endTime = moment(endTime, 'HH:mm').get('hour');
-            setEndTimeAction(moment(endTime, 'HH:mm').get('hour'))
-        }
-        // setTimeObj(obj);
-        console.log(startTime, endTime)
-    }
+    // const setTime = (time) => {
+    //     const obj = new Object();
+    //     if(isStartTime) {
+    //         setStartTime(time)
+    //         // obj.startTime = moment(startTime, 'HH:mm').get('hour');
+    //         setStartTimeAction(moment(startTime, 'HH:mm').get('hour'))
+    //     } else {
+    //         setEndTime(time)
+    //         // obj.endTime = moment(endTime, 'HH:mm').get('hour');
+    //         setEndTimeAction(moment(endTime, 'HH:mm').get('hour'))
+    //     }
+    //     // setTimeObj(obj);
+    //     console.log(startTime, endTime)
+    // }
+
+    useEffect(() => {
+        setStartTimeAction(moment(startTime, 'HH:mm').get('hour'));
+        setEndTimeAction(moment(endTime, 'HH:mm').get('hour'))
+    }, [startTime, endTime])
     return (
         <div className='ArchiveOptions'>
             <RangeDate startTime={moment(startTime, 'HH:mm').get('hour')} endTime={moment(endTime, 'HH:mm').get('hour')}/>
@@ -41,23 +48,44 @@ const ArchiveOptions = ({isCurrent, setParamOption, isDaily, setIsDaily, setTime
                         <option key={index + 3} value={item} style={{margin: '5px'}}>{ArchiveObject[item]}</option>
                     ))}
                 </select>
+                {/* <span className='downloadExcel' onClick={() => User.downloadExcel()}>Завантажити ексель</span> */}
+                <a href='http://localhost:5000/api/downloadExcel' className='downloadExcel'>Завантажити ексель</a>
+                <span className='sendToMail' onClick={() => User.excelToMail()}>Відправити на пошту</span>
             </div>
             {!isDaily ? 
-                <div className='TimeKeeper-block'>
+                <React.Fragment>
+                    <div className='TimeKeeper-block'>
                     <TimeKeeper
-                    time={isStartTime ? startTime : endTime}
-                    onChange={(newTime) => setTime(newTime.formatted24)}
+                    time={startTime}
+                    onChange={(newTime) => setStartTime(newTime.formatted24)}
                     hour24Mode
                     coarseMinutes={60}
                     forceCoarseMinutes
                     />
-                    <span className='TimeKeeper-block__btn' onClick={() => setIsStartTime(!isStartTime)}>{isStartTime ? 'Задати поч. час' : 'Задати кінц. час'}</span>
-                </div>
+                    <span className='TimeKeeper-block__btn' >Задати поч. час</span>
+                    </div>
+                    <div className='TimeKeeper-block'>
+                        <TimeKeeper
+                        time={endTime}
+                        onChange={(newTime) => setEndTime(newTime.formatted24)}
+                        hour24Mode
+                        coarseMinutes={60}
+                        forceCoarseMinutes
+                        />
+                        <span className='TimeKeeper-block__btn' >Задати кінц. час</span>
+                    </div>
+                </React.Fragment>
+                
+
                  : null
             }
             
             <Helmet>
                 <style>{`
+                --main-bg: none !important;
+                .css-nakgy8-TimeKeeper{
+                    background: none !important;
+                }
                     .react-timekeeper {
                         --top-bg: none;
                         background: none;

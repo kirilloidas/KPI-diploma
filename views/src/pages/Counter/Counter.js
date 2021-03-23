@@ -56,8 +56,8 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
             
             if(Object.keys(intervalObj).length !== 0 && Object.keys(intervalObj).length !== 1) {
                 const startInterval = moment(intervalObj.start).set({h: (startTime || 12)}).valueOf();
-                const endInterval = moment(intervalObj.finished).set({h: (startTime || 12)}).valueOf();
-            // if(false) {
+                const endInterval = moment(intervalObj.finished).set({h: (endTime || 12)}).valueOf();
+                console.log('yes')
                 User.getData({
                     startTime: startInterval, 
                     endTime: endInterval,

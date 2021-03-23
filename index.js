@@ -16,8 +16,8 @@ const counter3 = require('./routes/counter3');
 const customization = require('./routes/customization');
 const access = require('./routes/access');
 
-// const nodemailer = require('nodemailer')
-// const sendGrid = require('nodemailer-sendgrid-transport')
+const nodemailer = require('nodemailer')
+const sendGrid = require('nodemailer-sendgrid-transport')
 const sendExcelModule = require('./emails/sendExcelModule')
 const key = require('./keys/keys');
 
@@ -52,11 +52,11 @@ app.use(express.static(__dirname + '/views'));
 // app.use('/customization', customization)
 // app.use('/access', access)
 
-// const transporter = nodemailer.createTransport(sendGrid({
-//     auth: {
-//         api_key: key.SENDGRID_API_KEY
-//     }
-// }))
+const transporter = nodemailer.createTransport(sendGrid({
+    auth: {
+        api_key: key.SENDGRID_API_KEY
+    }
+}))
 
 
 var intervalTime;
@@ -109,13 +109,16 @@ app.post("/api/authorization", function (request, response) {
 });
 
 app.get('/api/downloadExcel', function (req, res, next) {
+    console.log('yes');
     // var filePath = "../"; // Or format the path using the `id` rest param
     // var fileName = "data.xlsx"; // The default name the browser will use
 
     res.download('./data.xlsx');
+    // fs.createReadStream('./data.xlsx').pipe(res);
 });
 
 app.post('/api/excelToMail', jsonParser, function (req, res) {
+    console.log('email')
     try {
         nodemailer.createTransport(sendGrid({
             auth: {

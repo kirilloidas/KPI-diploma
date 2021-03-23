@@ -29,6 +29,7 @@
     .options-block {
         display: flex;
         flex-direction: column;
+        align-items: center;
         margin-left: 30px;
         margin-top: 70px;
 
@@ -70,6 +71,45 @@
             -ms-border-radius: 10px;
             -o-border-radius: 10px;
         }
+
+        .downloadExcel {
+            cursor: pointer;
+            border: 1px solid #8C8C8C;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+            padding: 10px 20px;
+            margin-top: 40px;
+            text-decoration: none;
+            color: white;
+
+            &:hover {
+                color: rgba(0, 40, 120, 1);
+                border: 1px solid rgba(0, 40, 120, .7);
+                box-shadow: 0 10px 32px 0 rgba(0, 40, 120, .35);
+            }
+        }
+
+        .sendToMail{
+            cursor: pointer;
+            border: 1px solid #8C8C8C;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            color: white;
+            
+            &:hover {
+                color: rgba(0, 40, 120, 1);
+                border: 1px solid rgba(0, 40, 120, .7);
+                box-shadow: 0 10px 32px 0 rgba(0, 40, 120, .35);
+            }
+        }
     }
 
     .TimeKeeper-block {
@@ -78,8 +118,7 @@
         align-items: center;
 
         &__btn {
-            cursor: pointer;
-            border: 1px solid gray;
+            border: 1px solid #8C8C8C;
             border-radius: 20px;
             padding: 5px 15px;
             -webkit-border-radius: 20px;
@@ -90,4 +129,8 @@
             box-shadow: 16px 16px 52px 0 rgba(238, 3, 3, 0.35);
         }
     }
+}
+
+.css-nakgy8-TimeKeeper{
+    background: none !important;
 }

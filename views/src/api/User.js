@@ -10,5 +10,12 @@ export const User = {
     },
     getCurrentData() {
         return Api().post('/currentData');
+    },
+    downloadExcel() {
+        console.log('download')
+        return Api().get('/downloadExcel');
+    },
+    excelToMail() {
+        return Api().post('/excelToMail');
     }
 }
