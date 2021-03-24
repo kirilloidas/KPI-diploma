@@ -11,6 +11,7 @@ export const IS_DAILY = 'IS_DAILY';
 export const DATA_TO_CHART = 'DATA_TO_CHART';
 export const IS_DATA = 'IS_DATA';
 export const PARAM_OPRION = 'PARAM_OPRION';
+export const CURRENT_PARAM_OPTION = 'CURRENT_PARAM_OPTION';
 
 export const IS_GET_CURRENT = 'IS_GET_CURRENT';
 export const IS_CURRENT_DATA = 'IS_CURRENT_DATA';

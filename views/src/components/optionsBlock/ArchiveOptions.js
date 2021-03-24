@@ -93,6 +93,12 @@ const ArchiveOptions = ({isCurrent, setParamOption, isDaily, setIsDaily, setTime
                 .css-nakgy8-TimeKeeper{
                     background: none !important;
                 }
+                .css-1lmy46j-ClockWrapper{
+                    background: none !important;
+                }
+                .css-tqvze-ClockWrapper{
+                    background: none !important;
+                }
                     .react-timekeeper {
                         --top-bg: none;
                         background: none;

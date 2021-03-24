@@ -109,12 +109,7 @@ app.post("/api/authorization", function (request, response) {
 });
 
 app.get('/api/downloadExcel', function (req, res, next) {
-    console.log('yes');
-    // var filePath = "../"; // Or format the path using the `id` rest param
-    // var fileName = "data.xlsx"; // The default name the browser will use
-
     res.download('./data.xlsx');        
-    // fs.createReadStream('./data.xlsx').pipe(res);
 });
 
 app.post('/api/excelToMail', jsonParser, function (req, res) {

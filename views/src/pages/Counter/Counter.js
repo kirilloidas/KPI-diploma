@@ -5,6 +5,7 @@ import CheckOptions from '../../components/checkbox/CheckOptions';
 import OptionsBlock from '../../components/optionsBlock/OptionsBlock'
 import ChartData from '../../components/charts/Chart'
 import CurrentChart from '../../components/charts/CurrentChart'
+import CurrentOptions from '../../components/optionsBlock/CurrentOptions'
 import {User} from '../../api/User'
 import {getCurrentData} from '../../redux/actions/main';
 import RangeDate from '../../components/optionsBlock/RangeDate'
@@ -23,16 +24,25 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
     const [endMonth, setEndMonth] = useState();
     const [endYear, setEndYear] = useState();
     const [endHour, setEndHour] = useState();
+    
+    useEffect(() => {
+        User.getCurrentData()
+        .then(data => {
+            setIsGetCurrent(true)
+            getCurrentData(data.data)
+            console.log(data.data)
+        })
+    }, [])
 
     useEffect(() => {
         if(isCurrent) {
-            console.log('3')
-            User.getCurrentData()
-                .then(data => {
-                    setIsGetCurrent(true)
-                    getCurrentData(data.data)
-                    console.log(data.data)
-                })
+            // console.log('3')
+            // User.getCurrentData()
+            //     .then(data => {
+            //         setIsGetCurrent(true)
+            //         getCurrentData(data.data)
+            //         console.log(data.data)
+            //     })
         } else {
             // User.getCurrentData()
             //     .then(data => {
@@ -89,6 +99,7 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                 <React.Fragment>
                     <Navbar/>
                     <CurrentChart/>
+                    <CurrentOptions/>
                 </React.Fragment>
                 : <React.Fragment>
                     <div className='archive-block'>

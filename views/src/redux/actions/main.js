@@ -5,6 +5,5 @@ export function setIsCurrentData(bool) {
 }
 
 export function getCurrentData(obj) {
-    console.log(obj)
     return {type: CURRENT_DATA, payload: obj}
 }

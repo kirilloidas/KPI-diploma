@@ -1,16 +1,30 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Chart from 'chart.js'
-import './Chart.scss'
+import './Chart.scss';
+import {CurrentObject} from '../../objectsDataChart/CurrentObject'
 import { connect } from 'react-redux';
 
-const CurrentChart = ({currentData, isGetCurrent}) => {
+const CurrentChart = ({currentData, isGetCurrent, currentParamOption, isCurrent}) => {
     const schedule = useRef(null);
+    const [numberParam, setNumbarParam] = useState(0)
+
     useEffect(() => {
+        Object.keys(CurrentObject).map((item, index) => {
+            // console.log(item, index)
+            if(item == currentParamOption) {
+                console.log(item)
+                setNumbarParam(index);
+            }
+        })
+    }, [currentParamOption])
+
+    useEffect(() => {
+        console.log(currentData)
         if(Object.keys(currentData).length != 0) {
             console.log(currentData)
             const ctx = schedule.current.getContext("2d");
             ctx.canvas.height = 500;
-            let arrData = [currentData[0].data[19].value, currentData[1].data[19].value]
+            let arrData = [currentData[0].data[numberParam].value, currentData[1].data[numberParam].value]
             // let arrData = []
             const colors = {
                 purple: {
@@ -53,7 +67,7 @@ const CurrentChart = ({currentData, isGetCurrent}) => {
                 }
             });
         }
-    })
+    }, [numberParam, isCurrent, currentData])
 
     return (
         <canvas ref = {schedule} width='800' className='chart'/>
@@ -62,8 +76,10 @@ const CurrentChart = ({currentData, isGetCurrent}) => {
 
 const mapStateToProps = state => {
     return {
+        isCurrent: state.mainReducer.isCurrent,
         currentData: state.mainReducer.currentData,
-        isGetCurrent: state.checkBoxReducer.isGetCurrent
+        isGetCurrent: state.checkBoxReducer.isGetCurrent,
+        currentParamOption: state.checkBoxReducer.currentParamOption
     }
 }
 
