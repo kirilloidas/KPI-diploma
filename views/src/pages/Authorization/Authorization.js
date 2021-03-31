@@ -25,7 +25,7 @@ const Authorization = ({login, pass}) => {
 
     useEffect(() => {
         if(isUser) {
-            history.push('counter/1')
+            history.push('/counter')
         }
     }, [isUser])
 

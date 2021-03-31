@@ -58,8 +58,14 @@ const CurrentChart = ({currentData, isGetCurrent, currentParamOption, isCurrent}
                 },
                 options: {
                     scales: {
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 16
+                            }
+                        }],
                         yAxes: [{
                             ticks: {
+                                fontSize: 16,
                                 beginAtZero:true
                             }
                         }]

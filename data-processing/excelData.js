@@ -4,10 +4,10 @@ const ExcelJS = require('exceljs');
 
 
 exports.setExcel = (data, switchCheckedObj) => {
-    if(Object.keys(data).length != 0) {
+
+    if(data.date.length != 0) {
         fs.unlinkSync('./data.xlsx');
-        console.log('file deleted')
-    }
+    console.log('file deleted')
     
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Data');
@@ -58,8 +58,9 @@ exports.setExcel = (data, switchCheckedObj) => {
     }
 
 
-
     //Save the workbook
     return workbook.xlsx.writeFile("data.xlsx");
+    }
+    
 
 }

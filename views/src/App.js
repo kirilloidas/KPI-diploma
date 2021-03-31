@@ -5,14 +5,16 @@ import Navbar from './components/navbar/Navbar'
 import Counter from './pages/Counter/Counter'
 import Access from './pages/Access/Access'
 import Customization from './pages/Customization/Customization'
+import MnemonicDiagram from './pages/MnemonicDiagram/MnemonicDiagram'
 import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 
 const routing = [
   {path: '/', component: Authorization },
-  {path: '/counter/:id', component: Counter},
+  {path: '/counter', component: Counter},
   {path: '/access', component: Access},
-  {path: 'customization', component: Customization}
+  {path: '/customization', component: Customization},
+  {path: '/mnemonicDiagram', component: MnemonicDiagram}
 ]
 
 function App() {

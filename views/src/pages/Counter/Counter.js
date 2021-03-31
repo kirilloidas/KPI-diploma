@@ -68,21 +68,27 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                 const startInterval = moment(intervalObj.start).set({h: (startTime || 12)}).valueOf();
                 const endInterval = moment(intervalObj.finished).set({h: (endTime || 12)}).valueOf();
                 console.log('yes')
-                User.getData({
-                    startTime: startInterval, 
-                    endTime: endInterval,
-                    switchCheckedObj: paramsObj,
-                    isDaily: isDaily
-                }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
-                .catch((e) => console.log(e))
+                setTimeout(() => {
+                    User.getData({
+                        startTime: startInterval, 
+                        endTime: endInterval,
+                        switchCheckedObj: paramsObj,
+                        isDaily: isDaily
+                    }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
+                    .catch((e) => console.log(e))
+                }, 700);
+                
             } else {
-                User.getData({
-                    startTime: 1604959200000, 
-                    endTime: 1606255200000,
-                    switchCheckedObj: paramsObj,
-                    isDaily: isDaily
-                }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
-                .catch((e) => console.log(e))
+                setTimeout(() => {
+                    User.getData({
+                        startTime: 1604959200000, 
+                        endTime: 1606255200000,
+                        switchCheckedObj: paramsObj,
+                        isDaily: isDaily
+                    }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
+                    .catch((e) => console.log(e))
+                }, 700);
+                
             }
 
 
