@@ -26,23 +26,24 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
     const [endHour, setEndHour] = useState();
     
     useEffect(() => {
-        User.getCurrentData()
-        .then(data => {
-            setIsGetCurrent(true)
-            getCurrentData(data.data)
-            console.log(data.data)
-        })
+        // User.getCurrentData()
+        // .then(data => {
+        //     setIsGetCurrent(true)
+        //     getCurrentData(data.data)
+        //     console.log(data.data)
+        // })
     }, [])
 
     useEffect(() => {
+        console.log(isCurrent)
         if(isCurrent) {
-            // console.log('3')
-            // User.getCurrentData()
-            //     .then(data => {
-            //         setIsGetCurrent(true)
-            //         getCurrentData(data.data)
-            //         console.log(data.data)
-            //     })
+            console.log('3')
+            User.getCurrentData()
+                .then(data => {
+                    setIsGetCurrent(true)
+                    getCurrentData(data.data)
+                    console.log(data.data)
+                })
         } else {
             // User.getCurrentData()
             //     .then(data => {

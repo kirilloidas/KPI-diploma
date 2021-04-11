@@ -29,8 +29,10 @@ const Navbar = ({setIsCurrentData}) => {
         const path = navList[index].path;
         console.log(path)
         if(item.name == 'Поточний') {
+            console.log('Поточний')
             setIsCurrentData(true)
         } else if(item.name == 'Архів') {
+            console.log('Архів')
             setIsCurrentData(false)
         }
         history.push(path);
