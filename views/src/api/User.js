@@ -3,7 +3,7 @@ import {Api} from './Api'
 export const User = {
     login(form) {
         console.log(form)
-        return Api().post('/authorization', form)
+        return Api().post('/auth/login', form)
     },
     getData(intervalObj) {
         return Api().post('/timeInterval', intervalObj)

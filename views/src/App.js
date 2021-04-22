@@ -24,7 +24,7 @@ function App() {
         {routing.map((content, index) => {
           return <Route key={index} exact path={content.path} component={content.component} />
         })}
-        <Redirect from='*' to='/' />
+        <Redirect from="*" to={sessionStorage.getItem('token') ? "/counter" : "/"}/>
       </Router>
       
     </div>

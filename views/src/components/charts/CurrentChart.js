@@ -10,18 +10,14 @@ const CurrentChart = ({currentData, isGetCurrent, currentParamOption, isCurrent}
 
     useEffect(() => {
         Object.keys(CurrentObject).map((item, index) => {
-            // console.log(item, index)
             if(item == currentParamOption) {
-                console.log(item)
                 setNumbarParam(index);
             }
         })
     }, [currentParamOption])
 
     useEffect(() => {
-        console.log(currentData)
         if(Object.keys(currentData).length != 0) {
-            console.log(currentData)
             const ctx = schedule.current.getContext("2d");
             ctx.canvas.height = 500;
             let arrData = [currentData[0].data[numberParam].value, currentData[1].data[numberParam].value]

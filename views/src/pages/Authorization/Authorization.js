@@ -15,20 +15,12 @@ const Authorization = ({login, pass}) => {
     const [isCorrent, setIsCorrect] = useState(true);
 
     const submitHandler = () => {
-        // console.log(window.location.origin)
-        User.login({login: login, pass:pass})
-            .then(data => {
-                setIsUser(data.data.isUser);
-                setIsCorrect(data.data.isUser)
+        User.login({username: login, password: pass})
+            .then(res => {
+                sessionStorage.setItem('token', res.data.token)
+                history.push('/counter')
             })
     }
-
-    useEffect(() => {
-        if(isUser) {
-            history.push('/counter')
-        }
-    }, [isUser])
-
     return (
         <div className="Authorization">
             <h1 className="authorization_title">Авторизація</h1>

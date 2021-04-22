@@ -27,16 +27,12 @@ const ChartData = ({
     // }
     useEffect(() => {
         Object.keys(ArchiveObject).map((item, index) => {
-            // console.log(item, index)
             if(item == paramOption) {
-                console.log(item)
                 setNumbarParam(index);
-                console.log(numberParam)
             }
         })
     }, [paramOption])
     useEffect(() => {
-        console.log(numberParam)
         
         if(isData) {
             const colors = {
@@ -58,7 +54,6 @@ const ChartData = ({
             const ctx = schedule.current.getContext("2d");
             // ctx.clearRect(0, 0, schedule.current.width, schedule.current.height);
             let draw = Chart.controllers.line.prototype.draw;
-            console.log(Chart.controllers)
             Chart.controllers.line = Chart.controllers.line.extend({
                 draw: function() {
                     console.log('k')

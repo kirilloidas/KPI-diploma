@@ -228,6 +228,8 @@ const MnemonicDiagram = () => {
         insertSensor(720, 619.5)
         insertSensor(770, 619.5)
         insertPipe(820, 636.5)
+
+        return () => canvas.clear()
     }, [])
 
     return (

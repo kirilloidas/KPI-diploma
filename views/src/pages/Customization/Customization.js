@@ -1,8 +1,12 @@
 import React from 'react'
+import NavBar from '../../components/navbar/Navbar';
 
 const Customization = () => {
     return (
-        <h1>Customization</h1>
+        <React.Fragment>
+            <h1>Customization</h1>
+            <NavBar />
+        </React.Fragment>
     )
 }
 

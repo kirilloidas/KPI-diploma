@@ -1,48 +1,58 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
-const path = require('path');
-const fs = require('fs');
+// const path = require('path');
+// const fs = require('fs');
 const bodyParser = require('body-parser');
 const {
     Telegraf,
     Markup
 } = require("telegraf");
 
-const authorization = require('./routes/authorization');
-const counter1 = require('./routes/counter1');
-const counter2 = require('./routes/counter2');
-const counter3 = require('./routes/counter3');
-const customization = require('./routes/customization');
-const access = require('./routes/access');
+// const authorization = require('./routes/authorization');
+// const counter1 = require('./routes/counter1');
+// const counter2 = require('./routes/counter2');
+// const counter3 = require('./routes/counter3');
+// const customization = require('./routes/customization');
+// const access = require('./routes/access');
 
+const session = require('express-session')
 const nodemailer = require('nodemailer')
 const sendGrid = require('nodemailer-sendgrid-transport')
 const sendExcelModule = require('./emails/sendExcelModule')
 const key = require('./keys/keys');
 
-const dailyData = require('./models.js').dailyData;
-const users = require('./models.js').users;
-const hourlyData = require('./models.js').hourlyData;
-const currentDataModel = require('./models.js').currentData;
-const currentDataModel1 = require('./models.js').currentData1;
+const dailyData = require('./models/CounterData.js').dailyData;
+const users = require('./models/User.js').users;
+const hourlyData = require('./models/CounterData.js').hourlyData;
+const currentDataModel = require('./models/CounterData.js').currentData;
+const currentDataModel1 = require('./models/CounterData.js').currentData1;
 
 const setDataToFront = require('./data-processing/setDataToFront.js');
+
+const authRouter = require('./authRouter');
 
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 const jsonParser = express.json();
+app.use(express.json())
+app.use(cors())
+app.use('/api/auth', authRouter)
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-app.use(cors())
 
 app.use(express.static(__dirname + '/views'));
+app.use(session({
+    secret: 'some secret value',
+    resave: false,
+    saveUninitialized: false
+}))
 
 // Routers
 // app.use('/', authorization)
@@ -99,14 +109,15 @@ app.post('/api/currentData', jsonParser, function(request, response) {
 })
 
 
-app.post("/api/authorization", function (request, response) {
-    if (!request.body) return response.sendStatus(400);
-    authorizationUser(request.body)
-        .then(res => {
-            response.end(JSON.stringify(res))
-        });
+// app.post("/api/authorization", function (request, response) {
+//     if (!request.body) return response.sendStatus(400);
+//     // console.log(req.session.isAuthenticated)
+//     authorizationUser(request.body)
+//         .then(res => {
+//             response.end(JSON.stringify(res))
+//         });
 
-});
+// });
 
 app.get('/api/downloadExcel', function (req, res, next) {
     res.download('./data.xlsx');        
@@ -131,12 +142,6 @@ app.post('/api/excelToMail', jsonParser, function (req, res) {
 
 async function getCurrentDataCounter1(model) {
     try {
-        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
-            useNewUrlParser: true,
-            useFindAndModify: true,
-            useUnifiedTopology: true
-        });
-
         let data = await model.findOne({});
         return data;
     } catch(e) {
@@ -146,12 +151,6 @@ async function getCurrentDataCounter1(model) {
 
 async function getCurrentDataCounter2(model) {
     try {
-        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
-            useNewUrlParser: true,
-            useFindAndModify: true,
-            useUnifiedTopology: true
-        });
-
         let data = await model.find({});
         return data;
     } catch(e) {
@@ -163,12 +162,6 @@ async function getCurrentDataCounter2(model) {
 
 async function getDataOfInterval(dataFromFront, requestData) {
     try {
-        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
-            useNewUrlParser: true,
-            useFindAndModify: true,
-            useUnifiedTopology: true
-        });
-
         let ourData = await requestData.find({
             $and: [{
                     "date": {
@@ -196,35 +189,29 @@ async function getDataOfInterval(dataFromFront, requestData) {
 
 
 
-async function authorizationUser(requestUser) {
-    try {
-        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
-            useNewUrlParser: true,
-            useFindAndModify: true,
-            useUnifiedTopology: true
-        });
-
-        let isUser = await users.findOne({
-            "login": {
-                $eq: requestUser.login
-            }
-        });
-        if (isUser == null || isUser.pass != requestUser.pass) {
-            let obj = {
-                isUser: false
-            };
-            return obj;
-        } else {
-            let obj = {
-                isUser: true
-            };
-            return obj;
-        }
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
+// async function authorizationUser(requestUser) {
+//     try {
+//         let isUser = await users.findOne({
+//             "login": {
+//                 $eq: requestUser.login
+//             }
+//         });
+//         if (isUser == null || isUser.pass != requestUser.pass) {
+//             let obj = {
+//                 isUser: false
+//             };
+//             return obj;
+//         } else {
+//             let obj = {
+//                 isUser: true
+//             };
+//             return obj;
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         return false;
+//     }
+// }
 
 
 
@@ -252,8 +239,19 @@ async function authorizationUser(requestUser) {
 // // Запуск бота
 // bot.launch();
 
+const start = async () => {
+    try {
+        await mongoose.connect('mongodb+srv://Kirill:kirill2000@cluster0.uyqia.mongodb.net/Cluster0', {
+                    useNewUrlParser: true,
+                    useFindAndModify: true,
+                    useUnifiedTopology: true
+                });
+        app.listen(PORT, () => {
+            console.log(`Server has been started... ${PORT}`);
+        })
+    } catch (e) {
+        console.log(e)
+    }
+}
 
-app.listen(PORT, () => {
-    console.log(`Server has been started...`);
-    // start();
-})
+start();

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 const CurrentOptions = ({setCurrentParamOption}) => {
     return (
-        <div class='CurrentOptiuons'>
+        <div className='CurrentOptiuons'>
             <div className='current-options-block'>
                 <select className='current-options-block__select-block' onChange={(e) => setCurrentParamOption(e.target.value)}>
                     {Object.keys(CurrentObject).map((item, index) => (
