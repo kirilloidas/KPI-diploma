@@ -1,6 +1,10 @@
 export const LOGIN = 'LOGIN'
 export const PASS = 'PASS'
 
+export const CREATE_USER_NAME = 'CREATE_USER_NAME';
+export const CREATE_PASSWORD = 'CREATE_PASSWORD';
+export const CREATE_ROLE = 'CREATE_ROLE';
+
 export const CHECKBOX_OBJ = 'CHECKBOX_OBJ';
 export const CHECKBOX_ITEM = 'CHECKBOX_ITEM';
 export const INTERVAL_OBJ = 'INTERVAL_OBJ';

@@ -18,5 +18,10 @@ export const User = {
     excelToMail(mail) {
         // return Api().post('/excelToMail', JSON.stringify({mail: mail}));
         return Api().post('/excelToMail', {mail: mail});
+    },
+    registration(username, password, role) {
+        console.log(username, password, role)
+        // return Api().post('/auth/registration', JSON.stringify({form: form, token: sessionStorage.getItem('token')}))
+        return Api().post('/auth/registration', {token: sessionStorage.getItem('token'), username: username, password, password, role: role})
     }
 }

@@ -21,6 +21,12 @@ const Authorization = ({login, pass}) => {
                 history.push('/counter')
             })
     }
+
+    window.addEventListener('keydown', function (e) {
+        if(e.key === 'Enter') {
+            submitHandler();
+        }
+    })
     return (
         <div className="Authorization">
             <h1 className="authorization_title">Авторизація</h1>
@@ -28,9 +34,13 @@ const Authorization = ({login, pass}) => {
                 <fieldset className="clearfix">
                     <InputAuth 
                         name = "Логін"
+                        type = "text"
+                        auth = {true}
                     />
                     <InputAuth 
                         name = "Пароль"
+                        type = "password"
+                        auth = {true}
                     />
                     <ReactIsCapsLockActive>
                      {active => active ? <CapsBlock/> : null}

@@ -19,13 +19,17 @@ class authController {
             // if (!errors.isEmpty()) {
             //     return res.status(400).json({message: "Ошибка при регистрации", errors})
             // }
-            const {username, password, role} = req.body;
+
+
+            const {username, password, role, token} = req.body;
+            if(jwt.verify(token, secret).roles != 'ADMIN') {
+                return res.json({message: "У Вас не хватает прав"})
+            }
             const candidate = await User.findOne({username})
             if (candidate) {
                 return res.status(400).json({message: "Пользователь с таким именем уже существует"})
             }
             const hashPassword = bcrypt.hashSync(password, 7);
-            // const userRole = await Role.findOne({value: "USER"})
             const user = new User({username: username, password: hashPassword, roles: role || "USER"})
             await user.save()
             return res.json({message: "Пользователь успешно зарегистрирован"})
