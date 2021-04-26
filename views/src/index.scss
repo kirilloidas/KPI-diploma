@@ -1,3 +1,8 @@
+:root {
+  --light-blue: #276899;
+  --dark: #17212b;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -27,9 +32,9 @@ body {
 
 #root {
   position: relative;
-  max-width: 1280px;
-  margin-left: auto;
-  margin-right: auto;
+  // max-width: 1280px;
+  // margin-left: auto;
+  // margin-right: auto;
   font-family: Roboto, sans-serif;
 }
 code {
@@ -40,4 +45,13 @@ code {
 ul, input {
   padding: 0;
   margin: 0;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  // font-family: "roc-grotesk", sans-serif;
+  font-family: Roboto, sans-serif;
+  color: var(--text-color);
 }

@@ -1,5 +1,8 @@
-export const LOGIN = 'LOGIN'
-export const PASS = 'PASS'
+export const IS_ERROR = 'IS_ERROR';
+export const MODAL_MESSAGE = 'MODAL_MESSAGE';
+
+export const LOGIN = 'LOGIN';
+export const PASS = 'PASS';
 
 export const CREATE_USER_NAME = 'CREATE_USER_NAME';
 export const CREATE_PASSWORD = 'CREATE_PASSWORD';

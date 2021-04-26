@@ -8,7 +8,7 @@ const initialState = {
 
 export const createUser = (state = initialState, action) => {
     switch (action.type) {
-        case CREATE_USER_NAME:
+        case CREATE_USER_NAME: 
             return {...state, userName: action.payload}
         case CREATE_PASSWORD:
             return {...state, password: action.payload}

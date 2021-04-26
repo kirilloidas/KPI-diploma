@@ -23,7 +23,7 @@ class authController {
 
             const {username, password, role, token} = req.body;
             if(jwt.verify(token, secret).roles != 'ADMIN') {
-                return res.json({message: "У Вас не хватает прав"})
+                return res.status(400).json({message: "У Вас не хватает прав"})
             }
             const candidate = await User.findOne({username})
             if (candidate) {
@@ -40,7 +40,6 @@ class authController {
     }
 
     async login(req, res) {
-        console.log(req.body)
         try {
             const {username, password} = req.body
             console.log(username, password)

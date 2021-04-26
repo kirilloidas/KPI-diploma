@@ -6,6 +6,7 @@ import Counter from './pages/Counter/Counter'
 import Access from './pages/Access/Access'
 import Customization from './pages/Customization/Customization'
 import MnemonicDiagram from './pages/MnemonicDiagram/MnemonicDiagram'
+import Modal from './components/shared.components/Modal'
 import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 
@@ -20,13 +21,13 @@ const routing = [
 function App() {
   return (
     <div className="App">
+      <Modal/>
       <Router>
         {routing.map((content, index) => {
           return <Route key={index} exact path={content.path} component={content.component} />
         })}
         <Redirect from="*" to={sessionStorage.getItem('token') ? "/counter" : "/"}/>
       </Router>
-      
     </div>
   );
 }
