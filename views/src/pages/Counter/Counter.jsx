@@ -25,17 +25,8 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
     const [endYear, setEndYear] = useState();
     const [endHour, setEndHour] = useState();
     
-    useEffect(() => {
-        // User.getCurrentData()
-        // .then(data => {
-        //     setIsGetCurrent(true)
-        //     getCurrentData(data.data)
-        //     console.log(data.data)
-        // })
-    }, [])
 
     useEffect(() => {
-        console.log(isCurrent)
         if(isCurrent) {
             console.log('3')
             User.getCurrentData()
@@ -80,21 +71,17 @@ const Counter = ({setDataToChart, setIsData, isCurrent, setIsGetCurrent, current
                 }, 700);
                 
             } else {
-                setTimeout(() => {
-                    User.getData({
-                        startTime: 1604959200000, 
-                        endTime: 1606255200000,
-                        switchCheckedObj: paramsObj,
-                        isDaily: isDaily
-                    }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
-                    .catch((e) => console.log(e))
-                }, 700);
+                // setTimeout(() => {
+                //     User.getData({
+                //         startTime: 1604959200000, 
+                //         endTime: 1606255200000,
+                //         switchCheckedObj: paramsObj,
+                //         isDaily: isDaily
+                //     }).then(data => {setDataToChart(data.data); console.log(data.data); setIsData(true); setIsGetCurrent(false)})
+                //     .catch((e) => console.log(e))
+                // }, 700);
                 
             }
-
-
-            
-            
         }
     }, [isCurrent, isDaily, intervalObj,startTime, endTime])
 

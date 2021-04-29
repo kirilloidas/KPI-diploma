@@ -4,13 +4,6 @@ const cors = require('cors')
 // const path = require('path');
 // const fs = require('fs');
 const bodyParser = require('body-parser');
-// const {
-//     Telegraf,
-//     Markup,
-//     session,
-//     Scenes: { BaseScene, Stage }
-// } = require("telegraf");
-
 const telegrafController = require('./telegraf/telegrafController')
 const session = require('express-session')
 const nodemailer = require('nodemailer')
@@ -24,7 +17,9 @@ const hourlyData = require('./models/CounterData.js').hourlyData;
 const currentDataModel = require('./models/CounterData.js').currentData;
 const currentDataModel1 = require('./models/CounterData.js').currentData1;
 
-const setDataToFront = require('./data-processing/setDataToFront.js');
+const mongoData = require('./mongo/mongoData')
+
+// const setDataToFront = require('./data-processing/setDataToFront.js');
 
 const authRouter = require('./authRouter');
 
@@ -50,23 +45,24 @@ app.use(session({
     saveUninitialized: false
 }))
 
-const transporter = nodemailer.createTransport(sendGrid({
-    auth: {
-        api_key: key.SENDGRID_API_KEY
-    }
-}))
+// const transporter = nodemailer.createTransport(sendGrid({
+//     auth: {
+//         api_key: key.SENDGRID_API_KEY
+//     }
+// }))
 
 app.post("/api/timeInterval", jsonParser, function (request, response) {
     if (!request.body) return response.sendStatus(400);
+    console.log(request.body)
     // response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
     if (request.body.isDaily) {
-        getDataOfInterval(request.body, dailyData)
+        mongoData.getDataOfInterval(request.body, dailyData)
             .then(res => {
                 response.end(JSON.stringify(res))
             });
     } else {
-        getDataOfInterval(request.body, hourlyData)
+        mongoData.getDataOfInterval(request.body, hourlyData)
             .then(res => {
                 response.end(JSON.stringify(res))
             });
@@ -75,7 +71,7 @@ app.post("/api/timeInterval", jsonParser, function (request, response) {
 });
 
 app.post('/api/currentData', jsonParser, function(request, response) {
-    Promise.all([getCurrentDataCounter1(currentDataModel), getCurrentDataCounter1(currentDataModel1)]
+    Promise.all([mongoData.getCurrentDataCounter1(currentDataModel), mongoData.getCurrentDataCounter1(currentDataModel1)]
         .map(p => p.catch(x => console.log(x)))).then(r => response.end(JSON.stringify(r)))
 })
 
@@ -98,88 +94,50 @@ app.post('/api/excelToMail', jsonParser, function (req, res) {
 })
 
 
-async function getCurrentDataCounter1(model) {
-    try {
-        let data = await model.findOne({});
-        return data;
-    } catch(e) {
-        console.log(e)
-    }
-}
+// async function getCurrentDataCounter1(model) {
+//     try {
+//         let data = await model.findOne({});
+//         return data;
+//     } catch(e) {
+//         console.log(e)
+//     }
+// }
 
-async function getCurrentDataCounter2(model) {
-    try {
-        let data = await model.find({});
-        return data;
-    } catch(e) {
-        console.log(e)
-    }
-}
+// async function getCurrentDataCounter2(model) {
+//     try {
+//         let data = await model.find({});
+//         return data;
+//     } catch(e) {
+//         console.log(e)
+//     }
+// }
 
-async function getDataOfInterval(dataFromFront, requestData) {
-    try {
-        let ourData = await requestData.find({
-            $and: [{
-                    "date": {
-                        $gte: dataFromFront.startTime
-                    }
-                },
-                {
-                    "date": {
-                        $lte: dataFromFront.endTime
-                    }
-                }
-            ]
+// async function getDataOfInterval(dataFromFront, requestData) {
+//     try {
+//         let ourData = await requestData.find({
+//             $and: [{
+//                     "date": {
+//                         $gte: dataFromFront.startTime
+//                     }
+//                 },
+//                 {
+//                     "date": {
+//                         $lte: dataFromFront.endTime
+//                     }
+//                 }
+//             ]
 
-        }).sort('field');
-        let responseData = ourData.sort(
-            function (a, b) {
-                return a.date - b.date;
-            }
-        );
-        return setDataToFront.setDataSchedule(responseData, dataFromFront.switchCheckedObj);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
-
-// const bot = new Telegraf("1605090343:AAGp3XULDmenK3BPWxVU4B6tDN26efM-95M");
-
-// const keyboard = Markup.keyboard(
-//     [
-//         [
-//             'Registration'
-//         ],
-//         [
-//             'GetData'
-//         ]
-//     ]
-// )
-// const nameScene = new BaseScene();
-// // Обработчик начала диалога с ботом
-// bot.start((ctx) => {
-//     ctx.reply(
-//         `Приветствую, ${
-//        ctx.from.first_name ? ctx.from.first_name : "хороший человек"
-//     }! Набери /getFile и получи свой файл`,
-//     keyboard)
-// })
-
-
-// // Обработчик команды /help
-// // bot.help((ctx) => ctx.reply("Справка в процессе"));
-// bot.command("getFile", (ctx) => {
-//     ctx.replyWithDocument({ source: './data.xlsx'})
-// })
-
-// bot.on('message', ctx => {
-//     ctx.reply(ctx.message.text)
-// })
-
-// // Запуск бота
-// bot.launch();
+//         }).sort('field');
+//         let responseData = ourData.sort(
+//             function (a, b) {
+//                 return a.date - b.date;
+//             }
+//         );
+//         return setDataToFront.setDataSchedule(responseData, dataFromFront.switchCheckedObj);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 const start = async () => {
     try {

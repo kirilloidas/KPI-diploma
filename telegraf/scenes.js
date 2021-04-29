@@ -6,11 +6,13 @@ const {
     Scenes: { BaseScene, Stage }
 } = require("telegraf");
 const authController = require('../authController')
+const mongoData = require('../mongo/mongoData')
 
 class SceneGenerator {
     constructor() {
         this.username = '',
-        this.password = ''
+        this.password = '',
+        this.token = ''
     }
     authScene() {
         const auth = new BaseScene('auth')
@@ -25,11 +27,12 @@ class SceneGenerator {
                 await ctx.reply('Теперь введите пароль:')
             } else {
                 this.password = ctx.message.text
-                // await ctx.reply('Сверяем с базой данных...')
                 authController.loginTelegram(this.username, this.password)
                     .then(res => {
                         if(res.token) {
+                            this.token = res.token
                             ctx.reply('Авторизация прошла успешно')
+                            ctx.scene.enter('counters')
                         } else {
                             ctx.reply(res.message)
                             setTimeout(() => {
@@ -37,14 +40,22 @@ class SceneGenerator {
                             }, 500);
                         }
                     })
-                // await ctx.reply(authController.loginTelegram(this.username, this.password))
-            }
-            
+            }   
         })
-        // auth.on('text', async (ctx) => {
-            
-        // })
         return auth
+    }
+
+    counterScene() {
+        const counters = new BaseScene('counters')
+        const keyboard = Markup.keyboard(['Hourly', 'Daily', 'Current', 'Exit'])
+        counters.enter(async (ctx) => {
+            await ctx.reply('Выберите, какие данные вы хотите получить: почасовые, посуточные или текущие11:', keyboard)
+        })
+        counters.hears('Exit', (ctx) => {
+            ctx.reply('Вы вышли. Теперь Вам нужно авторизоваться вновь', Markup.removeKeyboard(true))
+            ctx.scene.enter('auth')
+        })
+        return counters
     }
 }
 

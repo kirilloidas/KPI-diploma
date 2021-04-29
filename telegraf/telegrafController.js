@@ -7,12 +7,13 @@ const {
 const SceneGenerator = require('./scenes')
 const curScene = new SceneGenerator()
 const authScene = curScene.authScene()
+const counterScene = curScene.counterScene()
 
 class TelegrafController {
     static controller() {
         const bot = new Telegraf("1605090343:AAGp3XULDmenK3BPWxVU4B6tDN26efM-95M");
 
-        const stage = new Stage([authScene])
+        const stage = new Stage([authScene, counterScene])
 
         bot.use(session())
         bot.use(stage.middleware())
@@ -46,10 +47,6 @@ class TelegrafController {
         // Обработчик команды /help
         // bot.command("getFile", (ctx) => {
         //     ctx.replyWithDocument({ source: './data.xlsx'})
-        // })
-
-        // bot.on('message', ctx => {
-        //     ctx.reply(ctx.message.text)
         // })
 
         // Запуск бота
