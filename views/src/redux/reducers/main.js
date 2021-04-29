@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export const mainReducer = (state = initialState, action) => {
-    console.log(action)
     switch(action.type) {
         case IS_CURRENT_DATA:
             return {...state, isCurrent: action.payload}

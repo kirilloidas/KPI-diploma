@@ -1,5 +1,4 @@
 const User = require('./models/User').users
-// const Role = require('./models/User').role
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const { validationResult } = require('express-validator')
@@ -65,6 +64,24 @@ class authController {
             res.json(users)
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    async loginTelegram(username, password) {
+        console.log(username, password)
+        try {
+            const user = await User.findOne({username})
+            if (!user) {
+                return {message: `Пользователь ${username} не найден`}
+            }
+            const validPassword = bcrypt.compareSync(password, user.password)
+            if (!validPassword) {
+                return {message: `Введен неверный пароль`}
+            }
+            const token = generateAccessToken(user._id, user.roles)
+            return {token: token}
+        } catch(e) {
+            return {e}
         }
     }
 }

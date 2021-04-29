@@ -8,7 +8,6 @@ import {User} from '../../api/User'
 import {setModalMessage} from '../../redux/actions/main'
 
 const Access = (props) => {
-    {console.log(props)}
     const createUser = () => {
         User.registration(props.userName, props.password, props.role)
             .then(res => {
@@ -16,7 +15,6 @@ const Access = (props) => {
             })
             .catch(e => {
                 props.setModalMessage(e.response.data.message)
-                console.log(e.response.data.message)
             })
     }
 
@@ -42,7 +40,6 @@ const Access = (props) => {
 }
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
         userName: state.createUser.userName,
         password: state.createUser.password,
