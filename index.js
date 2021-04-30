@@ -12,7 +12,7 @@ const sendExcelModule = require('./emails/sendExcelModule')
 const key = require('./keys/keys');
 
 const dailyData = require('./models/CounterData.js').dailyData;
-const users = require('./models/User.js').users;
+// const users = require('./models/User.js').users;
 const hourlyData = require('./models/CounterData.js').hourlyData;
 const currentDataModel = require('./models/CounterData.js').currentData;
 const currentDataModel1 = require('./models/CounterData.js').currentData1;
@@ -56,6 +56,7 @@ app.post("/api/timeInterval", jsonParser, function (request, response) {
     console.log(request.body)
     // response.json(request.body); // отправляем пришедший ответ обратно
     intervalTime = request.body;
+    console.log(request.body)
     if (request.body.isDaily) {
         mongoData.getDataOfInterval(request.body, dailyData)
             .then(res => {

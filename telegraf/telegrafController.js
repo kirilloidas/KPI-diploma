@@ -8,12 +8,13 @@ const SceneGenerator = require('./scenes')
 const curScene = new SceneGenerator()
 const authScene = curScene.authScene()
 const counterScene = curScene.counterScene()
+const dailyScene = curScene.dailyScene()
 
 class TelegrafController {
     static controller() {
         const bot = new Telegraf("1605090343:AAGp3XULDmenK3BPWxVU4B6tDN26efM-95M");
 
-        const stage = new Stage([authScene, counterScene])
+        const stage = new Stage([authScene, counterScene, dailyScene])
 
         bot.use(session())
         bot.use(stage.middleware())
