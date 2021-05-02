@@ -103,6 +103,7 @@ class RangeDate extends React.Component {
 
     obj.start = range.from;
     obj.finished = range.to;
+    console.log(obj)
 
     this.props.setIntervalObj(obj)
   }

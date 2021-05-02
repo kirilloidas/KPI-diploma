@@ -2,6 +2,7 @@ const setDataToFront = require('../data-processing/setDataToFront.js');
 
 class mongoData {
     async getDataOfInterval(dataFromFront, requestData) {
+        console.log(dataFromFront)
         try {
             let ourData = await requestData.find({
                 $and: [{
