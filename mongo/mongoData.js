@@ -1,4 +1,5 @@
 const setDataToFront = require('../data-processing/setDataToFront.js');
+const excelCurrentData = require('../data-processing/excelCurrentData')
 
 class mongoData {
     async getDataOfInterval(dataFromFront, requestData) {
@@ -32,6 +33,7 @@ class mongoData {
     async getCurrentDataCounter1(model) {
         try {
             let data = await model.findOne({});
+            excelCurrentData.setExcel(data)
             return data;
         } catch(e) {
             console.log(e)

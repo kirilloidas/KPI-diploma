@@ -10,6 +10,7 @@ const authController = require('../authController')
 const mongoData = require('../mongo/mongoData')
 const dailyData = require('../models/CounterData.js').dailyData;
 const hourlyData = require('../models/CounterData.js').hourlyData;
+const currentDataModel = require('../models/CounterData.js').currentData;
 
 class SceneGenerator {
     constructor() {
@@ -87,6 +88,9 @@ class SceneGenerator {
             this.isDaily = false
             ctx.scene.enter('archive')
         })
+        counters.command('Current', async (ctx) => {
+            ctx.scene.enter('current')
+        })
         return counters
     }
 
@@ -158,6 +162,26 @@ class SceneGenerator {
         return archive
     }
 
+    currentCounterScene() {
+        const current = new BaseScene('current')
+        const getFileKeyboard = Markup.keyboard(['/GetFile'])
+
+        current.command('GetFile', async (ctx) => {
+            await ctx.replyWithDocument({ source: './data.xlsx'})
+            await ctx.scene.enter('counters')
+        })
+        
+        current.enter(async (ctx) => {
+            await ctx.reply('Выберите, какие данные вы хотите получить: почасовые, посуточные или текущие:')
+            this.mongoCurrentScene()
+                .then(async () => {
+                    await ctx.reply('Файл готов к скачиванию, можете его загрузить', getFileKeyboard)
+                })
+        })
+
+        return current
+    }
+
     mongoDailyScene() {
         return mongoData.getDataOfInterval({
             startTime: moment([this.startYear, this.startMonth, this.startDay]).valueOf(),
@@ -174,6 +198,10 @@ class SceneGenerator {
             switchCheckedObj: this.switchCheckedObj,
             isDaily: false
         }, hourlyData)
+    }
+
+    mongoCurrentScene() {
+        return mongoData.getCurrentDataCounter1(currentDataModel)
     }
 }
 
