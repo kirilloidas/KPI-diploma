@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
 // const path = require('path');
-// const fs = require('fs');
+const fs = require('fs').promises;
 const bodyParser = require('body-parser');
 const telegrafController = require('./telegraf/telegrafController')
 const session = require('express-session')
@@ -44,6 +44,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+app.get('/', function(req, res) {
+    res.writeHead(200);
+    fs.readFile(__dirname + '/views/build/index.html')
+        .then(page => res.end(page))
+})
 
 // const transporter = nodemailer.createTransport(sendGrid({
 //     auth: {

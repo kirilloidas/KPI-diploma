@@ -5,7 +5,7 @@ import {fabric} from 'fabric';
 import pipeImg from '../../img/1100087-plumber-tools/png/015-pipe.png'
 import valveImg from '../../img/1100087-plumber-tools/png/030-valve.png'
 import leakImg from '../../img/1100087-plumber-tools/png/014-leak-3.png'
-import pipe4Img from '../../img/1100087-plumber-tools/png/024-pipe-8.png'
+// import pipe4Img from '../../img/1100087-plumber-tools/png/024-pipe-8.png'
 import pipe2Img from '../../img/1100087-plumber-tools/png/021-pipe-5.png'
 import sensor from '../../img/1100087-plumber-tools/png/013-manometer.png'
 import pump from '../../img/pump.svg';
@@ -109,7 +109,7 @@ const MnemonicDiagram = () => {
         insertPipe(479, 164.5)
 
         fabric.loadSVGFromURL(pump, function(objects, options) {
-            var obj = fabric.util.groupSVGElements(objects, options);
+            let obj = fabric.util.groupSVGElements(objects, options);
             obj.top = 143
             obj.left = 500
             canvas.add(obj).renderAll();
@@ -123,7 +123,7 @@ const MnemonicDiagram = () => {
         insertAnglePipe(433.5, 390, -90)
         insertPipe(479, 354)
         fabric.loadSVGFromURL(pump, function(objects, options) {
-            var obj = fabric.util.groupSVGElements(objects, options);
+            let obj = fabric.util.groupSVGElements(objects, options);
             obj.top = 334
             obj.left = 500
             canvas.add(obj).renderAll();
@@ -199,7 +199,7 @@ const MnemonicDiagram = () => {
         insertPipe(479, 581)
 
         fabric.loadSVGFromURL(pump, function(objects, options) {
-            var obj = fabric.util.groupSVGElements(objects, options);
+            let obj = fabric.util.groupSVGElements(objects, options);
             obj.top = 559.5
             obj.left = 500
             canvas.add(obj).renderAll();
@@ -213,7 +213,7 @@ const MnemonicDiagram = () => {
         insertAnglePipe(433.5, 806.5, -90)
         insertPipe(479, 770.5)
         fabric.loadSVGFromURL(pump, function(objects, options) {
-            var obj = fabric.util.groupSVGElements(objects, options);
+            let obj = fabric.util.groupSVGElements(objects, options);
             obj.top = 750.5
             obj.left = 500
             canvas.add(obj).renderAll();
