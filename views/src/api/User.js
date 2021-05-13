@@ -13,7 +13,7 @@ export const User = {
     },
     downloadExcel() {
         console.log('download')
-        return Api().get('/downloadExcel');
+        return Api().post('/downloadExcel');
     },
     excelToMail(mail) {
         // return Api().post('/excelToMail', JSON.stringify({mail: mail}));

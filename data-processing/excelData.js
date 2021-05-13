@@ -56,10 +56,18 @@ exports.setExcel = (data, switchCheckedObj) => {
         }
     }
 
-    fs.unlinkSync('./data.xlsx');
-    console.log('file deleted')
-    //Save the workbook
-    return workbook.xlsx.writeFile("data.xlsx");
+    try {
+        if (fs.existsSync('./data.xlsx')) {
+            fs.unlinkSync('./data.xlsx');
+            return workbook.xlsx.writeFile("data.xlsx");
+        }
+    } catch {
+        return workbook.xlsx.writeFile("data.xlsx");
+    }
+    // fs.unlinkSync('./data.xlsx');
+    // console.log('file deleted')
+    // //Save the workbook
+    // return workbook.xlsx.writeFile("data.xlsx");
     }
     
 

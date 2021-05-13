@@ -32,23 +32,24 @@ app.use(express.json())
 app.use(cors())
 app.use('/api/auth', authRouter)
 
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/views/build'));
 app.use(session({
     secret: 'some secret value',
     resave: false,
     saveUninitialized: false
 }))
 
-app.get('/', function(req, res) {
+app.get('/*', function(req, res) {
     res.writeHead(200);
-    fs.readFile(__dirname + '/views/build/index.html')
-        .then(page => res.end(page))
+    // fs.readFile(__dirname + '/views/build/index.html')
+    //     .then(page => res.end(page))
+    res.sendFile(path.join(__dirname, 'views', 'build', 'index.html'));
 })
 
 // const transporter = nodemailer.createTransport(sendGrid({
@@ -57,12 +58,9 @@ app.get('/', function(req, res) {
 //     }
 // }))
 
-app.post("/api/timeInterval", jsonParser, function (request, response) {
+app.post("/api/timeInterval", jsonParser, async function (request, response) {
     if (!request.body) return response.sendStatus(400);
-    console.log(request.body)
-    // response.json(request.body); // отправляем пришедший ответ обратно
-    intervalTime = request.body;
-    console.log(request.body)
+    // intervalTime = request.body;
     if (request.body.isDaily) {
         mongoData.getDataOfInterval(request.body, dailyData)
             .then(res => {
@@ -82,7 +80,7 @@ app.post('/api/currentData', jsonParser, function(request, response) {
         .map(p => p.catch(x => console.log(x)))).then(r => response.end(JSON.stringify(r)))
 })
 
-app.get('/api/downloadExcel', function (req, res, next) {
+app.post('/api/downloadExcel', function (req, res, next) {
     res.download('./data.xlsx');        
 });
 

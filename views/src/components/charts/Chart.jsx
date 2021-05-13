@@ -56,7 +56,6 @@ const ChartData = ({
             let draw = Chart.controllers.line.prototype.draw;
             Chart.controllers.line = Chart.controllers.line.extend({
                 draw: function() {
-                    console.log('k')
                     draw.apply(this, arguments);
                     let ctx = this.chart.chart.ctx;
                     let _stroke = ctx.stroke;
