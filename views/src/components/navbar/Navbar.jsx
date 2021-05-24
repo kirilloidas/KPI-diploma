@@ -6,12 +6,12 @@ import AccessIcon from '../svg/SVGNavbar/accessIcon/AccessIcon'
 import CustomizationIcon from '../svg/SVGNavbar/customizationIcon/CustomizationIcon'
 import ChartIcon from '../svg/SVGNavbar/chart'
 import MnemonicIcon from '../svg/SVGNavbar/mnemonic/MnemonicIcon';
+import lineChartIcon from '../../img/line-chart.svg'
+import ScheduleIcon from '../svg/SVGNavbar/schedules'
 import LogoImg from '../../img/ntuukpi.png';
 import {setIsCurrentData} from '../../redux/actions/main'
 import './Navbar.scss'
 import { connect } from 'react-redux'
-// import svgChart from '../../img/svgChart.svg'
-// import svgDashboard from '../../img/dashboard.svg'
 
 const Navbar = ({setIsCurrentData}) => {
     const history = useHistory()
@@ -22,7 +22,8 @@ const Navbar = ({setIsCurrentData}) => {
         {name: 'Архів', path: '/counter', icon: <CounterIcon/>},
         {name: 'Приватність', path: '/access', icon: <AccessIcon/>},
         {name: 'Налаштування', path: '/customization', icon: <CustomizationIcon/>},
-        {name: 'Мнемограма', path: '/mnemonicDiagram', icon: <MnemonicIcon/>}
+        {name: 'Мнемограма', path: '/mnemonicDiagram', icon: <MnemonicIcon/>},
+        {name: 'Моделювання', path: '/schedules', icon: <ScheduleIcon/>}
     ];
 
     const menuClickHandler = (item, index) => {
@@ -48,7 +49,7 @@ const Navbar = ({setIsCurrentData}) => {
                 <ul className='nav-list'>
                     {navList.map((context, index) => {
                         return (
-                            <li className='nav-list__item' onClick={() => {menuClickHandler(context, index)}}>
+                            <li className='nav-list__item' onClick={() => {menuClickHandler(context, index)}} key={index}>
                                 <span className='nav-list__item-icon'>{context.icon}</span>
                                 <span className='nav-list__item-link'>{context.name}</span>
                             </li>
@@ -57,24 +58,6 @@ const Navbar = ({setIsCurrentData}) => {
                 </ul>
             </nav>
         </div>
-        // <div className="container-header">
-        //     <div className="container-header-items">
-        //         <div className="container-items">
-        //             {navList.map((context, index) => {
-        //                 return (
-        //                     <div className={index === 0 ? 'logo' : 'item'}>
-        //                         <NavLink to={context.path} key={index} className='menu-item'>
-        //                             {context.icon}
-        //                             <div className="menu-text">
-        //                                 {context.name}
-        //                             </div>
-        //                         </NavLink>
-        //                     </div>
-        //                 )
-        //             })}
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 

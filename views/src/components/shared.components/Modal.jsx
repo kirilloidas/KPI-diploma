@@ -5,14 +5,14 @@ import {setModalMessage} from '../../redux/actions/main'
 
 const Modal = (props) => {
   return (
-    <div style={{display: props.modalMessage ? 'flex' : 'none'}} class="modal-wrap">
-      <div class="modal">
-        <h2 class="title">You have error:</h2>
-        <div class="content">
+    <div style={{display: props.modalMessage ? 'flex' : 'none'}} className="modal-wrap">
+      <div className="modal">
+        <h2 className="title">You have error:</h2>
+        <div className="content">
           {props.modalMessage}
         </div>
-        <div class="btn-container">
-          <button onClick={() => props.setModalMessage('')} class="btn">Close</button>
+        <div className="btn-container">
+          <button onClick={() => props.setModalMessage('')} className="btn">Close</button>
         </div>
       </div>
     </div>

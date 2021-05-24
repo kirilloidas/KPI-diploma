@@ -4,7 +4,7 @@ import './CapsBlock.scss'
 
 const CapsBlock = () => {
     return (
-        <span class="CapsBlock">
+        <span className="CapsBlock">
               <CapsIcon />             
         </span>
     )

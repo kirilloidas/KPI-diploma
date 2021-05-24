@@ -19,12 +19,12 @@ const CustomSelect = (props) => {
     }
     return (
         <label className='custom-select-block'>Role
-            <input class="input-field" type="text" value={role} readonly />
+            <input className="input-field" type="text" defaultValue={role} readOnly />
             <span onClick={() => toggleVisible()} className="triangle">
                 <img src={selectImg} alt="select" />
             </span>
             {showSelect ?
-            (<ul class="list-related-numbers">
+            (<ul className="list-related-numbers">
                 <li onClick={() => selectRole('User')}>User</li>
                 <li onClick={() => selectRole('Admin')}>Admin</li>
             </ul>)

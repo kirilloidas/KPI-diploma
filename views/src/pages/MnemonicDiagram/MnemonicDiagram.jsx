@@ -8,6 +8,7 @@ import leakImg from '../../img/1100087-plumber-tools/png/014-leak-3.png'
 // import pipe4Img from '../../img/1100087-plumber-tools/png/024-pipe-8.png'
 import pipe2Img from '../../img/1100087-plumber-tools/png/021-pipe-5.png'
 import sensor from '../../img/1100087-plumber-tools/png/013-manometer.png'
+import arrow from '../../img/mnemonic-arrow.svg'
 import pump from '../../img/pump.svg';
 import './MnemonicDiagram.scss';
 
@@ -65,8 +66,19 @@ const MnemonicDiagram = () => {
                 canvas.add(oImg)
             })
         }
+
+        const insertArrow = (left, top, angle) => {
+            fabric.Image.fromURL(arrow, function(oImg) {
+                oImg.top = top
+                oImg.left = left;
+                oImg.scale(0.1)
+                oImg.angle = angle;
+                canvas.add(oImg)
+            })
+        }
         // first loop
         // ==================================================================================================
+        insertArrow(-20, 61.5)
         insertLeak(60, 120, 180)
         insertPipe(60, 61.5)
         insertPipe(111, 61.5)
@@ -85,6 +97,7 @@ const MnemonicDiagram = () => {
         insertPipe(751, 61.5)
         insertPipe(802, 61.5)
         insertPipe(853, 61.5)
+        insertArrow(886, 61.5)
 
         // vertical pipe
         insertPipe(400, 110, 90)
@@ -99,6 +112,7 @@ const MnemonicDiagram = () => {
         insertPipe(230, 257.5)
         insertPipe(190, 257.5)
         insertPipe(150, 257.5)
+        insertArrow(170, 308, 180)
 
         // Pumps
         insertLeak(410, 308.5, -90)
@@ -138,6 +152,7 @@ const MnemonicDiagram = () => {
         insertSensor(720, 203)
         insertSensor(770, 203)
         insertPipe(820, 220)
+        insertArrow(907, 271.5, 180)
 
 
 
@@ -175,6 +190,7 @@ const MnemonicDiagram = () => {
         insertPipe(751, 478)
         insertPipe(802, 478)
         insertPipe(853, 478)
+        insertArrow(883, 478)
 
         // vertical pipe
         insertPipe(400, 526.5, 90)
@@ -189,6 +205,7 @@ const MnemonicDiagram = () => {
         insertPipe(230, 674)
         insertPipe(190, 674)
         insertPipe(150, 674)
+        insertArrow(170, 725, 180)
 
         // Pumps
         insertLeak(410, 725, -90)
@@ -228,15 +245,16 @@ const MnemonicDiagram = () => {
         insertSensor(720, 619.5)
         insertSensor(770, 619.5)
         insertPipe(820, 636.5)
+        insertArrow(907, 688, 180)
 
         return () => canvas.clear()
     }, [])
 
     return (
-        <React.Fragment>
+        <div>
             <NavBar/>
             <canvas ref = {canv} width='1200' height='900' className='mnemonic'/>
-        </React.Fragment>
+        </div>
         
     )
 }
