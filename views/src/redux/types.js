@@ -23,3 +23,13 @@ export const CURRENT_PARAM_OPTION = 'CURRENT_PARAM_OPTION';
 export const IS_GET_CURRENT = 'IS_GET_CURRENT';
 export const IS_CURRENT_DATA = 'IS_CURRENT_DATA';
 export const CURRENT_DATA = 'CURRENT_DATA';
+
+export const T_MIN_WATER = 'T_MIN_WATER';
+export const T_MAX_WATER = 'T_MAX_WATER';
+export const T_MIN_OUTSIDE = 'T_MIN_OUTSIDE';
+export const T_MAX_OUTSIDE = 'T_MAX_OUTSIDE';
+export const T_OUTSIDE = 'T_OUTSIDE';
+export const T_WATER = 'T_WATER'; 
+export const START_MODELING = 'START_MODELING';
+export const POINTS_MODELING = 'POINTS_MODELING';
+export const TIME_MODELING = 'TIME_MODELING';

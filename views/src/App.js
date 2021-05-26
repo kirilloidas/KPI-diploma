@@ -8,6 +8,7 @@ import Customization from './pages/Customization/Customization'
 import MnemonicDiagram from './pages/MnemonicDiagram/MnemonicDiagram'
 import Modal from './components/shared.components/Modal'
 import Schedules from './pages/Schedules/Schedules'
+import Modeling from './components/modeling/Modeling'
 import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 
@@ -20,12 +21,15 @@ const routing = [
   {path: '/schedules', component: Schedules}
 ]
 
-
+// window.onload = function () {
+//   localStorage.setItem('input_PID', 70)
+// };
 
 function App() {
   return (
     <div className="App">
       <Modal/>
+      <Modeling />
       <Router>
         {routing.map((content, index) => {
           return <Route key={index} exact path={content.path} component={content.component} />
