@@ -33,13 +33,14 @@ class IntegralBlock {
 }
 
 export class APBlock {
-    constructor(T, dt) {
+    constructor(K, T, dt) {
         this.T = T;
+        this.K = K;
         this.dt = dt;
         this.yi_1 = 0;
     }
     transfer(x) {
-        this.yi_1 =  (x * this.dt + this.T * this.yi_1) / (this.T + this.dt);
+        this.yi_1 =  (x * this.K * this.dt + this.T * this.yi_1) / (this.T + this.dt);
         return this.yi_1;
     }
 }

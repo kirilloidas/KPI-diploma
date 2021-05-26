@@ -3,8 +3,8 @@ import {PIDBlock} from './Blocks';
 
 export default class ControlSystem {
     constructor(dt) {
-        this.obj = new APBlock(20,dt);
-        this.pid = new PIDBlock(2,0.1,0,dt);
+        this.obj = new APBlock(1.29,38, dt);
+        this.pid = new PIDBlock(0.93,0.2,0, dt);
         this.zd = 0;
         this.dt = dt;
         this.y = 0;
@@ -16,9 +16,9 @@ export default class ControlSystem {
     transfer() {
         if(this.isManual === false){
             this.u = this.pid.transfer(this.zd - this.y);
-            this.y = this.obj.transfer(this.x + this.u);
+            this.y = this.obj.transfer(this.u);
             this.time += this.dt;
-            console.log(this.y, '!manualllllllllll')
+            // console.log(this.y, '!manualllllllllll')
             return this.y;
         } else if(this.isManual === true) {
             this.y = this.obj.transfer(this.x);
