@@ -185,7 +185,8 @@ export const Schedules = (props) => {
   const [TMaxWater, setTMaxWater] = useState(95);
   const [TMinOutside, setTMinOutside] = useState(-20);
   const [TMaxOutside, setTMaxOutside] = useState(5);
-  const [TOutside, setTOutside] = useState(-15);
+  const [TOutside, setTOutside] = useState(5);
+  const [TWater, setTWater] = useState()
   let chart
 
   useEffect(() => {
@@ -302,13 +303,18 @@ export const Schedules = (props) => {
 
   function run() {
       chart.update();
-      console.log(props.TWater)
+      setTWater(sessionStorage.getItem('TWater'))
       setTimeout(function () {
         run()
-      }, 100);
+      }, 300);
     }
 
   const applySettings = () => {
+    sessionStorage.setItem('TMinWater', TMinWater)
+    sessionStorage.setItem('TMaxWater', TMaxWater)
+    sessionStorage.setItem('TMinOutside', TMinOutside)
+    sessionStorage.setItem('TMaxOutside', TMaxOutside)
+    sessionStorage.setItem('TOutside', TOutside)
     // actionTMinWater(TMinWater),
     // actionTMaxWater(TMaxWater),
     // actionTMinOutside(TMinOutside),
@@ -337,7 +343,7 @@ export const Schedules = (props) => {
                 <input type='text' value={TOutside} onChange={e => setTOutside(e.target.value)} />
             </label>
             <label className='input-label'>TWater
-                <input type='text' value={props.TWater}  readOnly/>
+                <input type='text' value={TWater}  readOnly/>
             </label>
           </div>
           <div className='schedules-main__apply-block'>
@@ -353,7 +359,7 @@ const mapStateToProps = state => {
   return {
       points: state.modeling.points,
       time: state.modeling.time,
-      TWater: state.modeling.TWater
+      // TWater: state.modeling.TWater
   }
 }
 

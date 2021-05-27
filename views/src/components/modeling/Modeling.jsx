@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { actionTWater, actionPointsModeling, actionTimeModeling } from '../../redux/actions/modeling'
 
 const Modeling = (props) => {
-    const [speed, setSpeed] = useState(100);
+    const [speed, setSpeed] = useState(300);
     const [points, setPoints] = useState([]);
     const [results, setResults] = useState(0);
     const [in1, setIn1] = useState(0);
@@ -14,7 +14,7 @@ const Modeling = (props) => {
     const system = new ControlSystem(1)
 
     useEffect(() => {
-        localStorage.setItem('input_PID', 50)
+        sessionStorage.setItem('input_PID', 50)
         run()
     }, [])
 
@@ -29,7 +29,7 @@ const Modeling = (props) => {
     
       //
       system.x = parseFloat(in1);
-      system.zd = parseFloat(localStorage.getItem('input_PID'))
+      system.zd = parseFloat(sessionStorage.getItem('input_PID'))
       system.transfer();
       //
       if (pointsArray.length > 150) {
@@ -50,7 +50,8 @@ const Modeling = (props) => {
       props.actionPointsModeling(pointsArray)
     //   chart.update();
     //   console.log(system.y)
-      actionTWater(system.y)
+      // actionTWater(system.y)
+      sessionStorage.setItem('TWater', system.y)
     }
 
     function run() {
@@ -61,17 +62,19 @@ const Modeling = (props) => {
     }
 
     function scalling() {
-        const calc = (props.TMinWater - props.TMaxWater) / (props.TMaxOutside - props.TMinOutside);
-        return calc * props.TOutside + props.TMinWater
+        const calc = (sessionStorage.getItem('TMinWater') - sessionStorage.getItem('TMaxWater')) / (sessionStorage.getItem('TMaxOutside') - sessionStorage.getItem('TMinOutside'));
+        // const calc = (props.TMinWater - props.TMaxWater) / (props.TMaxOutside - props.TMinOutside);
+        return calc * sessionStorage.getItem('TOutside') + sessionStorage.getItem('TMinWater')
+        // return calc * props.TOutside + props.TMinWater
       }
   
     function calculateZD() {
-        if(props.TOutside >= props.TMaxOutside) {
-            localStorage.setItem('input_PID', props.TMinWater)
-        } else if(props.TOutside <= props.TMinOutside) {
-            localStorage.setItem('input_PID', props.TMaxWater)
+        if(sessionStorage.getItem('TOutside') >= sessionStorage.getItem('TMaxOutside')) {
+          sessionStorage.setItem('input_PID', props.TMinWater)
+        } else if(sessionStorage.getItem('TOutside') <= sessionStorage.getItem('TMinOutside')) {
+          sessionStorage.setItem('input_PID', props.TMaxWater)
         } else {
-           localStorage.setItem('input_PID', scalling())
+          sessionStorage.setItem('input_PID', scalling())
         }
       }
 
